@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure des Tableaux HTML</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-container {
+            position: relative;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            border: 3px dashed #95a5a6;
+            padding: 60px 30px 30px;
+            border-radius: 5px;
+        }
+        
+        /* Style des étiquettes d'éléments */
+        .element-tag {
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        /* Connecteurs visuels */
+        .connector {
+            position: absolute;
+            border: 2px dashed;
+            z-index: 90;
+            pointer-events: none;
+        }
+        
+        /* Table tag */
+        .table-tag {
+            background-color: #9b59b6;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Thead tag */
+        .thead-tag {
+            background-color: #2980b9;
+            top: 18px;
+            left: -20px;
+        }
+        
+        /* Tbody tag */
+        .tbody-tag {
+            background-color: #27ae60;
+            top: 100px;
+            left: -20px;
+        }
+        
+        /* Tr tags */
+        .tr-tag {
+            background-color: #e74c3c;
+            left: -30px;
+        }
+        
+        /* Th et Td tags */
+        .th-tag, .td-tag {
+            background-color: #f39c12;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        thead {
+            background-color: #d6eaf8;
+            position: relative;
+            border: 3px solid #2980b9;
+            z-index: 1;
+        }
+        
+        tbody {
+            position: relative;
+            border: 3px solid #27ae60;
+            z-index: 1;
+        }
+        
+        tr {
+            position: relative;
+            border: 2px solid #e74c3c;
+            display: table-row;
+            margin: 10px 0;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            position: relative;
+            border: 2px solid #f39c12;
+            margin-bottom: 25px;
+        }
+        
+        th {
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        td {
+            background-color: #f8f9f9;
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        /* Légende */
+        .legend {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+        
+        .table-color { background-color: #9b59b6; }
+        .thead-color { background-color: #2980b9; }
+        .tbody-color { background-color: #27ae60; }
+        .tr-color { background-color: #e74c3c; }
+        .th-td-color { background-color: #f39c12; }
+        
+        .code-note {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Structure de tableau visuelle */
+        .visual-structure {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Pour s'assurer que les cellules ont suffisamment d'espace pour les tags */
+        .cell-wrapper {
+            position: relative;
+            padding-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Structure des Tableaux HTML</h1>
+        
+        <div class="table-container">
+            <span class="element-tag table-tag">&lt;table&gt;</span>
+            
+            <table>
+                <thead>
+                    <span class="element-tag thead-tag">&lt;thead&gt;</span>
+                    <tr>
+                        <span class="element-tag tr-tag" style="top: 15px;">&lt;tr&gt;</span>
+                        <th>
+                            <div class="cell-wrapper">
+                                En tête 1
+                                <span class="element-tag th-tag">&lt;th&gt;</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="cell-wrapper">
+                                En tête 2
+                                <span class="element-tag th-tag">&lt;th&gt;</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="cell-wrapper">
+                                En tête 3
+                                <span class="element-tag th-tag">&lt;th&gt;</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="cell-wrapper">
+                                En tête 4
+                                <span class="element-tag th-tag">&lt;th&gt;</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <span class="element-tag tbody-tag">&lt;tbody&gt;</span>
+                    <tr>
+                        <span class="element-tag tr-tag" style="top: 25px;">&lt;tr&gt;</span>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 1
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 2
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 3
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 4
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <span class="element-tag tr-tag" style="top: 25px;">&lt;tr&gt;</span>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 5
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 6
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 7
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper">
+                                Donnée 8
+                                <span class="element-tag td-tag">&lt;td&gt;</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="visual-structure">
+            <h3>Comment lire ce tableau ?</h3>
+            <p>Chaque élément HTML est identifié par une étiquette colorée :</p>
+            <ul>
+                <li><span class="legend-color table-color"></span> <strong>&lt;table&gt;</strong> - L'élément principal qui contient tout le tableau</li>
+                <li><span class="legend-color thead-color"></span> <strong>&lt;thead&gt;</strong> - Contient les en-têtes du tableau</li>
+                <li><span class="legend-color tbody-color"></span> <strong>&lt;tbody&gt;</strong> - Contient les données du tableau</li>
+                <li><span class="legend-color tr-color"></span> <strong>&lt;tr&gt;</strong> - Représente une ligne du tableau</li>
+                <li><span class="legend-color th-td-color"></span> <strong>&lt;th&gt;</strong> - Représente une cellule d'en-tête</li>
+                <li><span class="legend-color th-td-color"></span> <strong>&lt;td&gt;</strong> - Représente une cellule de données</li>
+            </ul>
+            <p>Les étiquettes sont positionnées près de l'élément qu'elles identifient pour montrer clairement la structure.</p>
+        </div>
+        
+        <div class="legend">
+            <h3>Structure de base d'un tableau HTML</h3>
+            <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 16px;">
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;En-tête 1&lt;/th&gt;
+            &lt;th&gt;En-tête 2&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Donnée 1&lt;/td&gt;
+            &lt;td&gt;Donnée 2&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+        </div>
+    </div>
+</body>
+</html>
