@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Complet de Flexbox CSS</title>
+    <style>
+        /* Styles généraux */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h2 {
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h3 {
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .code-display {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Boutons et contrôles */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button.active {
+            background-color: #16a085;
+        }
+
+        /* Navigation par onglets */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+        }
+        
+        .tab-button:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .tab-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Conteneurs Flexbox pour démonstration */
+        .flex-container-demo {
+            display: flex;
+            border: 2px solid #3498db;
+            margin-bottom: 20px;
+            min-height: 200px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .flex-item {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Sélecteurs de propriétés */
+        .property-selector {
+            margin-bottom: 15px;
+        }
+        
+        .property-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .property-select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        /* Axe visuel pour montrer les directions */
+        .axis-demo {
+            position: relative;
+            margin: 40px 0;
+            height: 300px;
+        }
+        
+        .main-axis {
+            position: absolute;
+            height: 3px;
+            background-color: #e74c3c;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+        }
+        
+        .cross-axis {
+            position: absolute;
+            width: 3px;
+            background-color: #2ecc71;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .axis-label {
+            position: absolute;
+            background-color: rgba(255,255,255,0.8);
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .main-axis-label {
+            color: #e74c3c;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .cross-axis-label {
+            color: #2ecc71;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Table des matières */
+        .toc {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .toc-list {
+            list-style-type: none;
+        }
+        
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        
+        .toc-list a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Visualisateur interactif */
+        .interactive-flex {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .flex-control-panel {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .flex-control-group {
+            margin-bottom: 15px;
+        }
+        
+        .flex-control-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .flex-control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .flex-value-button {
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .flex-value-button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .flex-value-button.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        
+        .flex-sandbox {
+            min-height: 300px;
+            border: 2px solid #3498db;
+            background-color: white;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .add-item-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #2ecc71;
+        }
+        
+        .remove-item-btn {
+            position: absolute;
+            top: 10px;
+            right: 120px;
+            background-color: #e74c3c;
+        }
+        
+        .flex-item-controls {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .flex-item-controls.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guide Complet et Interactif de Flexbox CSS</h1>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Flexbox (Flexible Box Layout) est un modèle de mise en page unidimensionnel qui permet de créer des designs flexibles et efficaces. Il simplifie considérablement la disposition, l'alignement et la distribution de l'espace entre les éléments.</p>
+            
+            <p>Ce guide interactif vous permettra de comprendre et maîtriser toutes les facettes de Flexbox en manipulant directement les propriétés et en visualisant les résultats en temps réel.</p>
+            
+            <div class="toc">
+                <div class="toc-title">Table des matières</div>
+                <ul class="toc-list">
+                    <li><a href="#concepts">1. Concepts fondamentaux</a></li>
+                    <li><a href="#container">2. Propriétés du conteneur flex</a></li>
+                    <li><a href="#items">3. Propriétés des éléments flex</a></li>
+                    <li><a href="#examples">4. Exemples pratiques</a></li>
+                    <li><a href="#playground">5. Laboratoire d'expérimentation</a></li>
+                    <li><a href="#responsive">6. Flexbox et responsive design</a></li>
+                    <li><a href="#tips">7. Astuces et bonnes pratiques</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="concepts" class="section">
+            <h2>1. Concepts fondamentaux</h2>
+            <p>Avant de plonger dans les propriétés spécifiques, il est essentiel de comprendre les concepts de base qui sous-tendent Flexbox.</p>
+            
+            <div class="demo-box">
+                <h3>Terminologie de base</h3>
+                
+                <ul>
+                    <li><strong>Conteneur flex (Flex container)</strong> : L'élément parent auquel on applique <code>display: flex</code></li>
+                    <li><strong>Éléments flex (Flex items)</strong> : Les enfants directs du conteneur flex</li>
+                    <li><strong>Axe principal (Main axis)</strong> : L'axe sur lequel les éléments flex sont disposés principalement</li>
+                    <li><strong>Axe secondaire (Cross axis)</strong> : L'axe perpendiculaire à l'axe principal</li>
+                </ul>
+                
+                <div class="axis-demo">
+                    <div class="flex-container-demo" style="position: relative;">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                        <div class="main-axis"></div>
+                        <div class="cross-axis"></div>
+                        <div class="axis-label main-axis-label">Axe principal</div>
+                        <div class="axis-label cross-axis-label">Axe secondaire</div>
+                    </div>
+                    
+                    <div class="explanation">
+                        <p>Par défaut, l'axe principal va de gauche à droite (row), et l'axe secondaire de haut en bas. Ces directions peuvent être modifiées avec la propriété <code>flex-direction</code>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-box">
+                <h3>Comment activer Flexbox</h3>
+                
+                <p>Pour convertir un élément en conteneur flex, on utilise la propriété <code>display</code> avec la valeur <code>flex</code> ou <code>inline-flex</code>.</p>
+                
+                <div class="code-display">
+/* Pour un conteneur de niveau bloc */
+.container {
+    display: flex;
+}
+
+/* Pour un conteneur de niveau en ligne */
+.container {
+    display: inline-flex;
+}</div>
+                
+                <div class="explanation">
+                    <p><code>display: flex</code> transforme l'élément en un bloc flex.</p>
+                    <p><code>display: inline-flex</code> transforme l'élément en un élément en ligne flex (comme inline-block mais avec des propriétés flex).</p>
+                </div>
+                
+                <div class="controls">
+                    <button onclick="toggleFlexDisplay('block')">Afficher comme block</button>
+                    <button onclick="toggleFlexDisplay('flex')">Afficher comme flex</button>
+                    <button onclick="toggleFlexDisplay('inline-flex')">Afficher comme inline-flex</button>
+                </div>
+                
+                <div id="flex-display-demo" style="margin-top: 20px;">
+                    <div id="flex-container-display" style="border: 2px solid #3498db; padding: 10px; width: 100%; display: block;">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="container" class="section">
+            <h2>2. Propriétés du conteneur flex</h2>
+            <p>Les propriétés suivantes s'appliquent au conteneur flex et déterminent comment ses enfants (les éléments flex) seront disposés.</p>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'flex-direction')">flex-direction</button>
+                <button class="tab-button" onclick="openTab(event, 'flex-wrap')">flex-wrap</button>
+                <button class="tab-button" onclick="openTab(event, 'flex-flow')">flex-flow</button>
+                <button class="tab-button" onclick="openTab(event, 'justify-content')">justify-content</button>
+                <button class="tab-button" onclick="openTab(event, 'align-items')">align-items</button>
+                <button class="tab-button" onclick="openTab(event, 'align-content')">align-content</button>
+            </div>
+            
+            <div id="flex-direction" class="tab-content active">
+                <h3>flex-direction</h3>
+                <p>Cette propriété établit l'axe principal, définissant ainsi la direction dans laquelle les éléments flex sont placés.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="direction-btn active" onclick="changeFlexDirection('row')">row</button>
+                        <button class="direction-btn" onclick="changeFlexDirection('row-reverse')">row-reverse</button>
+                        <button class="direction-btn" onclick="changeFlexDirection('column')">column</button>
+                        <button class="direction-btn" onclick="changeFlexDirection('column-reverse')">column-reverse</button>
+                    </div>
+                    
+                    <div id="flex-direction-container" class="flex-container-demo">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                        <div class="flex-item">4</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    flex-direction: row; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p><code>row</code> (défaut) : Les éléments sont disposés de gauche à droite.</p>
+                        <p><code>row-reverse</code> : Les éléments sont disposés de droite à gauche.</p>
+                        <p><code>column</code> : Les éléments sont disposés de haut en bas.</p>
+                        <p><code>column-reverse</code> : Les éléments sont disposés de bas en haut.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex-wrap" class="tab-content">
+                <h3>flex-wrap</h3>
+                <p>Cette propriété détermine si les éléments flex doivent être affichés sur une seule ligne ou peuvent s'enrouler sur plusieurs lignes.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="wrap-btn active" onclick="changeFlexWrap('nowrap')">nowrap</button>
+                        <button class="wrap-btn" onclick="changeFlexWrap('wrap')">wrap</button>
+                        <button class="wrap-btn" onclick="changeFlexWrap('wrap-reverse')">wrap-reverse</button>
+                    </div>
+                    
+                    <div id="flex-wrap-container" class="flex-container-demo" style="width: 100%;">
+                        <div class="flex-item" style="width: 100px;">1</div>
+                        <div class="flex-item" style="width: 100px;">2</div>
+                        <div class="flex-item" style="width: 100px;">3</div>
+                        <div class="flex-item" style="width: 100px;">4</div>
+                        <div class="flex-item" style="width: 100px;">5</div>
+                        <div class="flex-item" style="width: 100px;">6</div>
+                        <div class="flex-item" style="width: 100px;">7</div>
+                        <div class="flex-item" style="width: 100px;">8</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    flex-wrap: nowrap; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p><code>nowrap</code> (défaut) : Tous les éléments sont sur une seule ligne, même s'ils débordent.</p>
+                        <p><code>wrap</code> : Les éléments s'enroulent sur plusieurs lignes si nécessaire.</p>
+                        <p><code>wrap-reverse</code> : Les éléments s'enroulent sur plusieurs lignes dans le sens inverse.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex-flow" class="tab-content">
+                <h3>flex-flow</h3>
+                <p>Cette propriété est un raccourci pour <code>flex-direction</code> et <code>flex-wrap</code>.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="flow-btn active" onclick="changeFlexFlow('row nowrap')">row nowrap</button>
+                        <button class="flow-btn" onclick="changeFlexFlow('row wrap')">row wrap</button>
+                        <button class="flow-btn" onclick="changeFlexFlow('column nowrap')">column nowrap</button>
+                        <button class="flow-btn" onclick="changeFlexFlow('column wrap')">column wrap</button>
+                        <button class="flow-btn" onclick="changeFlexFlow('row-reverse wrap-reverse')">row-reverse wrap-reverse</button>
+                    </div>
+                    
+                    <div id="flex-flow-container" class="flex-container-demo" style="width: 100%;">
+                        <div class="flex-item" style="width: 80px;">1</div>
+                        <div class="flex-item" style="width: 80px;">2</div>
+                        <div class="flex-item" style="width: 80px;">3</div>
+                        <div class="flex-item" style="width: 80px;">4</div>
+                        <div class="flex-item" style="width: 80px;">5</div>
+                        <div class="flex-item" style="width: 80px;">6</div>
+                        <div class="flex-item" style="width: 80px;">7</div>
+                        <div class="flex-item" style="width: 80px;">8</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    flex-flow: row nowrap; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>Le premier paramètre est la <code>flex-direction</code>, le second est le <code>flex-wrap</code>.</p>
+                        <p>Cette propriété raccourcie simplifie l'écriture lorsque vous avez besoin de définir ces deux propriétés à la fois.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="justify-content" class="tab-content">
+                <h3>justify-content</h3>
+                <p>Cette propriété aligne les éléments flex le long de l'axe principal.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="justify-btn active" onclick="changeJustifyContent('flex-start')">flex-start</button>
+                        <button class="justify-btn" onclick="changeJustifyContent('flex-end')">flex-end</button>
+                        <button class="justify-btn" onclick="changeJustifyContent('center')">center</button>
+                        <button class="justify-btn" onclick="changeJustifyContent('space-between')">space-between</button>
+                        <button class="justify-btn" onclick="changeJustifyContent('space-around')">space-around</button>
+                        <button class="justify-btn" onclick="changeJustifyContent('space-evenly')">space-evenly</button>
+                    </div>
+                    
+                    <div id="justify-content-container" class="flex-container-demo" style="width: 100%;">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    justify-content: flex-start; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p><code>flex-start</code> (défaut) : Les éléments sont alignés au début de l'axe principal.</p>
+                        <p><code>flex-end</code> : Les éléments sont alignés à la fin de l'axe principal.</p>
+                        <p><code>center</code> : Les éléments sont centrés sur l'axe principal.</p>
+                        <p><code>space-between</code> : Les éléments sont répartis uniformément; le premier élément est aligné au début, le dernier à la fin.</p>
+                        <p><code>space-around</code> : Les éléments sont répartis uniformément avec un espace égal autour de chacun.</p>
+                        <p><code>space-evenly</code> : Les éléments sont répartis uniformément avec un espace égal entre eux et les bords.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="align-items" class="tab-content">
+                <h3>align-items</h3>
+                <p>Cette propriété aligne les éléments flex le long de l'axe secondaire.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="align-btn active" onclick="changeAlignItems('stretch')">stretch</button>
+                        <button class="align-btn" onclick="changeAlignItems('flex-start')">flex-start</button>
+                        <button class="align-btn" onclick="changeAlignItems('flex-end')">flex-end</button>
+                        <button class="align-btn" onclick="changeAlignItems('center')">center</button>
+                        <button class="align-btn" onclick="changeAlignItems('baseline')">baseline</button>
+                    </div>
+                    
+                    <div id="align-items-container" class="flex-container-demo" style="height: 300px; width: 100%;">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item" style="font-size: 24px;">2</div>
+                        <div class="flex-item" style="padding-top: 30px;">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    align-items: stretch; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p><code>stretch</code> (défaut) : Les éléments sont étirés pour remplir le conteneur (respectant min/max-width/height).</p>
+                        <p><code>flex-start</code> : Les éléments sont alignés au début de l'axe secondaire.</p>
+                        <p><code>flex-end</code> : Les éléments sont alignés à la fin de l'axe secondaire.</p>
+                        <p><code>center</code> : Les éléments sont centrés sur l'axe secondaire.</p>
+                        <p><code>baseline</code> : Les éléments sont alignés sur leur ligne de base textuelle.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="align-content" class="tab-content">
+                <h3>align-content</h3>
+                <p>Cette propriété aligne les lignes d'éléments flex dans le conteneur quand il y a de l'espace supplémentaire sur l'axe secondaire (fonctionne uniquement s'il y a plusieurs lignes).</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button class="align-content-btn active" onclick="changeAlignContent('stretch')">stretch</button>
+                        <button class="align-content-btn" onclick="changeAlignContent('flex-start')">flex-start</button>
+                        <button class="align-content-btn" onclick="changeAlignContent('flex-end')">flex-end</button>
+                        <button class="align-content-btn" onclick="changeAlignContent('center')">center</button>
+                        <button class="align-content-btn" onclick="changeAlignContent('space-between')">space-between</button>
+                        <button class="align-content-btn" onclick="changeAlignContent('space-around')">space-around</button>
+                    </div>
+                    
+                    <div id="align-content-container" class="flex-container-demo" style="height: 400px; width: 100%; flex-wrap: wrap;">
+                        <div class="flex-item" style="width: 80px;">1</div>
+                        <div class="flex-item" style="width: 80px;">2</div>
+                        <div class="flex-item" style="width: 80px;">3</div>
+                        <div class="flex-item" style="width: 80px;">4</div>
+                        <div class="flex-item" style="width: 80px;">5</div>
+                        <div class="flex-item" style="width: 80px;">6</div>
+                        <div class="flex-item" style="width: 80px;">7</div>
+                        <div class="flex-item" style="width: 80px;">8</div>
+                        <div class="flex-item" style="width: 80px;">9</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p><code>stretch</code> (défaut) : Les lignes s'étirent pour occuper l'espace disponible.</p>
+                        <p><code>flex-start</code> : Les lignes sont rassemblées au début du conteneur.</p>
+                        <p><code>flex-end</code> : Les lignes sont rassemblées à la fin du conteneur.</p>
+                        <p><code>center</code> : Les lignes sont centrées dans le conteneur.</p>
+                        <p><code>space-between</code> : Les lignes sont réparties uniformément; la première ligne est au début, la dernière à la fin.</p>
+                        <p><code>space-around</code> : Les lignes sont réparties uniformément avec un espace égal autour de chacune.</p>
+                        <p>Note: Cette propriété n'a d'effet que lorsque les éléments s'enroulent sur plusieurs lignes (<code>flex-wrap: wrap</code>).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="items" class="section">
+            <h2>3. Propriétés des éléments flex</h2>
+            <p>Ces propriétés s'appliquent aux éléments enfants directs du conteneur flex (les flex items) et déterminent comment chaque élément se comporte individuellement.</p>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'order')">order</button>
+                <button class="tab-button" onclick="openTab(event, 'flex-grow')">flex-grow</button>
+                <button class="tab-button" onclick="openTab(event, 'flex-shrink')">flex-shrink</button>
+                <button class="tab-button" onclick="openTab(event, 'flex-basis')">flex-basis</button>
+                <button class="tab-button" onclick="openTab(event, 'flex')">flex</button>
+                <button class="tab-button" onclick="openTab(event, 'align-self')">align-self</button>
+            </div>
+            
+            <div id="order" class="tab-content active">
+                <h3>order</h3>
+                <p>Cette propriété contrôle l'ordre dans lequel les éléments apparaissent dans le conteneur flex.</p>
+                
+                <div class="demo-box">
+                    <div class="flex-container-demo" style="width: 100%;">
+                        <div class="flex-item" style="order: 3;">1 (ordre: 3)</div>
+                        <div class="flex-item" style="order: 1;">2 (ordre: 1)</div>
+                        <div class="flex-item" style="order: 2;">3 (ordre: 2)</div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button onclick="changeItemOrder('item1-order', 3)">Item 1: ordre 3</button>
+                        <button onclick="changeItemOrder('item1-order', 1)">Item 1: ordre 1</button>
+                        <button onclick="changeItemOrder('item1-order', 0)">Item 1: ordre 0</button>
+                        <button onclick="changeItemOrder('item1-order', -1)">Item 1: ordre -1</button>
+                    </div>
+                    
+                    <div id="order-container" class="flex-container-demo" style="width: 100%; margin-top: 20px;">
+                        <div id="item1-order" class="flex-item" style="order: 0;">1</div>
+                        <div class="flex-item" style="order: 0;">2</div>
+                        <div class="flex-item" style="order: 0;">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.item {
+    order: 0; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>order</code> définit l'ordre d'apparition des éléments flex.</p>
+                        <p>Par défaut, tous les éléments ont une valeur d'ordre de 0, et ils apparaissent dans l'ordre du code source.</p>
+                        <p>Les valeurs plus basses apparaissent en premier. Les éléments avec la même valeur d'ordre apparaissent selon leur ordre dans le code source.</p>
+                        <p>Les valeurs négatives sont autorisées et apparaîtront avant les éléments avec une valeur d'ordre plus élevée ou positive.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex-grow" class="tab-content">
+                <h3>flex-grow</h3>
+                <p>Cette propriété définit la capacité d'un élément à grandir si nécessaire. Elle détermine quelle proportion d'espace disponible dans le conteneur l'élément doit occuper.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Item 1: </strong>
+                            <button onclick="changeFlexGrow('item1-grow', 0)">0</button>
+                            <button onclick="changeFlexGrow('item1-grow', 1)">1</button>
+                            <button onclick="changeFlexGrow('item1-grow', 2)">2</button>
+                            <button onclick="changeFlexGrow('item1-grow', 3)">3</button>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Item 2: </strong>
+                            <button onclick="changeFlexGrow('item2-grow', 0)">0</button>
+                            <button onclick="changeFlexGrow('item2-grow', 1)">1</button>
+                            <button onclick="changeFlexGrow('item2-grow', 2)">2</button>
+                            <button onclick="changeFlexGrow('item2-grow', 3)">3</button>
+                        </div>
+                        <div>
+                            <strong>Item 3: </strong>
+                            <button onclick="changeFlexGrow('item3-grow', 0)">0</button>
+                            <button onclick="changeFlexGrow('item3-grow', 1)">1</button>
+                            <button onclick="changeFlexGrow('item3-grow', 2)">2</button>
+                            <button onclick="changeFlexGrow('item3-grow', 3)">3</button>
+                        </div>
+                    </div>
+                    
+                    <div id="flex-grow-container" class="flex-container-demo" style="width: 100%; margin-top: 20px;">
+                        <div id="item1-grow" class="flex-item" style="flex-grow: 1;">1</div>
+                        <div id="item2-grow" class="flex-item" style="flex-grow: 1;">2</div>
+                        <div id="item3-grow" class="flex-item" style="flex-grow: 1;">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.item {
+    flex-grow: 0; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>flex-grow</code> accepte une valeur sans unité qui sert de proportion.</p>
+                        <p>Elle détermine la quantité d'espace disponible à l'intérieur du conteneur flex que l'élément doit occuper.</p>
+                        <p>Si tous les éléments ont <code>flex-grow: 1</code>, l'espace restant dans le conteneur sera réparti équitablement entre tous les enfants.</p>
+                        <p>Si un élément a <code>flex-grow: 2</code>, il prendra deux fois plus d'espace que les éléments avec <code>flex-grow: 1</code>.</p>
+                        <p>Une valeur de 0 (par défaut) signifie que l'élément ne grandira pas au-delà de sa taille de base.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex-shrink" class="tab-content">
+                <h3>flex-shrink</h3>
+                <p>Cette propriété définit la capacité d'un élément à rétrécir si nécessaire.</p>
+                
+                <div class="demo-box">
+                    <p>Redimensionnez la fenêtre pour voir les effets de <code>flex-shrink</code>:</p>
+                    
+                    <div class="controls">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Item 1: </strong>
+                            <button onclick="changeFlexShrink('item1-shrink', 0)">0</button>
+                            <button onclick="changeFlexShrink('item1-shrink', 1)">1</button>
+                            <button onclick="changeFlexShrink('item1-shrink', 2)">2</button>
+                            <button onclick="changeFlexShrink('item1-shrink', 3)">3</button>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Item 2: </strong>
+                            <button onclick="changeFlexShrink('item2-shrink', 0)">0</button>
+                            <button onclick="changeFlexShrink('item2-shrink', 1)">1</button>
+                            <button onclick="changeFlexShrink('item2-shrink', 2)">2</button>
+                            <button onclick="changeFlexShrink('item2-shrink', 3)">3</button>
+                        </div>
+                        <div>
+                            <strong>Item 3: </strong>
+                            <button onclick="changeFlexShrink('item3-shrink', 0)">0</button>
+                            <button onclick="changeFlexShrink('item3-shrink', 1)">1</button>
+                            <button onclick="changeFlexShrink('item3-shrink', 2)">2</button>
+                            <button onclick="changeFlexShrink('item3-shrink', 3)">3</button>
+                        </div>
+                    </div>
+                    
+                    <div id="flex-shrink-container" class="flex-container-demo" style="width: 100%; margin-top: 20px;">
+                        <div id="item1-shrink" class="flex-item" style="flex-basis: 200px; flex-shrink: 1;">1</div>
+                        <div id="item2-shrink" class="flex-item" style="flex-basis: 200px; flex-shrink: 1;">2</div>
+                        <div id="item3-shrink" class="flex-item" style="flex-basis: 200px; flex-shrink: 1;">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.item {
+    flex-shrink: 1; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>flex-shrink</code> accepte une valeur sans unité qui sert de proportion.</p>
+                        <p>Elle détermine dans quelle mesure l'élément rétrécira par rapport aux autres éléments flex quand il n'y a pas assez d'espace.</p>
+                        <p>Si tous les éléments ont <code>flex-shrink: 1</code>, ils rétrécissent uniformément.</p>
+                        <p>Si un élément a <code>flex-shrink: 2</code>, il rétrécira deux fois plus que les éléments avec <code>flex-shrink: 1</code>.</p>
+                        <p>Une valeur de 0 signifie que l'élément ne rétrécira pas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex-basis" class="tab-content">
+                <h3>flex-basis</h3>
+                <p>Cette propriété définit la taille initiale d'un élément flex avant que l'espace supplémentaire soit distribué.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="changeFlexBasis('item1-basis', 'auto')">auto</button>
+                        <button onclick="changeFlexBasis('item1-basis', '100px')">100px</button>
+                        <button onclick="changeFlexBasis('item1-basis', '200px')">200px</button>
+                        <button onclick="changeFlexBasis('item1-basis', '300px')">300px</button>
+                        <button onclick="changeFlexBasis('item1-basis', '0')">0</button>
+                        <button onclick="changeFlexBasis('item1-basis', '50%')">50%</button>
+                    </div>
+                    
+                    <div id="flex-basis-container" class="flex-container-demo" style="width: 100%; margin-top: 20px;">
+                        <div id="item1-basis" class="flex-item" style="flex-basis: auto;">flex-basis: auto</div>
+                        <div class="flex-item" style="flex-basis: 150px;">flex-basis: 150px</div>
+                    </div>
+                    
+                    <div class="code-display">
+.item {
+    flex-basis: auto; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>flex-basis</code> définit la taille initiale d'un élément flex. Elle peut être une longueur (px, em, etc.) ou auto.</p>
+                        <p><code>auto</code> : La taille est basée sur le contenu de l'élément ou sur sa largeur/hauteur définie.</p>
+                        <p><code>0</code> : L'élément n'a pas de taille initiale, il se base uniquement sur flex-grow/shrink.</p>
+                        <p>Unités de longueur (px, em, %) : Définit une taille spécifique comme point de départ.</p>
+                        <p>Elle agit comme <code>width</code> quand <code>flex-direction</code> est row, et comme <code>height</code> quand <code>flex-direction</code> est column.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flex" class="tab-content">
+                <h3>flex</h3>
+                <p>Cette propriété est un raccourci pour <code>flex-grow</code>, <code>flex-shrink</code> et <code>flex-basis</code> combinés.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="changeFlex('item1-flex', '0 1 auto')">0 1 auto (défaut)</button>
+                        <button onclick="changeFlex('item1-flex', '1 1 auto')">1 1 auto</button>
+                        <button onclick="changeFlex('item1-flex', '1 0 auto')">1 0 auto</button>
+                        <button onclick="changeFlex('item1-flex', '1')">1</button>
+                        <button onclick="changeFlex('item1-flex', '2')">2</button>
+                        <button onclick="changeFlex('item1-flex', '0 0 200px')">0 0 200px</button>
+                    </div>
+                    
+                    <div id="flex-shorthand-container" class="flex-container-demo" style="width: 100%; margin-top: 20px;">
+                        <div id="item1-flex" class="flex-item" style="flex: 0 1 auto;">1</div>
+                        <div class="flex-item" style="flex: 1 1 auto;">2</div>
+                        <div class="flex-item" style="flex: 0 0 150px;">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.item {
+    flex: 0 1 auto; /* valeur par défaut */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>flex</code> est un raccourci qui combine trois propriétés: <code>flex-grow</code>, <code>flex-shrink</code> et <code>flex-basis</code>.</p>
+                        <p>Syntaxe: <code>flex: [flex-grow] [flex-shrink] [flex-basis]</code></p>
+                        <p><code>flex: 1</code> = <code>flex: 1 1 0</code> - L'élément peut grandir, rétrécir et n'a pas de taille de base.</p>
+                        <p><code>flex: auto</code> = <code>flex: 1 1 auto</code> - L'élément peut grandir, rétrécir et sa taille de base est auto.</p>
+                        <p><code>flex: none</code> = <code>flex: 0 0 auto</code> - L'élément ne peut ni grandir ni rétrécir.</p>
+                        <p><code>flex: initial</code> = <code>flex: 0 1 auto</code> - Valeur par défaut: l'élément ne peut pas grandir mais peut rétrécir si nécessaire.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="align-self" class="tab-content">
+                <h3>align-self</h3>
+                <p>Cette propriété permet de remplacer l'alignement par défaut (ou celui spécifié par <code>align-items</code>) pour des éléments flex individuels.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="changeAlignSelf('item1-self', 'auto')">auto</button>
+                        <button onclick="changeAlignSelf('item1-self', 'flex-start')">flex-start</button>
+                        <button onclick="changeAlignSelf('item1-self', 'flex-end')">flex-end</button>
+                        <button onclick="changeAlignSelf('item1-self', 'center')">center</button>
+                        <button onclick="changeAlignSelf('item1-self', 'baseline')">baseline</button>
+                        <button onclick="changeAlignSelf('item1-self', 'stretch')">stretch</button>
+                    </div>
+                    
+                    <div id="align-self-container" class="flex-container-demo" style="height: 300px; width: 100%; align-items: center;">
+                        <div id="item1-self" class="flex-item" style="align-self: auto;">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    
+                    <div class="code-display">
+.container {
+    display: flex;
+    align-items: center; /* Alignement par défaut pour tous les éléments */
+}
+
+.item {
+    align-self: auto; /* valeur par défaut (hérite de align-items) */
+}</div>
+                    
+                    <div class="explanation">
+                        <p>La propriété <code>align-self</code> permet de remplacer l'alignement défini par <code>align-items</code> pour un élément spécifique.</p>
+                        <p>Elle accepte les mêmes valeurs que <code>align-items</code>:</p>
+                        <p><code>auto</code> : Hérite de la valeur de <code>align-items</code> du parent (défaut).</p>
+                        <p><code>flex-start</code> : L'élément est aligné au début de l'axe secondaire.</p>
+                        <p><code>flex-end</code> : L'élément est aligné à la fin de l'axe secondaire.</p>
+                        <p><code>center</code> : L'élément est centré sur l'axe secondaire.</p>
+                        <p><code>baseline</code> : L'élément est aligné sur sa ligne de base textuelle.</p>
+                        <p><code>stretch</code> : L'élément est étiré pour remplir le conteneur (respectant min/max-width/height).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="playground" class="section">
+            <h2>5. Laboratoire d'expérimentation</h2>
+            <p>Mettez en pratique tout ce que vous avez appris en manipulant les différentes propriétés Flexbox sur un ensemble d'éléments.</p>
+            
+            <div class="interactive-flex">
+                <div class="flex-control-panel">
+                    <h3>Propriétés du conteneur</h3>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">flex-direction:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetContainerProp('flexDirection', 'row', this)">row</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('flexDirection', 'row-reverse', this)">row-reverse</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('flexDirection', 'column', this)">column</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('flexDirection', 'column-reverse', this)">column-reverse</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">flex-wrap:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetContainerProp('flexWrap', 'nowrap', this)">nowrap</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('flexWrap', 'wrap', this)">wrap</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('flexWrap', 'wrap-reverse', this)">wrap-reverse</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">justify-content:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetContainerProp('justifyContent', 'flex-start', this)">flex-start</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('justifyContent', 'flex-end', this)">flex-end</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('justifyContent', 'center', this)">center</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('justifyContent', 'space-between', this)">space-between</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('justifyContent', 'space-around', this)">space-around</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('justifyContent', 'space-evenly', this)">space-evenly</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">align-items:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetContainerProp('alignItems', 'stretch', this)">stretch</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignItems', 'flex-start', this)">flex-start</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignItems', 'flex-end', this)">flex-end</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignItems', 'center', this)">center</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignItems', 'baseline', this)">baseline</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">align-content:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetContainerProp('alignContent', 'stretch', this)">stretch</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignContent', 'flex-start', this)">flex-start</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignContent', 'flex-end', this)">flex-end</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignContent', 'center', this)">center</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignContent', 'space-between', this)">space-between</button>
+                            <button class="flex-value-button" onclick="playgroundSetContainerProp('alignContent', 'space-around', this)">space-around</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="add-item-btn" onclick="playgroundAddItem()">+ Ajouter un élément</button>
+                <button class="remove-item-btn" onclick="playgroundRemoveItem()">- Supprimer le dernier</button>
+                
+                <div id="playground-container" class="flex-sandbox">
+                    <div class="flex-item" onclick="playgroundSelectItem(this)">1</div>
+                    <div class="flex-item" onclick="playgroundSelectItem(this)">2</div>
+                    <div class="flex-item" onclick="playgroundSelectItem(this)">3</div>
+                </div>
+                
+                <div id="item-controls" class="flex-item-controls">
+                    <h3>Propriétés de l'élément <span id="selected-item-number">?</span></h3>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">order:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('order', '-1')">-1</button>
+                            <button class="flex-value-button active" onclick="playgroundSetItemProp('order', '0')">0</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('order', '1')">1</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('order', '2')">2</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">flex-grow:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetItemProp('flexGrow', '0')">0</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexGrow', '1')">1</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexGrow', '2')">2</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexGrow', '3')">3</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">flex-shrink:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexShrink', '0')">0</button>
+                            <button class="flex-value-button active" onclick="playgroundSetItemProp('flexShrink', '1')">1</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexShrink', '2')">2</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexShrink', '3')">3</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">flex-basis:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetItemProp('flexBasis', 'auto')">auto</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexBasis', '0')">0</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexBasis', '100px')">100px</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexBasis', '200px')">200px</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('flexBasis', '50%')">50%</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-control-group">
+                        <label class="flex-control-label">align-self:</label>
+                        <div class="flex-control-buttons">
+                            <button class="flex-value-button active" onclick="playgroundSetItemProp('alignSelf', 'auto')">auto</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('alignSelf', 'flex-start')">flex-start</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('alignSelf', 'flex-end')">flex-end</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('alignSelf', 'center')">center</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('alignSelf', 'stretch')">stretch</button>
+                            <button class="flex-value-button" onclick="playgroundSetItemProp('alignSelf', 'baseline')">baseline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        // Fonctions pour les propriétés des éléments flex
+        function changeItemOrder(id, order) {
+            const item = document.getElementById(id);
+            item.style.order = order;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#order .code-display').textContent = `.item {
+    order: ${order};
+}`;
+        }
+        
+        function changeFlexGrow(id, grow) {
+            const item = document.getElementById(id);
+            item.style.flexGrow = grow;
+            item.textContent = grow;
+            
+            // Met à jour l'affichage du code si l'élément est le premier item
+            if (id === 'item1-grow') {
+                document.querySelector('#flex-grow .code-display').textContent = `.item {
+    flex-grow: ${grow};
+}`;
+            }
+        }
+        
+        function changeFlexShrink(id, shrink) {
+            const item = document.getElementById(id);
+            item.style.flexShrink = shrink;
+            item.textContent = shrink;
+            
+            // Met à jour l'affichage du code si l'élément est le premier item
+            if (id === 'item1-shrink') {
+                document.querySelector('#flex-shrink .code-display').textContent = `.item {
+    flex-shrink: ${shrink};
+}`;
+            }
+        }
+        
+        function changeFlexBasis(id, basis) {
+            const item = document.getElementById(id);
+            item.style.flexBasis = basis;
+            item.textContent = `flex-basis: ${basis}`;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#flex-basis .code-display').textContent = `.item {
+    flex-basis: ${basis};
+}`;
+        }
+        
+        function changeFlex(id, flex) {
+            const item = document.getElementById(id);
+            item.style.flex = flex;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#flex .code-display').textContent = `.item {
+    flex: ${flex};
+}`;
+        }
+        
+        function changeAlignSelf(id, align) {
+            const item = document.getElementById(id);
+            item.style.alignSelf = align;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#align-self .code-display').textContent = `.container {
+    display: flex;
+    align-items: center; /* Alignement par défaut pour tous les éléments */
+}
+
+.item {
+    align-self: ${align};
+}`;
+        }
+        
+        // Fonctions pour le laboratoire d'expérimentation
+        let selectedItem = null;
+        let itemCounter = 3;
+        
+        function playgroundSetContainerProp(property, value, button) {
+            const container = document.getElementById('playground-container');
+            container.style[property] = value;
+            
+            // Mettre à jour le bouton actif
+            const buttons = button.parentNode.querySelectorAll('.flex-value-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+        
+        function playgroundSelectItem(item) {
+            // Désélectionner l'élément précédent
+            if (selectedItem) {
+                selectedItem.style.border = 'none';
+            }
+            
+            // Sélectionner le nouvel élément
+            selectedItem = item;
+            selectedItem.style.border = '2px solid #e74c3c';
+            
+            // Afficher le panneau de contrôle des éléments
+            document.getElementById('item-controls').classList.add('active');
+            
+            // Mettre à jour le numéro de l'élément sélectionné
+            document.getElementById('selected-item-number').textContent = item.textContent;
+            
+            // Mettre à jour les boutons actifs en fonction des propriétés actuelles
+            updateItemControlButtons();
+        }
+        
+        function updateItemControlButtons() {
+            if (!selectedItem) return;
+            
+            // Mettre à jour les boutons pour chaque propriété
+            updateActiveButton('order', selectedItem.style.order || '0');
+            updateActiveButton('flexGrow', selectedItem.style.flexGrow || '0');
+            updateActiveButton('flexShrink', selectedItem.style.flexShrink || '1');
+            updateActiveButton('flexBasis', selectedItem.style.flexBasis || 'auto');
+            updateActiveButton('alignSelf', selectedItem.style.alignSelf || 'auto');
+        }
+        
+        function updateActiveButton(property, value) {
+            const container = document.querySelector(`[class*="${property}"]`).parentNode;
+            const buttons = container.querySelectorAll('.flex-value-button');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === value) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function playgroundSetItemProp(property, value) {
+            if (!selectedItem) return;
+            
+            selectedItem.style[property] = value;
+            
+            // Mettre à jour le bouton actif
+            updateActiveButton(property, value);
+        }
+        
+        function playgroundAddItem() {
+            itemCounter++;
+            const newItem = document.createElement('div');
+            newItem.className = 'flex-item';
+            newItem.textContent = itemCounter;
+            newItem.onclick = function() { playgroundSelectItem(this); };
+            
+            document.getElementById('playground-container').appendChild(newItem);
+        }
+        
+        function playgroundRemoveItem() {
+            const container = document.getElementById('playground-container');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+                itemCounter--;
+                
+                // Si l'élément supprimé était sélectionné, nettoyer la sélection
+                if (selectedItem && !container.contains(selectedItem)) {
+                    selectedItem = null;
+                    document.getElementById('item-controls').classList.remove('active');
+                }
+            }
+        }
+    </script>
+
+</body>
+</html> 

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo-classes et Pseudo-éléments CSS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .code-display {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Pseudo-classes démos */
+        
+        /* :hover */
+        .hover-demo {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .hover-demo:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        /* :focus */
+        .focus-demo {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+            transition: border-color 0.3s;
+        }
+        
+        .focus-demo:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        
+        /* :checked */
+        .checked-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .checked-label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .checked-input {
+            margin-right: 8px;
+        }
+        
+        .checked-input:checked + .checked-text {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* :nth-child */
+        .nth-child-list {
+            list-style: none;
+        }
+        
+        .nth-child-list li {
+            padding: 10px;
+            background-color: #f5f5f5;
+            margin-bottom: 5px;
+            border-radius: 3px;
+        }
+        
+        .nth-child-list li:nth-child(odd) {
+            background-color: #e0f7fa;
+        }
+        
+        .nth-child-list li:nth-child(3n) {
+            color: #e74c3c;
+        }
+        
+        .nth-child-active li:nth-child(2n) {
+            background-color: #c8e6c9;
+        }
+        
+        /* :not */
+        .not-demo p {
+            padding: 8px;
+            margin-bottom: 5px;
+            background-color: #e0f7fa;
+        }
+        
+        .not-demo p:not(.excluded) {
+            border-left: 3px solid #3498db;
+        }
+        
+        /* Pseudo-éléments démos */
+        
+        /* ::before et ::after */
+        .before-after-demo {
+            position: relative;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .before-after-demo::before {
+            content: "♦";
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+        
+        .before-after-demo::after {
+            content: " ♦";
+            color: #e74c3c;
+            margin-left: 8px;
+        }
+        
+        /* ::first-letter */
+        .first-letter-demo {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .first-letter-demo::first-letter {
+            font-size: 48px;
+            color: #3498db;
+            float: left;
+            padding-right: 8px;
+            line-height: 1;
+        }
+        
+        /* ::first-line */
+        .first-line-demo {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .first-line-demo::first-line {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* ::selection */
+        .selection-demo::selection {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        /* Boutons de contrôle */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .active {
+            background-color: #16a085;
+        }
+
+        /* Styles pour le menu interactif */
+        .interactive-menu {
+            background-color: #34495e;
+            padding: 0;
+            border-radius: 5px;
+            list-style: none;
+            width: 200px;
+        }
+
+        .interactive-menu li {
+            padding: 12px 15px;
+            border-bottom: 1px solid #2c3e50;
+            color: #ecf0f1;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .interactive-menu li:hover {
+            background-color: #3498db;
+            padding-left: 20px;
+        }
+
+        .interactive-menu li.active {
+            background-color: #2980b9;
+        }
+
+        .interactive-menu li:nth-child(odd) {
+            background-color: #2c3e50;
+        }
+
+        .interactive-menu li::before {
+            content: "►";
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-menu li:hover::before {
+            left: 5px;
+            opacity: 1;
+        }
+
+        /* Exemple de formulaire pour montrer plusieurs pseudo-classes */
+        .form-demo {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+
+        .form-control:valid {
+            border-color: #2ecc71;
+        }
+
+        .form-control:invalid {
+            border-color: #e74c3c;
+        }
+
+        .form-control:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-submit:hover {
+            background-color: #2980b9;
+        }
+
+        .form-submit:active {
+            background-color: #1a5276;
+            transform: translateY(2px);
+        }
+
+        .form-submit:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pseudo-classes et Pseudo-éléments CSS</h1>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Les pseudo-classes et pseudo-éléments sont des sélecteurs spéciaux en CSS qui permettent de cibler des éléments basés sur leur état ou une partie spécifique de l'élément. Cette démonstration interactive vous aidera à comprendre leur fonctionnement et leurs applications.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Pseudo-classes</h2>
+            <p>Les pseudo-classes sélectionnent des éléments basés sur un état particulier, comme le survol de la souris, l'activation ou la position dans l'arborescence.</p>
+            
+            <div class="section">
+                <h3>:hover</h3>
+                <p>La pseudo-classe :hover s'applique lorsque l'utilisateur survole un élément avec la souris.</p>
+                
+                <div class="demo-box">
+                    <button class="hover-demo">Survolez-moi!</button>
+                    
+                    <div class="explanation">
+                        <p>Lorsque vous survolez ce bouton, son apparence change grâce à la pseudo-classe <code>:hover</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.hover-demo:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>:focus</h3>
+                <p>La pseudo-classe :focus s'applique lorsqu'un élément reçoit le focus (par exemple, un champ de formulaire sélectionné).</p>
+                
+                <div class="demo-box">
+                    <input type="text" class="focus-demo" placeholder="Cliquez ici pour voir l'effet :focus">
+                    
+                    <div class="explanation">
+                        <p>Cliquez sur le champ de texte ci-dessus pour voir l'effet de la pseudo-classe <code>:focus</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.focus-demo:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>:checked</h3>
+                <p>La pseudo-classe :checked s'applique aux éléments d'interface qui sont cochés ou sélectionnés (checkbox, radio, option).</p>
+                
+                <div class="demo-box">
+                    <div class="checked-container">
+                        <label class="checked-label">
+                            <input type="checkbox" class="checked-input">
+                            <span class="checked-text">Option 1</span>
+                        </label>
+                        
+                        <label class="checked-label">
+                            <input type="checkbox" class="checked-input">
+                            <span class="checked-text">Option 2</span>
+                        </label>
+                        
+                        <label class="checked-label">
+                            <input type="checkbox" class="checked-input">
+                            <span class="checked-text">Option 3</span>
+                        </label>
+                    </div>
+                    
+                    <div class="explanation">
+                        <p>Cochez les cases ci-dessus pour voir l'effet de la pseudo-classe <code>:checked</code> sur le texte adjacent.</p>
+                    </div>
+
+                    <div class="code-display">
+.checked-input:checked + .checked-text {
+    color: #e74c3c;
+    font-weight: bold;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>:nth-child()</h3>
+                <p>La pseudo-classe :nth-child() sélectionne des éléments basés sur leur position dans un groupe de frères.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="document.getElementById('nth-child-demo').classList.toggle('nth-child-active')">Activer/Désactiver nth-child(2n)</button>
+                    </div>
+                    
+                    <ul class="nth-child-list" id="nth-child-demo">
+                        <li>Élément 1</li>
+                        <li>Élément 2</li>
+                        <li>Élément 3</li>
+                        <li>Élément 4</li>
+                        <li>Élément 5</li>
+                        <li>Élément 6</li>
+                        <li>Élément 7</li>
+                        <li>Élément 8</li>
+                        <li>Élément 9</li>
+                    </ul>
+                    
+                    <div class="explanation">
+                        <p>Cette liste utilise <code>:nth-child(odd)</code> pour cibler les éléments impairs et <code>:nth-child(3n)</code> pour cibler tous les 3ème éléments. Cliquez sur le bouton pour activer/désactiver <code>:nth-child(2n)</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+/* Style de base */
+.nth-child-list li:nth-child(odd) {
+    background-color: #e0f7fa;
+}
+
+.nth-child-list li:nth-child(3n) {
+    color: #e74c3c;
+}
+
+/* Style activé par le bouton */
+.nth-child-active li:nth-child(2n) {
+    background-color: #c8e6c9;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>:not()</h3>
+                <p>La pseudo-classe :not() sélectionne les éléments qui ne correspondent pas au sélecteur spécifié.</p>
+                
+                <div class="demo-box">
+                    <div class="not-demo">
+                        <p>Ce paragraphe est sélectionné.</p>
+                        <p>Ce paragraphe est sélectionné aussi.</p>
+                        <p class="excluded">Ce paragraphe est exclu grâce à :not().</p>
+                        <p>Ce paragraphe est sélectionné également.</p>
+                    </div>
+                    
+                    <div class="explanation">
+                        <p>Tous les paragraphes sauf celui avec la classe "excluded" ont une bordure gauche, grâce à la pseudo-classe <code>:not()</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.not-demo p:not(.excluded) {
+    border-left: 3px solid #3498db;
+}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Pseudo-éléments</h2>
+            <p>Les pseudo-éléments permettent de cibler et de styliser une partie spécifique d'un élément, comme la première lettre ou ligne.</p>
+            
+            <div class="section">
+                <h3>::before et ::after</h3>
+                <p>Les pseudo-éléments ::before et ::after créent des éléments qui sont les premiers et derniers enfants de l'élément sélectionné.</p>
+                
+                <div class="demo-box">
+                    <p class="before-after-demo">Ce texte est entouré de symboles grâce à ::before et ::after</p>
+                    
+                    <div class="explanation">
+                        <p>Le texte ci-dessus a des symboles ♦ avant et après, ajoutés avec les pseudo-éléments <code>::before</code> et <code>::after</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.before-after-demo::before {
+    content: "♦";
+    color: #e74c3c;
+    margin-right: 8px;
+}
+
+.before-after-demo::after {
+    content: " ♦";
+    color: #e74c3c;
+    margin-left: 8px;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>::first-letter</h3>
+                <p>Le pseudo-élément ::first-letter cible la première lettre d'un élément.</p>
+                
+                <div class="demo-box">
+                    <p class="first-letter-demo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+                    
+                    <div class="explanation">
+                        <p>La première lettre du paragraphe ci-dessus est stylisée différemment grâce au pseudo-élément <code>::first-letter</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.first-letter-demo::first-letter {
+    font-size: 48px;
+    color: #3498db;
+    float: left;
+    padding-right: 8px;
+    line-height: 1;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>::first-line</h3>
+                <p>Le pseudo-élément ::first-line cible la première ligne d'un élément.</p>
+                
+                <div class="demo-box">
+                    <p class="first-line-demo">Cette première ligne est stylisée différemment grâce au pseudo-élément ::first-line.
+                    La deuxième ligne et les suivantes ont un style normal. Redimensionnez la fenêtre pour voir comment la première ligne s'adapte dynamiquement.</p>
+                    
+                    <div class="explanation">
+                        <p>La première ligne du paragraphe ci-dessus est stylisée différemment grâce au pseudo-élément <code>::first-line</code>. Redimensionnez la fenêtre pour voir comment le contenu de la "première ligne" change.</p>
+                    </div>
+
+                    <div class="code-display">
+.first-line-demo::first-line {
+    color: #e74c3c;
+    font-weight: bold;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>::selection</h3>
+                <p>Le pseudo-élément ::selection cible le texte qui a été sélectionné par l'utilisateur.</p>
+                
+                <div class="demo-box">
+                    <p class="selection-demo">Sélectionnez ce texte pour voir l'effet du pseudo-élément ::selection. La couleur de fond et de texte changera lorsque vous le sélectionnez.</p>
+                    
+                    <div class="explanation">
+                        <p>Sélectionnez le texte ci-dessus pour voir l'effet du pseudo-élément <code>::selection</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+.selection-demo::selection {
+    background-color: #2ecc71;
+    color: white;
+}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Exemples interactifs avancés</h2>
+            
+            <div class="section">
+                <h3>Menu interactif</h3>
+                <p>Ce menu utilise plusieurs pseudo-classes et pseudo-éléments pour créer une expérience interactive.</p>
+                
+                <div class="demo-box">
+                    <ul class="interactive-menu">
+                        <li>Accueil</li>
+                        <li>Produits</li>
+                        <li>Services</li>
+                        <li>À propos</li>
+                        <li>Contact</li>
+                    </ul>
+                    
+                    <div class="explanation">
+                        <p>Ce menu utilise <code>:hover</code>, <code>::before</code> et <code>:nth-child(odd)</code> pour créer une expérience interactive riche. Survolez les éléments pour voir les effets.</p>
+                    </div>
+
+                    <div class="code-display">
+.interactive-menu li:hover {
+    background-color: #3498db;
+    padding-left: 20px;
+}
+
+.interactive-menu li::before {
+    content: "►";
+    position: absolute;
+    left: -15px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.interactive-menu li:hover::before {
+    left: 5px;
+    opacity: 1;
+}
+
+.interactive-menu li:nth-child(odd) {
+    background-color: #2c3e50;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Formulaire avec états multiples</h3>
+                <p>Ce formulaire montre comment les pseudo-classes peuvent être utilisées pour indiquer différents états d'un formulaire.</p>
+                
+                <div class="demo-box">
+                    <form class="form-demo">
+                        <div class="form-group">
+                            <label for="name">Nom (requis)</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email (requis, format valide)</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="disabled">Champ désactivé</label>
+                            <input type="text" id="disabled" class="form-control" value="Ce champ est désactivé" disabled>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">Soumettre</button>
+                    </form>
+                    
+                    <div class="explanation">
+                        <p>Ce formulaire utilise <code>:focus</code>, <code>:valid</code>, <code>:invalid</code>, <code>:disabled</code>, <code>:hover</code> et <code>:active</code> pour montrer visuellement les différents états des champs.</p>
+                    </div>
+
+                    <div class="code-display">
+/* Focus */
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Valid/Invalid */
+.form-control:valid {
+    border-color: #2ecc71;
+}
+
+.form-control:invalid {
+    border-color: #e74c3c;
+}
+
+/* Disabled */
+.form-control:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Button states */
+.form-submit:hover {
+    background-color: #2980b9;
+}
+
+.form-submit:active {
+    background-color: #1a5276;
+    transform: translateY(2px);
+}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Récapitulatif</h2>
+            <p>Les pseudo-classes et pseudo-éléments sont des outils puissants pour créer des interfaces utilisateur interactives et dynamiques sans JavaScript supplémentaire. Ils permettent de cibler des éléments dans différents états ou des parties spécifiques d'un élément, enrichissant ainsi l'expérience utilisateur.</p>
+            
+            <div class="explanation">
+                <h3>Pseudo-classes courantes :</h3>
+                <ul>
+                    <li><code>:hover</code> - Survol de la souris</li>
+                    <li><code>:focus</code> - Élément qui a le focus</li>
+                    <li><code>:active</code> - Élément en cours d'activation</li>
+                    <li><code>:checked</code> - Élément coché (checkbox, radio)</li>
+                    <li><code>:nth-child()</code> - Élément basé sur sa position</li>
+                    <li><code>:first-child</code>, <code>:last-child</code> - Premier ou dernier élément</li>
+                    <li><code>:not()</code> - Éléments ne correspondant pas au sélecteur</li>
+                    <li><code>:valid</code>, <code>:invalid</code> - État de validation d'un champ de formulaire</li>
+                    <li><code>:disabled</code>, <code>:enabled</code> - État d'activation d'un champ de formulaire</li>
+                </ul>
+                
+                <h3>Pseudo-éléments courants :</h3>
+                <ul>
+                    <li><code>::before</code>, <code>::after</code> - Contenu avant ou après l'élément</li>
+                    <li><code>::first-letter</code> - Première lettre</li>
+                    <li><code>::first-line</code> - Première ligne</li>
+                    <li><code>::selection</code> - Texte sélectionné</li>
+                    <li><code>::placeholder</code> - Texte d'espace réservé dans les champs de formulaire</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ajouter des écouteurs d'événements pour illustrer la classe "active"
+        document.querySelectorAll('.interactive-menu li').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.interactive-menu li').forEach(el => {
+                    el.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transitions et Animations CSS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            min-height: 200px;
+        }
+        
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .code-display {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Boutons de contrôle */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .active {
+            background-color: #16a085;
+        }
+
+        /* Démos pour les transitions */
+        .transition-box {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            margin: 20px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* Transition simple */
+        .transition-simple {
+            transition: transform 0.3s ease;
+        }
+        
+        .transition-simple:hover {
+            transform: scale(1.2);
+        }
+
+        /* Transition avec délai */
+        .transition-delay {
+            transition: transform 0.5s ease 0.2s;
+        }
+        
+        .transition-delay:hover {
+            transform: rotate(45deg);
+        }
+
+        /* Transition avec courbe de timing */
+        .transition-timing {
+            transition: background-color 0.8s ease-in-out;
+        }
+        
+        .transition-timing:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Transition multi-propriétés */
+        .transition-multiple {
+            transition: 
+                background-color 0.5s ease-out,
+                transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+                border-radius 0.5s linear;
+        }
+        
+        .transition-multiple:hover {
+            background-color: #2ecc71;
+            transform: translateY(-20px) scale(1.1);
+            border-radius: 50%;
+        }
+
+        /* Démos pour les animations */
+        /* Animation de couleur */
+        @keyframes colorChange {
+            0% { background-color: #3498db; }
+            25% { background-color: #e74c3c; }
+            50% { background-color: #2ecc71; }
+            75% { background-color: #f39c12; }
+            100% { background-color: #3498db; }
+        }
+        
+        .animation-color {
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            display: inline-block;
+            animation-name: colorChange;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+
+        /* Animation de déplacement */
+        @keyframes moveAround {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, 0); }
+            50% { transform: translate(100px, 100px); }
+            75% { transform: translate(0, 100px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        .animation-move {
+            width: 50px;
+            height: 50px;
+            background-color: #9b59b6;
+            position: relative;
+            animation-name: moveAround;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        /* Animation complexe */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        .animation-bounce {
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            margin: 20px;
+            display: inline-block;
+        }
+        
+        .animation-bounce.active {
+            animation: bounce 2s infinite;
+            background-color: #e74c3c;
+        }
+
+        /* Animation avec transformation */
+        @keyframes rotateAndScale {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.5); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .animation-transform {
+            width: 80px;
+            height: 80px;
+            background-color: #1abc9c;
+            margin: 20px;
+            display: inline-block;
+        }
+        
+        .animation-transform.active {
+            animation: rotateAndScale 3s infinite alternate;
+        }
+
+        /* Animation avec propriétés multiples */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                background-color: #3498db;
+                border-radius: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                background-color: #e74c3c;
+                border-radius: 50%;
+            }
+            100% {
+                transform: scale(1);
+                background-color: #3498db;
+                border-radius: 0;
+            }
+        }
+        
+        .animation-pulse {
+            width: 80px;
+            height: 80px;
+            background-color: #3498db;
+            margin: 20px;
+            display: inline-block;
+            animation-name: pulse;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        /* Contrôles d'animation */
+        .animation-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .animation-property {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .property-controls {
+            margin-top: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .slider-container label {
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .slider {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .slider-value {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transitions et Animations CSS</h1>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Les transitions et animations CSS permettent d'ajouter du mouvement et des effets visuels à vos pages web sans JavaScript. Cette démonstration interactive vous aidera à comprendre leur fonctionnement et leurs applications.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Transitions CSS</h2>
+            <p>Les transitions CSS permettent de modifier progressivement les propriétés d'un élément, créant ainsi un effet de transition entre deux états.</p>
+            
+            <div class="section">
+                <h3>Transition simple</h3>
+                <p>Une transition simple avec une seule propriété.</p>
+                
+                <div class="demo-box">
+                    <div class="transition-box transition-simple"></div>
+                    
+                    <div class="explanation">
+                        <p>Survolez la boîte bleue pour voir une transition d'échelle simple. La propriété <code>transition</code> permet de spécifier la durée et la fonction de timing.</p>
+                    </div>
+
+                    <div class="code-display">
+.transition-simple {
+    transition: transform 0.3s ease;
+}
+
+.transition-simple:hover {
+    transform: scale(1.2);
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Transition avec délai</h3>
+                <p>Une transition avec un délai avant de commencer.</p>
+                
+                <div class="demo-box">
+                    <div class="transition-box transition-delay"></div>
+                    
+                    <div class="explanation">
+                        <p>Survolez la boîte bleue pour voir une transition de rotation avec délai. La transition commence 0.2 seconde après le survol.</p>
+                    </div>
+
+                    <div class="code-display">
+.transition-delay {
+    transition: transform 0.5s ease 0.2s;
+}
+
+.transition-delay:hover {
+    transform: rotate(45deg);
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Transition avec courbe de timing</h3>
+                <p>Une transition avec une courbe de timing personnalisée.</p>
+                
+                <div class="demo-box">
+                    <div class="transition-box transition-timing"></div>
+                    
+                    <div class="explanation">
+                        <p>Survolez la boîte bleue pour voir une transition de couleur avec la fonction de timing ease-in-out.</p>
+                    </div>
+
+                    <div class="code-display">
+.transition-timing {
+    transition: background-color 0.8s ease-in-out;
+}
+
+.transition-timing:hover {
+    background-color: #e74c3c;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Transition multi-propriétés</h3>
+                <p>Une transition affectant plusieurs propriétés avec des durées et des courbes de timing différentes.</p>
+                
+                <div class="demo-box">
+                    <div class="transition-box transition-multiple"></div>
+                    
+                    <div class="explanation">
+                        <p>Survolez la boîte bleue pour voir plusieurs propriétés en transition simultanément : couleur, transformation et bordure.</p>
+                    </div>
+
+                    <div class="code-display">
+.transition-multiple {
+    transition: 
+        background-color 0.5s ease-out,
+        transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+        border-radius 0.5s linear;
+}
+
+.transition-multiple:hover {
+    background-color: #2ecc71;
+    transform: translateY(-20px) scale(1.1);
+    border-radius: 50%;
+}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Animations CSS</h2>
+            <p>Les animations CSS permettent de créer des séquences d'animations plus complexes avec plusieurs étapes.</p>
+            
+            <div class="section">
+                <h3>Animation de couleur</h3>
+                <p>Une animation simple qui change la couleur de l'élément.</p>
+                
+                <div class="demo-box">
+                    <div class="animation-color"></div>
+                    
+                    <div class="explanation">
+                        <p>Cette animation change la couleur de fond de l'élément en passant par différentes teintes. Elle utilise <code>@keyframes</code> pour définir les états à différents pourcentages de l'animation.</p>
+                    </div>
+
+                    <div class="code-display">
+@keyframes colorChange {
+    0% { background-color: #3498db; }
+    25% { background-color: #e74c3c; }
+    50% { background-color: #2ecc71; }
+    75% { background-color: #f39c12; }
+    100% { background-color: #3498db; }
+}
+
+.animation-color {
+    animation-name: colorChange;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Animation de déplacement</h3>
+                <p>Une animation qui déplace un élément dans un motif.</p>
+                
+                <div class="demo-box">
+                    <div class="animation-move"></div>
+                    
+                    <div class="explanation">
+                        <p>Cette animation déplace l'élément selon un motif carré en utilisant la propriété <code>transform</code> avec <code>translate()</code>.</p>
+                    </div>
+
+                    <div class="code-display">
+@keyframes moveAround {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(100px, 0); }
+    50% { transform: translate(100px, 100px); }
+    75% { transform: translate(0, 100px); }
+    100% { transform: translate(0, 0); }
+}
+
+.animation-move {
+    animation-name: moveAround;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Animation de rebond</h3>
+                <p>Une animation qui simule un effet de rebond.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="document.querySelector('.animation-bounce').classList.toggle('active')">Démarrer/Arrêter l'animation</button>
+                    </div>
+                    
+                    <div class="animation-bounce"></div>
+                    
+                    <div class="explanation">
+                        <p>Cette animation simule un effet de rebond en utilisant différentes étapes dans les keyframes. Cliquez sur le bouton pour démarrer ou arrêter l'animation.</p>
+                    </div>
+
+                    <div class="code-display">
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+}
+
+.animation-bounce.active {
+    animation: bounce 2s infinite;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Animation avec transformation</h3>
+                <p>Une animation qui combine rotation et mise à l'échelle.</p>
+                
+                <div class="demo-box">
+                    <div class="controls">
+                        <button onclick="document.querySelector('.animation-transform').classList.toggle('active')">Démarrer/Arrêter l'animation</button>
+                    </div>
+                    
+                    <div class="animation-transform"></div>
+                    
+                    <div class="explanation">
+                        <p>Cette animation combine rotation et mise à l'échelle pour créer un effet complexe. L'animation alterne entre l'état initial et final.</p>
+                    </div>
+
+                    <div class="code-display">
+@keyframes rotateAndScale {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.5); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.animation-transform.active {
+    animation: rotateAndScale 3s infinite alternate;
+}</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Animation avec propriétés multiples</h3>
+                <p>Une animation qui modifie plusieurs propriétés en même temps.</p>
+                
+                <div class="demo-box">
+                    <div class="animation-pulse"></div>
+                    
+                    <div class="explanation">
+                        <p>Cette animation modifie simultanément la taille, la couleur de fond et la bordure arrondie pour créer un effet de pulsation.</p>
+                    </div>
+
+                    <div class="code-display">
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        background-color: #3498db;
+        border-radius: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: #e74c3c;
+        border-radius: 50%;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #3498db;
+        border-radius: 0;
+    }
+}
+
+.animation-pulse {
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Laboratoire d'animation interactif</h2>
+            <p>Expérimentez avec différentes propriétés d'animation pour voir leur effet en temps réel.</p>
+            
+            <div class="demo-box">
+                <div id="animation-lab" class="animation-pulse" style="animation-play-state: running;"></div>
+                
+                <div class="animation-controls">
+                    <div class="animation-property">
+                        <h3>Durée d'animation</h3>
+                        <div class="property-controls">
+                            <div class="slider-container">
+                                <label for="duration-slider">Durée (secondes):</label>
+                                <input type="range" id="duration-slider" class="slider" min="0.5" max="5" step="0.1" value="2">
+                                <span id="duration-value" class="slider-value">2s</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-property">
+                        <h3>Fonction de timing</h3>
+                        <div class="property-controls">
+                            <button onclick="setTimingFunction('ease')" class="timing-btn active">ease</button>
+                            <button onclick="setTimingFunction('linear')" class="timing-btn">linear</button>
+                            <button onclick="setTimingFunction('ease-in')" class="timing-btn">ease-in</button>
+                            <button onclick="setTimingFunction('ease-out')" class="timing-btn">ease-out</button>
+                            <button onclick="setTimingFunction('ease-in-out')" class="timing-btn">ease-in-out</button>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-property">
+                        <h3>Directions d'animation</h3>
+                        <div class="property-controls">
+                            <button onclick="setDirection('normal')" class="direction-btn active">normal</button>
+                            <button onclick="setDirection('reverse')" class="direction-btn">reverse</button>
+                            <button onclick="setDirection('alternate')" class="direction-btn">alternate</button>
+                            <button onclick="setDirection('alternate-reverse')" class="direction-btn">alternate-reverse</button>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-property">
+                        <h3>Mode de remplissage</h3>
+                        <div class="property-controls">
+                            <button onclick="setFillMode('none')" class="fill-btn active">none</button>
+                            <button onclick="setFillMode('forwards')" class="fill-btn">forwards</button>
+                            <button onclick="setFillMode('backwards')" class="fill-btn">backwards</button>
+                            <button onclick="setFillMode('both')" class="fill-btn">both</button>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-property">
+                        <h3>Contrôle de lecture</h3>
+                        <div class="property-controls">
+                            <button onclick="setPlayState('running')" class="play-btn active">Lecture</button>
+                            <button onclick="setPlayState('paused')" class="play-btn">Pause</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="explanation">
+                    <p>Utilisez les contrôles ci-dessus pour modifier en temps réel les propriétés d'animation et voir leur effet sur l'élément animé.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Récapitulatif</h2>
+            <p>Les transitions et animations CSS sont des outils puissants pour ajouter du mouvement et de l'interactivité à vos sites web sans JavaScript.</p>
+            
+            <div class="explanation">
+                <h3>Propriétés de transition :</h3>
+                <ul>
+                    <li><code>transition-property</code> - Propriété CSS à animer</li>
+                    <li><code>transition-duration</code> - Durée de la transition</li>
+                    <li><code>transition-timing-function</code> - Courbe de timing (ease, linear, etc.)</li>
+                    <li><code>transition-delay</code> - Délai avant le début de la transition</li>
+                    <li><code>transition</code> - Propriété shorthand</li>
+                </ul>
+                
+                <h3>Propriétés d'animation :</h3>
+                <ul>
+                    <li><code>animation-name</code> - Nom de l'animation @keyframes</li>
+                    <li><code>animation-duration</code> - Durée de l'animation</li>
+                    <li><code>animation-timing-function</code> - Courbe de timing</li>
+                    <li><code>animation-delay</code> - Délai avant le début de l'animation</li>
+                    <li><code>animation-iteration-count</code> - Nombre de répétitions</li>
+                    <li><code>animation-direction</code> - Direction de l'animation</li>
+                    <li><code>animation-fill-mode</code> - Comment l'animation applique ses styles avant et après l'exécution</li>
+                    <li><code>animation-play-state</code> - État de lecture (running, paused)</li>
+                    <li><code>animation</code> - Propriété shorthand</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonctions pour le laboratoire d'animation
+        function setTimingFunction(timing) {
+            const lab = document.getElementById('animation-lab');
+            lab.style.animationTimingFunction = timing;
+            
+            document.querySelectorAll('.timing-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+        
+        function setDirection(direction) {
+            const lab = document.getElementById('animation-lab');
+            lab.style.animationDirection = direction;
+            
+            document.querySelectorAll('.direction-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+        
+        function setFillMode(fillMode) {
+            const lab = document.getElementById('animation-lab');
+            lab.style.animationFillMode = fillMode;
+            
+            document.querySelectorAll('.fill-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+        
+        function setPlayState(state) {
+            const lab = document.getElementById('animation-lab');
+            lab.style.animationPlayState = state;
+            
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+        
+        // Configuration du slider de durée
+        const durationSlider = document.getElementById('duration-slider');
+        const durationValue = document.getElementById('duration-value');
+        
+        durationSlider.addEventListener('input', function() {
+            const value = this.value;
+            durationValue.textContent = value + 's';
+            
+            const lab = document.getElementById('animation-lab');
+            lab.style.animationDuration = value + 's';
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Modèle de Boîte CSS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .intro {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .interactive-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .box-demo {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .margin-zone {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #FFC0CB80;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .border-zone {
+            position: absolute;
+            background-color: #FFB74D80;
+        }
+
+        .padding-zone {
+            position: absolute;
+            background-color: #AED58180;
+        }
+
+        .content-zone {
+            position: absolute;
+            background-color: #64B5F680;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .controls {
+            flex: 1;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .value-display {
+            font-weight: normal;
+            color: #666;
+        }
+
+        .box-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .box-sizing-demo {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .box-example {
+            flex: 1;
+            border: 2px solid #333;
+            padding: 15px;
+            background-color: #f5f5f5;
+        }
+
+        .code {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #64B5F6;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Le Modèle de Boîte CSS</h1>
+    
+    <div class="intro">
+        <p>Le modèle de boîte est l'un des concepts fondamentaux du CSS. Il décrit comment chaque élément HTML est représenté comme une boîte rectangulaire, avec des propriétés qui déterminent sa taille, sa position et son apparence.</p>
+        <p>Cette démonstration interactive vous permet de comprendre comment fonctionne le modèle de boîte et comment les propriétés CSS affectent les dimensions et l'apparence des éléments.</p>
+    </div>
+
+    <h2>Démonstration Interactive</h2>
+    <div class="demo-container">
+        <div class="interactive-box">
+            <div class="box-demo">
+                <div id="margin" class="margin-zone">
+                    <div id="border" class="border-zone">
+                        <div id="padding" class="padding-zone">
+                            <div id="content" class="content-zone">Contenu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>Content Width: <span id="content-width-value" class="value-display">100px</span></label>
+                    <input type="range" id="content-width" min="50" max="200" value="100">
+                </div>
+                <div class="control-group">
+                    <label>Content Height: <span id="content-height-value" class="value-display">100px</span></label>
+                    <input type="range" id="content-height" min="50" max="200" value="100">
+                </div>
+                <div class="control-group">
+                    <label>Padding: <span id="padding-value" class="value-display">20px</span></label>
+                    <input type="range" id="padding-slider" min="0" max="50" value="20">
+                </div>
+                <div class="control-group">
+                    <label>Border Width: <span id="border-value" class="value-display">5px</span></label>
+                    <input type="range" id="border-slider" min="0" max="20" value="5">
+                </div>
+                <div class="control-group">
+                    <label>Margin: <span id="margin-value" class="value-display">20px</span></label>
+                    <input type="range" id="margin-slider" min="0" max="50" value="20">
+                </div>
+
+                <div class="box-details">
+                    <p><strong>Dimensions totales:</strong></p>
+                    <p>Largeur totale: <span id="total-width">190px</span></p>
+                    <p>Hauteur totale: <span id="total-height">190px</span></p>
+                    <p><strong>Formule:</strong></p>
+                    <p>Largeur totale = Contenu + (Padding × 2) + (Border × 2) + (Margin × 2)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Éléments du Modèle de Boîte</h2>
+    <div>
+        <p><strong>Le modèle de boîte CSS comprend:</strong></p>
+        <ul>
+            <li><strong>Content (Contenu)</strong> - Le contenu réel de l'élément (texte, images, etc.)</li>
+            <li><strong>Padding (Rembourrage)</strong> - L'espace entre le contenu et la bordure</li>
+            <li><strong>Border (Bordure)</strong> - La ligne qui entoure le contenu et le padding</li>
+            <li><strong>Margin (Marge)</strong> - L'espace transparent autour de la bordure</li>
+        </ul>
+        
+        <div class="code">
+            .element {<br>
+            &nbsp;&nbsp;/* Propriétés du contenu */<br>
+            &nbsp;&nbsp;width: 100px;<br>
+            &nbsp;&nbsp;height: 100px;<br>
+            <br>
+            &nbsp;&nbsp;/* Propriétés de padding */<br>
+            &nbsp;&nbsp;padding: 20px;<br>
+            &nbsp;&nbsp;/* ou padding-top, padding-right, padding-bottom, padding-left */<br>
+            <br>
+            &nbsp;&nbsp;/* Propriétés de bordure */<br>
+            &nbsp;&nbsp;border: 5px solid black;<br>
+            &nbsp;&nbsp;/* ou border-width, border-style, border-color */<br>
+            <br>
+            &nbsp;&nbsp;/* Propriétés de marge */<br>
+            &nbsp;&nbsp;margin: 20px;<br>
+            &nbsp;&nbsp;/* ou margin-top, margin-right, margin-bottom, margin-left */<br>
+            }
+        </div>
+    </div>
+
+    <h2>Box-sizing: Content-box vs Border-box</h2>
+    <p>La propriété <code>box-sizing</code> détermine comment la largeur et la hauteur d'un élément sont calculées:</p>
+    
+    <div class="box-sizing-demo">
+        <div class="box-example">
+            <h3>Content-box (comportement par défaut)</h3>
+            <p>Les propriétés width et height s'appliquent uniquement au contenu de l'élément.</p>
+            <p>Largeur totale = width + padding + border</p>
+            <div class="code">
+                .box {<br>
+                &nbsp;&nbsp;width: 100px;<br>
+                &nbsp;&nbsp;padding: 20px;<br>
+                &nbsp;&nbsp;border: 5px solid black;<br>
+                &nbsp;&nbsp;box-sizing: content-box; /* par défaut */<br>
+                }<br>
+                /* Largeur totale = 100 + 40 + 10 = 150px */
+            </div>
+        </div>
+        
+        <div class="box-example">
+            <h3>Border-box</h3>
+            <p>Les propriétés width et height incluent le padding et la bordure.</p>
+            <p>Largeur totale = width</p>
+            <div class="code">
+                .box {<br>
+                &nbsp;&nbsp;width: 100px;<br>
+                &nbsp;&nbsp;padding: 20px;<br>
+                &nbsp;&nbsp;border: 5px solid black;<br>
+                &nbsp;&nbsp;box-sizing: border-box;<br>
+                }<br>
+                /* Largeur totale = 100px */
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Éléments DOM
+        const contentElem = document.getElementById('content');
+        const paddingElem = document.getElementById('padding');
+        const borderElem = document.getElementById('border');
+        const marginElem = document.getElementById('margin');
+        
+        // Sliders
+        const contentWidthSlider = document.getElementById('content-width');
+        const contentHeightSlider = document.getElementById('content-height');
+        const paddingSlider = document.getElementById('padding-slider');
+        const borderSlider = document.getElementById('border-slider');
+        const marginSlider = document.getElementById('margin-slider');
+        
+        // Valeurs affichées
+        const contentWidthValue = document.getElementById('content-width-value');
+        const contentHeightValue = document.getElementById('content-height-value');
+        const paddingValue = document.getElementById('padding-value');
+        const borderValue = document.getElementById('border-value');
+        const marginValue = document.getElementById('margin-value');
+        const totalWidthSpan = document.getElementById('total-width');
+        const totalHeightSpan = document.getElementById('total-height');
+        
+        // Fonction pour mettre à jour le modèle de boîte
+        function updateBoxModel() {
+            const contentWidth = parseInt(contentWidthSlider.value);
+            const contentHeight = parseInt(contentHeightSlider.value);
+            const paddingSize = parseInt(paddingSlider.value);
+            const borderSize = parseInt(borderSlider.value);
+            const marginSize = parseInt(marginSlider.value);
+            
+            // Mise à jour des éléments visuels
+            contentElem.style.width = contentWidth + 'px';
+            contentElem.style.height = contentHeight + 'px';
+            contentElem.style.left = (paddingSize + borderSize) + 'px';
+            contentElem.style.top = (paddingSize + borderSize) + 'px';
+            
+            paddingElem.style.width = (contentWidth + paddingSize * 2) + 'px';
+            paddingElem.style.height = (contentHeight + paddingSize * 2) + 'px';
+            paddingElem.style.left = borderSize + 'px';
+            paddingElem.style.top = borderSize + 'px';
+            
+            borderElem.style.width = (contentWidth + paddingSize * 2 + borderSize * 2) + 'px';
+            borderElem.style.height = (contentHeight + paddingSize * 2 + borderSize * 2) + 'px';
+            borderElem.style.left = marginSize + 'px';
+            borderElem.style.top = marginSize + 'px';
+            
+            // Mise à jour des valeurs affichées
+            contentWidthValue.textContent = contentWidth + 'px';
+            contentHeightValue.textContent = contentHeight + 'px';
+            paddingValue.textContent = paddingSize + 'px';
+            borderValue.textContent = borderSize + 'px';
+            marginValue.textContent = marginSize + 'px';
+            
+            // Calcul des dimensions totales
+            const totalWidth = contentWidth + (paddingSize * 2) + (borderSize * 2) + (marginSize * 2);
+            const totalHeight = contentHeight + (paddingSize * 2) + (borderSize * 2) + (marginSize * 2);
+            
+            totalWidthSpan.textContent = totalWidth + 'px';
+            totalHeightSpan.textContent = totalHeight + 'px';
+        }
+        
+        // Ajouter des événements aux sliders
+        contentWidthSlider.addEventListener('input', updateBoxModel);
+        contentHeightSlider.addEventListener('input', updateBoxModel);
+        paddingSlider.addEventListener('input', updateBoxModel);
+        borderSlider.addEventListener('input', updateBoxModel);
+        marginSlider.addEventListener('input', updateBoxModel);
+        
+        // Initialisation
+        updateBoxModel();
+    </script>
+</body>
+</html>

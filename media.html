@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries CSS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            position: relative;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .code-display {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .responsive-info {
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            display: none;
+        }
+
+        #mobile-info {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        #tablet-info {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        #desktop-info {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #large-info {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* Démo 1: Détection de largeur d'écran */
+        /* Par défaut (mobile first) */
+        @media only screen and (max-width: 767px) {
+            #mobile-info {
+                display: block;
+            }
+        }
+
+        /* Tablette */
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            #tablet-info {
+                display: block;
+            }
+        }
+
+        /* Desktop */
+        @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+            #desktop-info {
+                display: block;
+            }
+        }
+
+        /* Large Desktop */
+        @media only screen and (min-width: 1440px) {
+            #large-info {
+                display: block;
+            }
+        }
+
+        /* Démo 2: Layout responsive */
+        .responsive-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Mobile: 1 colonne */
+        @media only screen and (max-width: 767px) {
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tablette: 2 colonnes */
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            .responsive-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Desktop: 3 colonnes */
+        @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+            .responsive-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        /* Large Desktop: 4 colonnes */
+        @media only screen and (min-width: 1440px) {
+            .responsive-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        /* Démo 3: Navigation responsive */
+        .responsive-nav {
+            background-color: #2c3e50;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .nav-toggle::after {
+            content: "☰";
+            float: right;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-item:hover {
+            background-color: #34495e;
+        }
+
+        /* Navigation mobile */
+        @media only screen and (max-width: 767px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-list {
+                display: none;
+                flex-direction: column;
+            }
+
+            .nav-list.active {
+                display: flex;
+            }
+        }
+
+        /* Démo 4: Images responsives */
+        .responsive-image-container {
+            margin-top: 20px;
+        }
+
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
+        /* Démo 5: Texte responsive */
+        .responsive-text {
+            margin-top: 20px;
+        }
+
+        .responsive-text h2 {
+            font-size: 24px;
+        }
+
+        .responsive-text p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .responsive-text h2 {
+                font-size: 32px;
+            }
+
+            .responsive-text p {
+                font-size: 18px;
+                line-height: 1.8;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .responsive-text h2 {
+                font-size: 36px;
+            }
+
+            .responsive-text p {
+                font-size: 20px;
+                line-height: 2;
+            }
+        }
+
+        /* Démo 6: Media queries pour l'orientation */
+        .orientation-demo {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .orientation-box {
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            max-width: 500px;
+        }
+
+        .portrait-content {
+            background-color: #e74c3c;
+            color: white;
+            display: none;
+        }
+
+        .landscape-content {
+            background-color: #2ecc71;
+            color: white;
+            display: none;
+        }
+
+        @media (orientation: portrait) {
+            .portrait-content {
+                display: block;
+            }
+        }
+
+        @media (orientation: landscape) {
+            .landscape-content {
+                display: block;
+            }
+        }
+
+        /* Démo 7: Media features avancées */
+        .media-features {
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            display: none;
+        }
+
+        /* Écran tactile */
+        @media (hover: none) and (pointer: coarse) {
+            #touch-screen {
+                display: block;
+                background-color: #9b59b6;
+                color: white;
+            }
+        }
+
+        /* Écran non tactile avec souris/trackpad */
+        @media (hover: hover) and (pointer: fine) {
+            #mouse-screen {
+                display: block;
+                background-color: #3498db;
+                color: white;
+            }
+        }
+
+        /* Écran préférant le thème sombre */
+        @media (prefers-color-scheme: dark) {
+            #dark-theme {
+                display: block;
+                background-color: #2c3e50;
+                color: white;
+            }
+        }
+
+        /* Écran préférant le thème clair */
+        @media (prefers-color-scheme: light) {
+            #light-theme {
+                display: block;
+                background-color: #ecf0f1;
+                color: #2c3e50;
+            }
+        }
+
+        /* Simulateur de taille d'écran */
+        .screen-simulator {
+            border: 2px dashed #3498db;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        .simulator-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .simulator-btn {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .simulator-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .simulator-btn.active {
+            background-color: #16a085;
+        }
+
+        .simulator-window {
+            border: 2px solid #3498db;
+            background-color: white;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            transition: width 0.3s ease;
+            margin: 0 auto;
+        }
+
+        .simulator-content {
+            padding: 20px;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .simulator-display {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* Affichage pour l'exemple de site responsive */
+        .demo-website {
+            font-family: Arial, sans-serif;
+        }
+
+        .demo-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .demo-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .demo-nav {
+            display: flex;
+        }
+
+        .demo-nav-item {
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .demo-hero {
+            padding: 50px 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        .demo-hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .demo-feature {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .demo-footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Media queries pour le site de démonstration */
+        @media (max-width: 767px) {
+            .demo-menu-toggle {
+                display: block;
+            }
+
+            .demo-nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #3498db;
+                padding: 20px;
+            }
+
+            .demo-nav.active {
+                display: flex;
+            }
+
+            .demo-nav-item {
+                margin: 10px 0;
+                padding: 10px;
+            }
+
+            .demo-features {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-hero h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .demo-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Media Queries CSS</h1>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Les media queries permettent d'appliquer des styles CSS conditionnellement en fonction des caractéristiques de l'appareil, comme la largeur d'écran, l'orientation ou le type d'appareil. Cette démonstration interactive vous aidera à comprendre leur fonctionnement et leurs applications pour créer des sites web responsifs.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Détection de la largeur d'écran</h2>
+            <p>Les media queries les plus courantes sont basées sur la largeur d'écran. Elles permettent d'adapter votre design aux différentes tailles d'écran.</p>
+            
+            <div class="demo-box">
+                <div id="mobile-info" class="responsive-info">Vous êtes sur un appareil mobile (max-width: 767px)</div>
+                <div id="tablet-info" class="responsive-info">Vous êtes sur une tablette (min-width: 768px)</div>
+                <div id="desktop-info" class="responsive-info">Vous êtes sur un ordinateur de bureau (min-width: 1024px)</div>
+                <div id="large-info" class="responsive-info">Vous êtes sur un grand écran (min-width: 1440px)</div>
+                
+                <div class="explanation">
+                    <p>Redimensionnez votre navigateur pour voir comment le message change en fonction de la largeur de l'écran. Ceci est réalisé grâce à des media queries basées sur la largeur.</p>
+                </div>
+
+                <div class="code-display">
+/* Mobile */
+@media only screen and (max-width: 767px) {
+    #mobile-info {
+        display: block;
+    }
+}
+
+/* Tablette */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    #tablet-info {
+        display: block;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    #desktop-info {
+        display: block;
+    }
+}
+
+/* Large Desktop */
+@media only screen and (min-width: 1440px) {
+    #large-info {
+        display: block;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Layout responsive avec CSS Grid</h2>
+            <p>Les media queries peuvent être utilisées pour modifier la disposition des éléments en fonction de la taille de l'écran.</p>
+            
+            <div class="demo-box">
+                <p>Redimensionnez votre navigateur pour voir comment la grille s'adapte à différentes tailles d'écran:</p>
+                
+                <div class="responsive-grid">
+                    <div class="grid-item">Élément 1</div>
+                    <div class="grid-item">Élément 2</div>
+                    <div class="grid-item">Élément 3</div>
+                    <div class="grid-item">Élément 4</div>
+                    <div class="grid-item">Élément 5</div>
+                    <div class="grid-item">Élément 6</div>
+                </div>
+                
+                <div class="explanation">
+                    <p>Sur mobile, la grille affiche 1 colonne. Sur tablette, 2 colonnes. Sur desktop, 3 colonnes. Sur grand écran, 4 colonnes.</p>
+                </div>
+
+                <div class="code-display">
+/* Mobile: 1 colonne */
+@media only screen and (max-width: 767px) {
+    .responsive-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablette: 2 colonnes */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Desktop: 3 colonnes */
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Large Desktop: 4 colonnes */
+@media only screen and (min-width: 1440px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Navigation responsive</h2>
+            <p>Un modèle courant est de transformer une barre de navigation horizontale en menu hamburger sur mobile.</p>
+            
+            <div class="demo-box">
+                <div class="responsive-nav">
+                    <button class="nav-toggle" onclick="toggleNav()">Menu</button>
+                    <ul class="nav-list" id="navList">
+                        <li class="nav-item">Accueil</li>
+                        <li class="nav-item">Produits</li>
+                        <li class="nav-item">Services</li>
+                        <li class="nav-item">À propos</li>
+                        <li class="nav-item">Contact</li>
+                    </ul>
+                </div>
+                
+                <div class="explanation">
+                    <p>Redimensionnez votre navigateur pour voir la navigation changer. Sur petit écran, elle devient un menu hamburger. Cliquez sur "Menu" pour l'ouvrir/fermer.</p>
+                </div>
+
+                <div class="code-display">
+/* Navigation par défaut */
+.nav-toggle {
+    display: none;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+
+/* Navigation mobile */
+@media only screen and (max-width: 767px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-list {
+        display: none;
+        flex-direction: column;
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Images responsives</h2>
+            <p>Les images peuvent être rendues responsives pour s'adapter à différentes tailles d'écran.</p>
+            
+            <div class="demo-box">
+                <div class="responsive-image-container">
+                    <img src="https://via.placeholder.com/1200x600/3498db/ffffff?text=Image+Responsive" alt="Image responsive" class="responsive-image">
+                </div>
+                
+                <div class="explanation">
+                    <p>Cette image s'adapte à la largeur de son conteneur, tout en maintenant son ratio hauteur/largeur. Redimensionnez votre navigateur pour voir l'effet.</p>
+                </div>
+
+                <div class="code-display">
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Texte responsive</h2>
+            <p>La taille du texte peut également être ajustée en fonction de la taille de l'écran.</p>
+            
+            <div class="demo-box">
+                <div class="responsive-text">
+                    <h2>Titre responsive</h2>
+                    <p>Ce paragraphe change de taille en fonction de la largeur de l'écran. Sur mobile, il est plus petit. Sur desktop, il est plus grand. Redimensionnez votre navigateur pour voir la différence.</p>
+                </div>
+                
+                <div class="explanation">
+                    <p>La taille du texte s'adapte à différentes tailles d'écran pour une meilleure lisibilité.</p>
+                </div>
+
+                <div class="code-display">
+/* Taille par défaut (mobile) */
+.responsive-text h2 {
+    font-size: 24px;
+}
+
+.responsive-text p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Tablette et plus */
+@media only screen and (min-width: 768px) {
+    .responsive-text h2 {
+        font-size: 32px;
+    }
+
+    .responsive-text p {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+}
+
+/* Desktop et plus */
+@media only screen and (min-width: 1024px) {
+    .responsive-text h2 {
+        font-size: 36px;
+    }
+
+    .responsive-text p {
+        font-size: 20px;
+        line-height: 2;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Media queries d'orientation</h2>
+            <p>Les media queries peuvent également cibler l'orientation de l'appareil (portrait ou paysage).</p>
+            
+            <div class="demo-box">
+                <div class="orientation-demo">
+                    <h3>Orientation actuelle:</h3>
+                    <div class="orientation-box portrait-content">
+                        <p>MODE PORTRAIT DÉTECTÉ</p>
+                        <p>Tournez votre appareil ou redimensionnez votre navigateur pour voir le mode paysage.</p>
+                    </div>
+                    <div class="orientation-box landscape-content">
+                        <p>MODE PAYSAGE DÉTECTÉ</p>
+                        <p>Tournez votre appareil ou redimensionnez votre navigateur pour voir le mode portrait.</p>
+                    </div>
+                </div>
+                
+                <div class="explanation">
+                    <p>Cette démo détecte l'orientation de votre écran et affiche un message différent en fonction de celle-ci.</p>
+                </div>
+
+                <div class="code-display">
+@media (orientation: portrait) {
+    .portrait-content {
+        display: block;
+    }
+}
+
+@media (orientation: landscape) {
+    .landscape-content {
+        display: block;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Media features avancées</h2>
+            <p>Au-delà de la largeur et de l'orientation, les media queries peuvent détecter d'autres caractéristiques comme le type d'appareil, les préférences de l'utilisateur, etc.</p>
+            
+            <div class="demo-box">
+                <div class="media-features">
+                    <div id="touch-screen" class="feature-box">
+                        <p>Vous utilisez un écran tactile (hover: none)</p>
+                    </div>
+                    <div id="mouse-screen" class="feature-box">
+                        <p>Vous utilisez un dispositif de pointage précis comme une souris (hover: hover)</p>
+                    </div>
+                    <div id="dark-theme" class="feature-box">
+                        <p>Vous préférez le thème sombre (prefers-color-scheme: dark)</p>
+                    </div>
+                    <div id="light-theme" class="feature-box">
+                        <p>Vous préférez le thème clair (prefers-color-scheme: light)</p>
+                    </div>
+                </div>
+                
+                <div class="explanation">
+                    <p>Ces exemples montrent comment détecter des caractéristiques avancées comme le type d'appareil (tactile ou non) et les préférences de thème de l'utilisateur.</p>
+                </div>
+
+                <div class="code-display">
+/* Écran tactile */
+@media (hover: none) and (pointer: coarse) {
+    #touch-screen {
+        display: block;
+    }
+}
+
+/* Écran non tactile avec souris/trackpad */
+@media (hover: hover) and (pointer: fine) {
+    #mouse-screen {
+        display: block;
+    }
+}
+
+/* Préférence de thème */
+@media (prefers-color-scheme: dark) {
+    #dark-theme {
+        display: block;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #light-theme {
+        display: block;
+    }
+}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Simulateur de taille d'écran</h2>
+            <p>Testez votre design responsive avec ce simulateur qui émule différentes tailles d'écran.</p>
+            
+            <div class="screen-simulator">
+                <div class="simulator-controls">
+                    <button class="simulator-btn active" onclick="setSimulatorWidth('320px', this)">Mobile S (320px)</button>
+                    <button class="simulator-btn" onclick="setSimulatorWidth('375px', this)">Mobile M (375px)</button>
+                    <button class="simulator-btn" onclick="setSimulatorWidth('425px', this)">Mobile L (425px)</button>
+                    <button class="simulator-btn" onclick="setSimulatorWidth('768px', this)">Tablette (768px)</button>
+                    <button class="simulator-btn" onclick="setSimulatorWidth('1024px', this)">Laptop (1024px)</button>
+                    <button class="simulator-btn" onclick="setSimulatorWidth('1440px', this)">Desktop (1440px)</button>
+                </div>
+                
+                <div class="simulator-window" id="simulatorWindow" style="width: 320px;">
+                    <div class="simulator-content">
+                        <!-- Exemple de site web responsive -->
+                        <div class="demo-website">
+                            <header class="demo-header">
+                                <div class="demo-logo">MonSite</div>
+                                <button class="demo-menu-toggle" onclick="toggleDemoNav()">☰</button>
+                                <nav class="demo-nav" id="demoNav">
+                                    <a href="#" class="demo-nav-item">Accueil</a>
+                                    <a href="#" class="demo-nav-item">Services</a>
+                                    <a href="#" class="demo-nav-item">À propos</a>
+                                    <a href="#" class="demo-nav-item">Contact</a>
+                                </nav>
+                            </header>
+                            
+                            <section class="demo-hero">
+                                <h1>Site web responsive</h1>
+                                <p>Ce site s'adapte à toutes les tailles d'écran grâce aux media queries.</p>
+                            </section>
+                            
+                            <section class="demo-features">
+                                <div class="demo-feature">
+                                    <h3>Fonctionnalité 1</h3>
+                                    <p>Description de la première fonctionnalité du site.</p>
+                                </div>
+                                <div class="demo-feature">
+                                    <h3>Fonctionnalité 2</h3>
+                                    <p>Description de la deuxième fonctionnalité du site.</p>
+                                </div>
+                                <div class="demo-feature">
+                                    <h3>Fonctionnalité 3</h3>
+                                    <p>Description de la troisième fonctionnalité du site.</p>
+                                </div>
+                            </section>
+                            
+                            <footer class="demo-footer">
+                                <p>&copy; 2023 MonSite - Tous droits réservés</p>
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="simulator-display" id="simulatorDisplay">Largeur: 320px</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Récapitulatif</h2>
+            <p>Les media queries sont essentielles pour créer des sites web qui s'adaptent à tous les appareils et préférences utilisateur.</p>
+            
+            <div class="explanation">
+                <h3>Syntaxe de base :</h3>
+                <pre><code>@media mediaType and (mediaFeature: value) {
+    /* Styles à appliquer si la condition est vraie */
+}</code></pre>
+                
+                <h3>Types de media courants :</h3>
+                <ul>
+                    <li><code>all</code> - Tous les appareils</li>
+                    <li><code>screen</code> - Écrans</li>
+                    <li><code>print</code> - Impression</li>
+                    <li><code>speech</code> - Synthèse vocale</li>
+                </ul>
+                
+                <h3>Media features courantes :</h3>
+                <ul>
+                    <li><code>width</code>, <code>min-width</code>, <code>max-width</code> - Largeur de la fenêtre</li>
+                    <li><code>height</code>, <code>min-height</code>, <code>max-height</code> - Hauteur de la fenêtre</li>
+                    <li><code>orientation</code> - Portrait ou paysage</li>
+                    <li><code>aspect-ratio</code> - Ratio largeur/hauteur</li>
+                    <li><code>resolution</code> - Densité de pixels</li>
+                    <li><code>hover</code> - Capacité de survol</li>
+                    <li><code>pointer</code> - Type de dispositif de pointage</li>
+                    <li><code>prefers-color-scheme</code> - Préférence de thème (clair/sombre)</li>
+                    <li><code>prefers-reduced-motion</code> - Préférence de réduction des animations</li>
+                </ul>
+                
+                <h3>Opérateurs logiques :</h3>
+                <ul>
+                    <li><code>and</code> - Toutes les conditions doivent être vraies</li>
+                    <li><code>not</code> - Inverse la condition</li>
+                    <li><code>,</code> (virgule) - Équivalent à OR, une des conditions doit être vraie</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour afficher/masquer la navigation
+        function toggleNav() {
+            const navList = document.getElementById('navList');
+            navList.classList.toggle('active');
+        }
+        
+        // Fonction pour définir la largeur du simulateur
+        function setSimulatorWidth(width, button) {
+            const simulatorWindow = document.getElementById('simulatorWindow');
+            const simulatorDisplay = document.getElementById('simulatorDisplay');
+            
+            simulatorWindow.style.width = width;
+            simulatorDisplay.textContent = 'Largeur: ' + width;
+            
+            // Mettre à jour le bouton actif
+            document.querySelectorAll('.simulator-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            button.classList.add('active');
+        }
+        
+        // Fonction pour le menu de démonstration
+        function toggleDemoNav() {
+            const demoNav = document.getElementById('demoNav');
+            demoNav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html> 
