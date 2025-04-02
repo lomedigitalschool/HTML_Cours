@@ -262,6 +262,69 @@
                 <p>La propriété <code>z-index</code> détermine l'ordre d'empilement des éléments positionnés qui se chevauchent. Un élément avec un <code>z-index</code> plus élevé sera placé au-dessus d'un élément avec un <code>z-index</code> plus bas.</p>
             </div>
         </div>
+        
+        <div class="section">
+            <h2>Float</h2>
+            <p>La propriété float permet de placer un élément à gauche ou à droite de son conteneur, permettant au texte et aux éléments en ligne de l'entourer.</p>
+            
+            <div class="controls">
+                <button onclick="applyFloat('float-box-1', 'left')">Float: left</button>
+                <button onclick="applyFloat('float-box-2', 'right')">Float: right</button>
+                <button onclick="resetFloat()">Réinitialiser</button>
+            </div>
+            
+            <div class="demo-box" id="float-demo">
+                <div class="box box-1" id="float-box-1">Boîte 1</div>
+                <div class="box box-2" id="float-box-2">Boîte 2</div>
+                <p style="padding: 10px; background-color: #f8f8f8;">
+                    Ceci est un paragraphe de texte pour démontrer comment le contenu s'écoule autour des éléments flottants. 
+                    Remarquez comment le texte s'enroule autour des boîtes lorsqu'elles sont flottantes. Les éléments flottants 
+                    sont retirés du flux normal du document, mais le contenu environnant s'adapte pour les contourner.
+                </p>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>float</code> permet de positionner un élément à gauche ou à droite de son conteneur, permettant aux autres éléments de s'écouler autour de lui. Un élément flottant est retiré du flux normal du document.</p>
+                <p>Valeurs courantes :</p>
+                <ul>
+                    <li><code>float: left</code> - L'élément flotte à gauche</li>
+                    <li><code>float: right</code> - L'élément flotte à droite</li>
+                    <li><code>float: none</code> - L'élément ne flotte pas (défaut)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Clear</h2>
+            <p>La propriété clear spécifie si un élément peut être placé à côté d'éléments flottants ou s'il doit être déplacé sous eux.</p>
+            
+            <div class="controls">
+                <button onclick="applyClear('clear-box-3', 'none')">Clear: none</button>
+                <button onclick="applyClear('clear-box-3', 'left')">Clear: left</button>
+                <button onclick="applyClear('clear-box-3', 'right')">Clear: right</button>
+                <button onclick="applyClear('clear-box-3', 'both')">Clear: both</button>
+            </div>
+            
+            <div class="demo-box" id="clear-demo">
+                <div class="box box-1" style="float: left; margin-right: 10px;">Float: left</div>
+                <div class="box box-2" style="float: right; margin-left: 10px;">Float: right</div>
+                <div class="box box-3" id="clear-box-3" style="width: 80%; margin: 10px auto; background-color: #9b59b6;">Clear: none</div>
+                <p style="padding: 10px; background-color: #f8f8f8; margin-top: 10px;">
+                    Ce paragraphe montre comment la propriété clear affecte le positionnement par rapport aux éléments flottants.
+                </p>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>clear</code> spécifie si un élément peut être adjacent à des éléments flottants précédents ou s'il doit être déplacé en dessous d'eux.</p>
+                <p>Valeurs courantes :</p>
+                <ul>
+                    <li><code>clear: none</code> - L'élément peut être adjacent aux éléments flottants (défaut)</li>
+                    <li><code>clear: left</code> - L'élément est poussé en dessous des éléments flottants à gauche</li>
+                    <li><code>clear: right</code> - L'élément est poussé en dessous des éléments flottants à droite</li>
+                    <li><code>clear: both</code> - L'élément est poussé en dessous des éléments flottants des deux côtés</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -320,6 +383,23 @@
             
             document.getElementById('z-box-3').style.zIndex = 3;
             document.getElementById('z-box-3').textContent = 'z-index: 3';
+        }
+        
+        function applyFloat(id, value) {
+            document.getElementById('float-box-1').style.float = 'none';
+            document.getElementById('float-box-2').style.float = 'none';
+            document.getElementById(id).style.float = value;
+        }
+        
+        function resetFloat() {
+            document.getElementById('float-box-1').style.float = 'none';
+            document.getElementById('float-box-2').style.float = 'none';
+        }
+        
+        function applyClear(id, value) {
+            const element = document.getElementById(id);
+            element.style.clear = value;
+            element.textContent = `Clear: ${value}`;
         }
     </script>
 </body>
