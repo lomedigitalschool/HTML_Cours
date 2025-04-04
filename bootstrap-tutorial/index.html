@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Bootstrap - Apprenez à utiliser le framework CSS le plus populaire</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <!-- Notre CSS personnalisé -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Prism.js pour la coloration syntaxique -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-bootstrap-fill me-2"></i>
+                Tutoriel Bootstrap
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#introduction">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#installation">Installation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#composants">Composants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#utilitaires">Utilitaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#exercices">Exercices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#avance">Avancé</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button id="theme-switcher" class="btn btn-sm">
+                        <i class="bi bi-moon-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Structure principale -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="col-lg-3 d-none d-lg-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="#introduction" class="nav-link active">
+                                <i class="bi bi-house-door-fill me-2"></i>
+                                Introduction
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#installation" class="nav-link">
+                                <i class="bi bi-download me-2"></i>
+                                Installation
+                            </a>
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a href="#installation-cdn" class="nav-link">
+                                        <i class="bi bi-cloud-arrow-down me-2"></i>
+                                        Avec CDN
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#installation-npm" class="nav-link">
+                                        <i class="bi bi-npm me-2"></i>
+                                        Avec NPM
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#grid" class="nav-link">
+                                <i class="bi bi-grid-3x3-gap me-2"></i>
+                                Système de grille
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#composants" class="nav-link">
+                                <i class="bi bi-ui-checks me-2"></i>
+                                Composants
+                            </a>
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a href="#composants-alerts" class="nav-link">
+                                        <i class="bi bi-exclamation-circle me-2"></i>
+                                        Alertes
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#composants-buttons" class="nav-link">
+                                        <i class="bi bi-dpad me-2"></i>
+                                        Boutons
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#composants-cards" class="nav-link">
+                                        <i class="bi bi-card-text me-2"></i>
+                                        Cards
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#composants-navbars" class="nav-link">
+                                        <i class="bi bi-list me-2"></i>
+                                        Navbars
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#composants-modals" class="nav-link">
+                                        <i class="bi bi-window me-2"></i>
+                                        Modals
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#utilitaires" class="nav-link">
+                                <i class="bi bi-tools me-2"></i>
+                                Classes utilitaires
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#formulaires" class="nav-link">
+                                <i class="bi bi-input-cursor me-2"></i>
+                                Formulaires
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#responsive" class="nav-link">
+                                <i class="bi bi-phone me-2"></i>
+                                Design responsive
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#customisation" class="nav-link">
+                                <i class="bi bi-brush me-2"></i>
+                                Personnalisation
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#exercices" class="nav-link">
+                                <i class="bi bi-pencil-square me-2"></i>
+                                Exercices pratiques
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#projets" class="nav-link">
+                                <i class="bi bi-folder2-open me-2"></i>
+                                Projets complets
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#bonnes-pratiques" class="nav-link">
+                                <i class="bi bi-check2-circle me-2"></i>
+                                Bonnes pratiques
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#integrations" class="nav-link">
+                                <i class="bi bi-puzzle me-2"></i>
+                                Intégrations avancées
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="col-lg-9 ms-sm-auto px-md-4 main-content">
+                <!-- Introduction -->
+                <section id="introduction" class="section">
+                    <div class="section-header">
+                        <h2>Introduction à Bootstrap</h2>
+                        <p class="lead">Découvrez Bootstrap, le framework CSS le plus populaire pour créer des sites web responsives et modernes.</p>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Qu'est-ce que Bootstrap ?</h5>
+                                    <p class="card-text">Bootstrap est un framework CSS open-source qui facilite la création de sites web modernes et responsives. Créé par Twitter, il fournit des composants réutilisables et des styles prédéfinis.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Framework HTML, CSS et JS</li>
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Mobile-first et responsive</li>
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Composants prêts à l'emploi</li>
+                                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Personnalisable</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pourquoi utiliser Bootstrap ?</h5>
+                                    <p class="card-text">Bootstrap offre de nombreux avantages qui accélèrent et simplifient le développement front-end :</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-arrow-right text-primary me-2"></i> Développement plus rapide</li>
+                                        <li><i class="bi bi-arrow-right text-primary me-2"></i> Design responsive sans effort</li>
+                                        <li><i class="bi bi-arrow-right text-primary me-2"></i> Compatibilité entre navigateurs</li>
+                                        <li><i class="bi bi-arrow-right text-primary me-2"></i> Grande communauté et documentation</li>
+                                        <li><i class="bi bi-arrow-right text-primary me-2"></i> Mises à jour régulières</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <strong>Version actuelle :</strong> Ce tutoriel utilise Bootstrap 5.3, la dernière version stable.
+                    </div>
+
+                    <div class="mb-4">
+                        <h3>Historique et évolution</h3>
+                        <p>Depuis sa création en 2011, Bootstrap a considérablement évolué :</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Version</th>
+                                        <th>Année</th>
+                                        <th>Caractéristiques principales</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Bootstrap 1</td>
+                                        <td>2011</td>
+                                        <td>Première version publique</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bootstrap 2</td>
+                                        <td>2012</td>
+                                        <td>Introduction du design responsive</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bootstrap 3</td>
+                                        <td>2013</td>
+                                        <td>Approche mobile-first, flat design</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bootstrap 4</td>
+                                        <td>2018</td>
+                                        <td>Passage à Sass, Flexbox, cartes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bootstrap 5</td>
+                                        <td>2021</td>
+                                        <td>Abandon de jQuery, support d'IE abandonné, améliorations des utilitaires</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation -->
+                <section id="installation" class="section">
+                    <div class="section-header">
+                        <h2>Installation de Bootstrap</h2>
+                        <p class="lead">Plusieurs méthodes pour intégrer Bootstrap dans vos projets</p>
+                    </div>
+
+                    <!-- Installation via CDN -->
+                    <div id="installation-cdn" class="mb-4">
+                        <h3>Méthode 1 : Via CDN</h3>
+                        <p>La méthode la plus simple pour commencer avec Bootstrap est d'utiliser le CDN (Content Delivery Network).</p>
+                        
+                        <div class="code-display" data-language="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Mon Projet Bootstrap&lt;/title&gt;
+    
+    &lt;!-- CSS Bootstrap --&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Votre contenu ici --&gt;
+    
+    &lt;!-- JS Bootstrap (avec Popper.js inclus) --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <strong>Avantage :</strong> Aucune installation requise, mise en cache par les navigateurs, chargement rapide.
+                        </div>
+                    </div>
+
+                    <!-- Installation via NPM -->
+                    <div id="installation-npm" class="mb-4">
+                        <h3>Méthode 2 : Via NPM</h3>
+                        <p>Pour les projets plus avancés, vous pouvez installer Bootstrap via NPM :</p>
+                        
+                        <div class="code-display" data-language="bash">
+# Installation de Bootstrap
+npm install bootstrap
+
+# Installation des dépendances (facultatif)
+npm install @popperjs/core
+                        </div>
+
+                        <p>Puis importez Bootstrap dans votre fichier JavaScript :</p>
+                        
+                        <div class="code-display" data-language="javascript">
+// Import de Bootstrap (avec Sass)
+import 'bootstrap/scss/bootstrap.scss';
+
+// Import des composants JS individuels au besoin
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/tooltip';
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            Cette méthode est recommandée pour les projets utilisant Webpack, Parcel ou d'autres bundlers.
+                        </div>
+                    </div>
+
+                    <!-- Téléchargement direct -->
+                    <div class="mb-4">
+                        <h3>Méthode 3 : Téléchargement direct</h3>
+                        <p>Vous pouvez également télécharger les fichiers compilés directement :</p>
+                        
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+                            <a href="https://getbootstrap.com/docs/5.3/getting-started/download/" target="_blank" class="btn btn-primary">
+                                <i class="bi bi-download me-2"></i> Télécharger Bootstrap
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Template de démarrage -->
+                    <div class="mb-4">
+                        <h3>Template de démarrage</h3>
+                        <p>Voici un template HTML minimal avec Bootstrap pour démarrer vos projets :</p>
+                        
+                        <div class="code-display" data-language="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Projet Bootstrap&lt;/title&gt;
+    
+    &lt;!-- Bootstrap CSS --&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    
+    &lt;!-- Bootstrap Icons (facultatif) --&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"&gt;
+    
+    &lt;!-- Votre CSS personnalisé --&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+        &lt;div class="container"&gt;
+            &lt;a class="navbar-brand" href="#"&gt;Mon Projet&lt;/a&gt;
+            &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+                &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+                &lt;ul class="navbar-nav"&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link active" href="#"&gt;Accueil&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" href="#"&gt;À propos&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container my-5"&gt;
+        &lt;h1&gt;Bienvenue dans mon projet Bootstrap&lt;/h1&gt;
+        &lt;p class="lead"&gt;Un exemple de template de démarrage avec Bootstrap 5.&lt;/p&gt;
+        
+        &lt;div class="row mt-4"&gt;
+            &lt;div class="col-md-4"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;Fonctionnalité 1&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Description de la première fonctionnalité de votre application.&lt;/p&gt;
+                        &lt;a href="#" class="btn btn-primary"&gt;En savoir plus&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-4"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;Fonctionnalité 2&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Description de la deuxième fonctionnalité de votre application.&lt;/p&gt;
+                        &lt;a href="#" class="btn btn-primary"&gt;En savoir plus&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-4"&gt;
+                &lt;div class="card"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;Fonctionnalité 3&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Description de la troisième fonctionnalité de votre application.&lt;/p&gt;
+                        &lt;a href="#" class="btn btn-primary"&gt;En savoir plus&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Bootstrap JS Bundle avec Popper --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+    
+    &lt;!-- Votre JavaScript personnalisé --&gt;
+    &lt;script src="js/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Système de grille -->
+                <section id="grid" class="section">
+                    <div class="section-header">
+                        <h2>Système de grille</h2>
+                        <p class="lead">Comprendre et utiliser le puissant système de grille responsive de Bootstrap</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Principes de base</h3>
+                        <p>Le système de grille de Bootstrap utilise Flexbox et permet de créer des mises en page complexes et responsives facilement.</p>
+                        
+                        <div class="demo-area">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-primary text-white rounded">Colonne 1</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-secondary text-white rounded">Colonne 2</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-info text-white rounded">Colonne 3</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>La grille Bootstrap est composée de 12 colonnes que vous pouvez combiner de différentes manières.</p>
+                    </div>
+                </section>
+                
+                <!-- Composants -->
+                <section id="composants" class="section">
+                    <div class="section-header">
+                        <h2>Composants Bootstrap</h2>
+                        <p class="lead">Découvrez les composants prêts à l'emploi de Bootstrap</p>
+                    </div>
+                    
+                    <!-- Alertes -->
+                    <div id="composants-alerts" class="mb-4">
+                        <h3>Alertes</h3>
+                        <p>Les alertes permettent de donner un feedback à l'utilisateur ou d'afficher des messages importants.</p>
+                        
+                        <div class="demo-area">
+                            <div class="alert alert-primary" role="alert">
+                                Une alerte primaire simple.
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Bravo!</h4>
+                                <p>Vous avez réussi à lire ce message d'alerte important.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Boutons -->
+                    <div id="composants-buttons" class="mb-4">
+                        <h3>Boutons</h3>
+                        <p>Bootstrap offre plusieurs styles de boutons pour différentes actions.</p>
+                        
+                        <div class="demo-area">
+                            <button type="button" class="btn btn-primary me-2">Primary</button>
+                            <button type="button" class="btn btn-secondary me-2">Secondary</button>
+                            <button type="button" class="btn btn-success me-2">Success</button>
+                            <button type="button" class="btn btn-danger me-2">Danger</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Cards -->
+                    <div id="composants-cards" class="mb-4">
+                        <h3>Cards</h3>
+                        <p>Les cards sont des conteneurs flexibles et extensibles.</p>
+                        
+                        <div class="demo-area">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">Titre de la carte</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Exemple de carte</h5>
+                                            <p class="card-text">Contenu de la carte avec texte et éléments.</p>
+                                            <a href="#" class="btn btn-primary">Bouton</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navbars -->
+                    <div id="composants-navbars" class="mb-4">
+                        <h3>Navbars</h3>
+                        <p>Les navbars sont des composants de navigation responsive.</p>
+                        
+                        <div class="demo-area">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                                <div class="container-fluid">
+                                    <a class="navbar-brand" href="#">Logo</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDemo">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarDemo">
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#">Accueil</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Produits</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- Modals -->
+                    <div id="composants-modals" class="mb-4">
+                        <h3>Modals</h3>
+                        <p>Les modals sont des fenêtres de dialogue qui peuvent contenir différents types de contenu.</p>
+                        
+                        <div class="demo-area">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Ouvrir la modal
+                            </button>
+                            
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Titre de la modal</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Contenu de la modal...</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            <button type="button" class="btn btn-primary">Sauvegarder</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Classes utilitaires -->
+                <section id="utilitaires" class="section">
+                    <div class="section-header">
+                        <h2>Classes utilitaires</h2>
+                        <p class="lead">Des classes pratiques pour manipuler rapidement la mise en page, les espacements et plus</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Espacements</h3>
+                        <p>Bootstrap propose des classes pour gérer facilement les marges et paddings.</p>
+                        
+                        <div class="demo-area">
+                            <div class="bg-light p-3 mb-3">Padding sur tous les côtés (p-3)</div>
+                            <div class="bg-light py-3 mb-3">Padding vertical (py-3)</div>
+                            <div class="bg-light px-3 mb-3">Padding horizontal (px-3)</div>
+                            <div class="bg-light pt-3 mb-3">Padding top (pt-3)</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Formulaires -->
+                <section id="formulaires" class="section">
+                    <div class="section-header">
+                        <h2>Formulaires</h2>
+                        <p class="lead">Créer des formulaires élégants et fonctionnels avec Bootstrap</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Formulaire simple</h3>
+                        
+                        <div class="demo-area">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Adresse email</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">Nous ne partagerons jamais votre email.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Connexion</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Design responsive -->
+                <section id="responsive" class="section">
+                    <div class="section-header">
+                        <h2>Design responsive</h2>
+                        <p class="lead">Comment créer des sites qui s'adaptent à tous les appareils</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Points de rupture (Breakpoints)</h3>
+                        <p>Bootstrap utilise les breakpoints suivants pour adapter le contenu selon la taille de l'écran:</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Breakpoint</th>
+                                        <th>Abréviation</th>
+                                        <th>Dimensions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Extra small</td>
+                                        <td><code>xs</code></td>
+                                        <td>&lt; 576px</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Small</td>
+                                        <td><code>sm</code></td>
+                                        <td>&ge; 576px</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Medium</td>
+                                        <td><code>md</code></td>
+                                        <td>&ge; 768px</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Large</td>
+                                        <td><code>lg</code></td>
+                                        <td>&ge; 992px</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extra large</td>
+                                        <td><code>xl</code></td>
+                                        <td>&ge; 1200px</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extra extra large</td>
+                                        <td><code>xxl</code></td>
+                                        <td>&ge; 1400px</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Personnalisation -->
+                <section id="customisation" class="section">
+                    <div class="section-header">
+                        <h2>Personnalisation</h2>
+                        <p class="lead">Comment adapter Bootstrap à votre identité visuelle</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Variables Sass</h3>
+                        <p>Vous pouvez personnaliser Bootstrap en modifiant ses variables Sass.</p>
+                        
+                        <div class="code-display" data-language="scss">
+// Personnaliser les couleurs
+$primary: #4361ee;
+$secondary: #3f37c9;
+$success: #2ecc71;
+$info: #4cc9f0;
+$warning: #f39c12;
+$danger: #e74c3c;
+
+// Personnaliser les polices
+$font-family-base: 'Inter', sans-serif;
+$headings-font-family: 'Montserrat', sans-serif;
+
+// Importer Bootstrap
+@import "bootstrap/scss/bootstrap";
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Exercices pratiques -->
+                <section id="exercices" class="section">
+                    <div class="section-header">
+                        <h2>Exercices pratiques</h2>
+                        <p class="lead">Mettez en pratique vos connaissances avec ces exercices</p>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">Exercice 1: Créer un portfolio responsive</div>
+                        <div class="card-body">
+                            <p>Créez une page portfolio responsive avec Bootstrap, comprenant:</p>
+                            <ul>
+                                <li>Une navbar avec logo et menu</li>
+                                <li>Une section hero avec image de fond</li>
+                                <li>Une grille de projets avec cartes</li>
+                                <li>Un formulaire de contact</li>
+                                <li>Un footer</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">Voir la solution</a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Fonctionnalités avancées -->
+                <section id="avance" class="section">
+                    <div class="section-header">
+                        <h2>Fonctionnalités avancées</h2>
+                        <p class="lead">Explorez les fonctionnalités avancées de Bootstrap</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Utilisation de JavaScript</h3>
+                        <p>Bootstrap offre de nombreux composants interactifs qui nécessitent JavaScript.</p>
+                        
+                        <div class="code-display" data-language="javascript">
+// Initialiser tous les tooltips
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+// Initialiser les popovers
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Projets complets -->
+                <section id="projets" class="section">
+                    <div class="section-header">
+                        <h2>Projets complets</h2>
+                        <p class="lead">Des projets concrets utilisant Bootstrap</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="Projet e-commerce">
+                                <div class="card-body">
+                                    <h5 class="card-title">Site e-commerce</h5>
+                                    <p class="card-text">Un exemple de site e-commerce complet avec Bootstrap.</p>
+                                    <a href="#" class="btn btn-outline-primary">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="Dashboard admin">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dashboard administrateur</h5>
+                                    <p class="card-text">Un tableau de bord administrateur avec graphiques et tableaux.</p>
+                                    <a href="#" class="btn btn-outline-primary">Voir le projet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Bonnes pratiques -->
+                <section id="bonnes-pratiques" class="section">
+                    <div class="section-header">
+                        <h2>Bonnes pratiques</h2>
+                        <p class="lead">Conseils pour utiliser Bootstrap efficacement</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Optimisation des performances</h3>
+                        <p>Pour des performances optimales avec Bootstrap:</p>
+                        <ul>
+                            <li>N'importez que les composants nécessaires</li>
+                            <li>Utilisez un bundler comme Webpack pour optimiser le code</li>
+                            <li>Minimisez et compressez vos fichiers CSS et JS</li>
+                            <li>Utilisez la version CDN avec cache pour les projets simples</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- Intégrations avancées -->
+                <section id="integrations" class="section">
+                    <div class="section-header">
+                        <h2>Intégrations avancées</h2>
+                        <p class="lead">Intégrer Bootstrap avec d'autres technologies</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3>Bootstrap avec React</h3>
+                        <p>Vous pouvez utiliser Bootstrap avec React via React-Bootstrap:</p>
+                        
+                        <div class="code-display" data-language="javascript">
+// Installation
+// npm install react-bootstrap bootstrap
+
+// Utilisation
+import { Button, Modal } from 'react-bootstrap';
+
+function Example() {
+  const [show, setShow] = useState(false);
+  
+  return (
+    <>
+      <Button variant="primary" onClick={() => setShow(true)}>
+        Ouvrir Modal
+      </Button>
+      
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Titre de la Modal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Contenu de la modal...</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Fermer
+          </Button>
+          <Button variant="primary" onClick={() => setShow(false)}>
+            Sauvegarder
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- La suite des sections sera ajoutée ici -->
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    Ce tutoriel est en cours de développement. D'autres sections seront ajoutées prochainement !
+                </div>
+                
+                <!-- Bouton "Retour en haut" -->
+                <button id="back-to-top" class="btn btn-primary rounded-circle" title="Retour en haut">
+                    <i class="bi bi-arrow-up"></i>
+                </button>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Tutoriel Bootstrap</h5>
+                    <p>Un guide complet pour apprendre à utiliser Bootstrap 5, le framework CSS le plus populaire.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Liens utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Documentation officielle</a></li>
+                        <li><a href="https://getbootstrap.com/docs/5.3/examples/" target="_blank">Exemples officiels</a></li>
+                        <li><a href="https://icons.getbootstrap.com/" target="_blank">Bootstrap Icons</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Ressources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Télécharger les exercices</a></li>
+                        <li><a href="#">Projets complets</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top pt-3 mt-3 text-center">
+                <p>&copy; 2023 Tutoriel Bootstrap - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Prism.js pour la coloration syntaxique -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    
+    <!-- Nos scripts JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/components.js"></script>
+    
+    <!-- Script de correction pour la navigation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fonction pour activer manuellement les liens de la sidebar
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId && targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            // Supprimer la classe active de tous les liens
+                            document.querySelectorAll('.sidebar .nav-link').forEach(l => {
+                                l.classList.remove('active');
+                            });
+                            
+                            // Ajouter la classe active au lien cliqué
+                            this.classList.add('active');
+                            
+                            // S'assurer que la section cible est visible
+                            targetElement.style.display = 'block';
+                            
+                            // Calculer la position de défilement
+                            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                            const offsetTop = targetElement.offsetTop - navbarHeight - 20;
+                            
+                            // Faire défiler jusqu'à la section
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Masquer toutes les autres sections
+                            // document.querySelectorAll('.section').forEach(section => {
+                            //    if (section.id !== targetElement.id) {
+                            //        section.style.display = 'none';
+                            //    }
+                            // });
+                        } else {
+                            console.error(`Section avec ID ${targetId} non trouvée`);
+                        }
+                    }
+                });
+            });
+            
+            // S'assurer que toutes les sections sont visibles
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            // Fonction pour gérer le scroll
+            function handleScroll() {
+                const scrollPosition = window.scrollY;
+                
+                // Trouver la section actuellement visible
+                let currentSection = '';
+                document.querySelectorAll('.section').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop - navbarHeight - 50 && 
+                        scrollPosition < sectionTop + sectionHeight - navbarHeight - 50) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                // Mettre à jour le lien actif dans la sidebar
+                if (currentSection) {
+                    document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (href === `#${currentSection}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }
+            
+            // Écouter l'événement de défilement
+            window.addEventListener('scroll', handleScroll);
+            
+            // Vérifier si l'URL contient une ancre
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => {
+                        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                        const offsetTop = targetElement.offsetTop - navbarHeight - 20;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Activer le lien correspondant
+                        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === window.location.hash) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }, 200);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

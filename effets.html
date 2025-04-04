@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effets CSS Avancés</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin: 20px 0;
+            position: relative;
+            min-height: 300px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .box {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .active {
+            background-color: #16a085;
+        }
+        
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .color-input {
+            margin: 5px;
+            padding: 5px;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .slider-container input {
+            flex-grow: 1;
+        }
+        
+        .code-display {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 15px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+            position: relative;
+        }
+        
+        .code-title {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-size: 12px;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Effets CSS Avancés</h1>
+        
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>CSS offre de nombreuses fonctionnalités pour créer des effets visuels avancés sans recourir à des images. Explorez les dégradés, les ombres et les transformations pour donner vie à vos designs web.</p>
+        </div>
+        
+        <!-- SECTION DÉGRADÉS -->
+        <div class="section">
+            <h2>Dégradés CSS (Gradients)</h2>
+            <p>Les dégradés permettent de créer des transitions douces entre deux couleurs ou plus.</p>
+            
+            <h3>Dégradé Linéaire</h3>
+            <div class="controls">
+                <div>
+                    <label for="linear-color1">Couleur 1:</label>
+                    <input type="color" id="linear-color1" class="color-input" value="#3498db">
+                </div>
+                <div>
+                    <label for="linear-color2">Couleur 2:</label>
+                    <input type="color" id="linear-color2" class="color-input" value="#e74c3c">
+                </div>
+                <div>
+                    <label for="linear-angle">Angle:</label>
+                    <div class="slider-container">
+                        <input type="range" id="linear-angle" min="0" max="360" value="90">
+                        <span id="linear-angle-value">90°</span>
+                    </div>
+                </div>
+                <button onclick="applyLinearGradient()">Appliquer</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="linear-gradient-box">Dégradé Linéaire</div>
+            </div>
+            
+            <div class="code-display" id="linear-gradient-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>Le dégradé linéaire (<code>linear-gradient</code>) crée une transition progressive entre deux ou plusieurs couleurs le long d'une ligne droite.</p>
+                <p>Syntaxe:</p>
+                <code>background: linear-gradient(angle, color1, color2, ...);</code>
+                <p>L'angle détermine la direction du dégradé (0° = de bas en haut, 90° = de gauche à droite).</p>
+            </div>
+            
+            <h3>Dégradé Radial</h3>
+            <div class="controls">
+                <div>
+                    <label for="radial-color1">Couleur 1 (centre):</label>
+                    <input type="color" id="radial-color1" class="color-input" value="#3498db">
+                </div>
+                <div>
+                    <label for="radial-color2">Couleur 2 (extérieur):</label>
+                    <input type="color" id="radial-color2" class="color-input" value="#e74c3c">
+                </div>
+                <div>
+                    <label>Forme:</label>
+                    <button onclick="setRadialShape('circle')">Cercle</button>
+                    <button onclick="setRadialShape('ellipse')">Ellipse</button>
+                </div>
+                <button onclick="applyRadialGradient()">Appliquer</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="radial-gradient-box">Dégradé Radial</div>
+            </div>
+            
+            <div class="code-display" id="radial-gradient-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>Le dégradé radial (<code>radial-gradient</code>) crée une transition entre deux ou plusieurs couleurs qui rayonnent à partir d'un point central.</p>
+                <p>Syntaxe:</p>
+                <code>background: radial-gradient(shape size at position, color1, color2, ...);</code>
+                <p>La forme peut être un cercle ou une ellipse, et la position définit le centre du dégradé.</p>
+            </div>
+        </div>
+        
+        <!-- SECTION OMBRES -->
+        <div class="section">
+            <h2>Ombres CSS</h2>
+            <p>Les ombres ajoutent de la profondeur et de la dimension à vos éléments.</p>
+            
+            <h3>Ombre de Boîte (box-shadow)</h3>
+            <div class="controls">
+                <div>
+                    <label for="box-shadow-x">Décalage horizontal:</label>
+                    <div class="slider-container">
+                        <input type="range" id="box-shadow-x" min="-20" max="20" value="5">
+                        <span id="box-shadow-x-value">5px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="box-shadow-y">Décalage vertical:</label>
+                    <div class="slider-container">
+                        <input type="range" id="box-shadow-y" min="-20" max="20" value="5">
+                        <span id="box-shadow-y-value">5px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="box-shadow-blur">Flou:</label>
+                    <div class="slider-container">
+                        <input type="range" id="box-shadow-blur" min="0" max="30" value="10">
+                        <span id="box-shadow-blur-value">10px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="box-shadow-spread">Étalement:</label>
+                    <div class="slider-container">
+                        <input type="range" id="box-shadow-spread" min="-10" max="20" value="0">
+                        <span id="box-shadow-spread-value">0px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="box-shadow-color">Couleur:</label>
+                    <input type="color" id="box-shadow-color" class="color-input" value="#000000">
+                </div>
+                <div>
+                    <label>Type:</label>
+                    <button onclick="setBoxShadowInset(false)">Externe</button>
+                    <button onclick="setBoxShadowInset(true)">Interne (inset)</button>
+                </div>
+                <button onclick="applyBoxShadow()">Appliquer</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="box-shadow-demo">Ombre de Boîte</div>
+            </div>
+            
+            <div class="code-display" id="box-shadow-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>box-shadow</code> ajoute des ombres à un élément.</p>
+                <p>Syntaxe:</p>
+                <code>box-shadow: [inset] x-offset y-offset blur-radius spread-radius color;</code>
+                <ul>
+                    <li><code>inset</code>: si présent, l'ombre sera à l'intérieur de la boîte</li>
+                    <li><code>x-offset</code>: décalage horizontal de l'ombre</li>
+                    <li><code>y-offset</code>: décalage vertical de l'ombre</li>
+                    <li><code>blur-radius</code>: rayon de flou</li>
+                    <li><code>spread-radius</code>: étalement de l'ombre</li>
+                    <li><code>color</code>: couleur de l'ombre</li>
+                </ul>
+            </div>
+            
+            <h3>Ombre de Texte (text-shadow)</h3>
+            <div class="controls">
+                <div>
+                    <label for="text-shadow-x">Décalage horizontal:</label>
+                    <div class="slider-container">
+                        <input type="range" id="text-shadow-x" min="-10" max="10" value="2">
+                        <span id="text-shadow-x-value">2px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="text-shadow-y">Décalage vertical:</label>
+                    <div class="slider-container">
+                        <input type="range" id="text-shadow-y" min="-10" max="10" value="2">
+                        <span id="text-shadow-y-value">2px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="text-shadow-blur">Flou:</label>
+                    <div class="slider-container">
+                        <input type="range" id="text-shadow-blur" min="0" max="10" value="3">
+                        <span id="text-shadow-blur-value">3px</span>
+                    </div>
+                </div>
+                <div>
+                    <label for="text-shadow-color">Couleur:</label>
+                    <input type="color" id="text-shadow-color" class="color-input" value="#000000">
+                </div>
+                <button onclick="applyTextShadow()">Appliquer</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="text-shadow-demo" style="font-size: 24px;">Ombre de Texte</div>
+            </div>
+            
+            <div class="code-display" id="text-shadow-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>text-shadow</code> ajoute des ombres au texte.</p>
+                <p>Syntaxe:</p>
+                <code>text-shadow: x-offset y-offset blur-radius color;</code>
+                <ul>
+                    <li><code>x-offset</code>: décalage horizontal de l'ombre</li>
+                    <li><code>y-offset</code>: décalage vertical de l'ombre</li>
+                    <li><code>blur-radius</code>: rayon de flou</li>
+                    <li><code>color</code>: couleur de l'ombre</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- SECTION TRANSFORMATIONS -->
+        <div class="section">
+            <h2>Transformations CSS</h2>
+            <p>Les transformations permettent de modifier la position, la taille et la forme des éléments.</p>
+            
+            <div class="controls">
+                <button onclick="applyTransform('rotate')">Rotation</button>
+                <button onclick="applyTransform('scale')">Échelle</button>
+                <button onclick="applyTransform('translate')">Translation</button>
+                <button onclick="applyTransform('skew')">Inclinaison</button>
+                <button onclick="applyTransform('multiple')">Combinaison</button>
+                <button onclick="resetTransform()">Réinitialiser</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="transform-demo">Transformation</div>
+            </div>
+            
+            <div class="code-display" id="transform-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>transform</code> permet d'appliquer des transformations 2D ou 3D à un élément.</p>
+                <p>Fonctions courantes:</p>
+                <ul>
+                    <li><code>rotate(angle)</code>: fait pivoter un élément autour de son origine</li>
+                    <li><code>scale(x, y)</code>: change la taille d'un élément</li>
+                    <li><code>translate(x, y)</code>: déplace un élément</li>
+                    <li><code>skew(x-angle, y-angle)</code>: incline un élément</li>
+                </ul>
+                <p>Ces transformations peuvent être combinées: <code>transform: rotate(45deg) scale(1.5) translate(10px, 20px);</code></p>
+            </div>
+            
+            <h3>Transform Origin</h3>
+            <div class="controls">
+                <button onclick="setTransformOrigin('top left')">Haut Gauche</button>
+                <button onclick="setTransformOrigin('top right')">Haut Droit</button>
+                <button onclick="setTransformOrigin('bottom left')">Bas Gauche</button>
+                <button onclick="setTransformOrigin('bottom right')">Bas Droit</button>
+                <button onclick="setTransformOrigin('center')">Centre</button>
+            </div>
+            
+            <div class="demo-box">
+                <div class="box" id="transform-origin-demo" style="transform: rotate(45deg);">Origine</div>
+            </div>
+            
+            <div class="code-display" id="transform-origin-code">
+                <div class="code-title">CSS</div>
+            </div>
+            
+            <div class="explanation">
+                <p>La propriété <code>transform-origin</code> définit le point d'origine des transformations.</p>
+                <p>Par défaut, l'origine est au centre de l'élément (50% 50%).</p>
+                <p>Modifier cette origine change le comportement des transformations, notamment pour les rotations et les mises à l'échelle.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables pour stocker les états
+        let radialShape = 'circle';
+        let boxShadowInset = false;
+        
+        // Gestionnaires pour les curseurs
+        document.getElementById('linear-angle').addEventListener('input', function() {
+            document.getElementById('linear-angle-value').textContent = this.value + '°';
+        });
+        
+        document.getElementById('box-shadow-x').addEventListener('input', function() {
+            document.getElementById('box-shadow-x-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('box-shadow-y').addEventListener('input', function() {
+            document.getElementById('box-shadow-y-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('box-shadow-blur').addEventListener('input', function() {
+            document.getElementById('box-shadow-blur-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('box-shadow-spread').addEventListener('input', function() {
+            document.getElementById('box-shadow-spread-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('text-shadow-x').addEventListener('input', function() {
+            document.getElementById('text-shadow-x-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('text-shadow-y').addEventListener('input', function() {
+            document.getElementById('text-shadow-y-value').textContent = this.value + 'px';
+        });
+        
+        document.getElementById('text-shadow-blur').addEventListener('input', function() {
+            document.getElementById('text-shadow-blur-value').textContent = this.value + 'px';
+        });
+        
+        // Fonctions pour les dégradés
+        function applyLinearGradient() {
+            const color1 = document.getElementById('linear-color1').value;
+            const color2 = document.getElementById('linear-color2').value;
+            const angle = document.getElementById('linear-angle').value;
+            const box = document.getElementById('linear-gradient-box');
+            
+            const cssCode = `background: linear-gradient(${angle}deg, ${color1}, ${color2});`;
+            box.style.background = `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+            
+            // Mettre à jour l'affichage du code
+            document.getElementById('linear-gradient-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        function setRadialShape(shape) {
+            radialShape = shape;
+        }
+        
+        function applyRadialGradient() {
+            const color1 = document.getElementById('radial-color1').value;
+            const color2 = document.getElementById('radial-color2').value;
+            const box = document.getElementById('radial-gradient-box');
+            
+            const cssCode = `background: radial-gradient(${radialShape}, ${color1}, ${color2});`;
+            box.style.background = `radial-gradient(${radialShape}, ${color1}, ${color2})`;
+            
+            // Mettre à jour l'affichage du code
+            document.getElementById('radial-gradient-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        // Fonctions pour les ombres
+        function setBoxShadowInset(inset) {
+            boxShadowInset = inset;
+        }
+        
+        function applyBoxShadow() {
+            const x = document.getElementById('box-shadow-x').value;
+            const y = document.getElementById('box-shadow-y').value;
+            const blur = document.getElementById('box-shadow-blur').value;
+            const spread = document.getElementById('box-shadow-spread').value;
+            const color = document.getElementById('box-shadow-color').value;
+            const inset = boxShadowInset ? 'inset ' : '';
+            
+            const box = document.getElementById('box-shadow-demo');
+            const cssCode = `box-shadow: ${inset}${x}px ${y}px ${blur}px ${spread}px ${color};`;
+            box.style.boxShadow = `${inset}${x}px ${y}px ${blur}px ${spread}px ${color}`;
+            
+            // Mettre à jour l'affichage du code
+            document.getElementById('box-shadow-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        function applyTextShadow() {
+            const x = document.getElementById('text-shadow-x').value;
+            const y = document.getElementById('text-shadow-y').value;
+            const blur = document.getElementById('text-shadow-blur').value;
+            const color = document.getElementById('text-shadow-color').value;
+            
+            const box = document.getElementById('text-shadow-demo');
+            const cssCode = `text-shadow: ${x}px ${y}px ${blur}px ${color};`;
+            box.style.textShadow = `${x}px ${y}px ${blur}px ${color}`;
+            
+            // Mettre à jour l'affichage du code
+            document.getElementById('text-shadow-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        // Fonctions pour les transformations
+        function applyTransform(type) {
+            const box = document.getElementById('transform-demo');
+            let cssCode = '';
+            
+            switch (type) {
+                case 'rotate':
+                    cssCode = 'transform: rotate(45deg);';
+                    box.style.transform = 'rotate(45deg)';
+                    break;
+                case 'scale':
+                    cssCode = 'transform: scale(1.5, 0.8);';
+                    box.style.transform = 'scale(1.5, 0.8)';
+                    break;
+                case 'translate':
+                    cssCode = 'transform: translate(50px, 20px);';
+                    box.style.transform = 'translate(50px, 20px)';
+                    break;
+                case 'skew':
+                    cssCode = 'transform: skew(20deg, 10deg);';
+                    box.style.transform = 'skew(20deg, 10deg)';
+                    break;
+                case 'multiple':
+                    cssCode = 'transform: rotate(30deg) scale(1.2) translate(20px, 10px);';
+                    box.style.transform = 'rotate(30deg) scale(1.2) translate(20px, 10px)';
+                    break;
+                default:
+                    cssCode = 'transform: none;';
+                    resetTransform();
+            }
+            
+            // Mettre à jour l'affichage du code
+            document.getElementById('transform-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        function resetTransform() {
+            document.getElementById('transform-demo').style.transform = 'none';
+            document.getElementById('transform-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    transform: none;\n}`;
+        }
+        
+        function setTransformOrigin(origin) {
+            const box = document.getElementById('transform-origin-demo');
+            box.style.transformOrigin = origin;
+            
+            // Mettre à jour l'affichage du code
+            const cssCode = `transform-origin: ${origin};\ntransform: rotate(45deg);`;
+            document.getElementById('transform-origin-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    ${cssCode}\n}`;
+        }
+        
+        // Initialisation
+        window.onload = function() {
+            applyLinearGradient();
+            applyRadialGradient();
+            applyBoxShadow();
+            applyTextShadow();
+            setTransformOrigin('center');
+            document.getElementById('transform-code').innerHTML = 
+                `<div class="code-title">CSS</div>.element {\n    transform: none;\n}`;
+        };
+    </script>
+</body>
+</html> 

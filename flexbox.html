@@ -529,6 +529,9 @@
                         <div class="flex-item" style="width: 100px;">6</div>
                         <div class="flex-item" style="width: 100px;">7</div>
                         <div class="flex-item" style="width: 100px;">8</div>
+                        <div class="flex-item" style="width: 100px;">9</div>
+                        <div class="flex-item" style="width: 100px;">10</div>
+                        <div class="flex-item" style="width: 100px;">11</div>
                     </div>
                     
                     <div class="code-display">
@@ -1099,6 +1102,142 @@
         </div>
 
     <script>
+        // Fonction pour gérer les onglets
+        function openTab(event, tabId) {
+            // Cacher tous les contenus d'onglets
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Désactiver tous les boutons d'onglets
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Afficher le contenu de l'onglet sélectionné
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activer le bouton cliqué
+            event.currentTarget.classList.add('active');
+        }
+
+        // Fonction pour changer l'affichage flex
+        function toggleFlexDisplay(displayType) {
+            const container = document.getElementById('flex-container-display');
+            container.style.display = displayType;
+        }
+
+        // Fonction pour changer la direction flex
+        function changeFlexDirection(direction) {
+            const container = document.getElementById('flex-direction-container');
+            container.style.flexDirection = direction;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#flex-direction .code-display').textContent = `.container {
+    display: flex;
+    flex-direction: ${direction};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.direction-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.direction-btn[onclick*="${direction}"]`).classList.add('active');
+        }
+        
+        // Fonction pour changer le flex-wrap
+        function changeFlexWrap(wrap) {
+            const container = document.getElementById('flex-wrap-container');
+            container.style.flexWrap = wrap;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#flex-wrap .code-display').textContent = `.container {
+    display: flex;
+    flex-wrap: ${wrap};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.wrap-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.wrap-btn[onclick*="${wrap}"]`).classList.add('active');
+        }
+        
+        // Fonction pour changer le flex-flow
+        function changeFlexFlow(flow) {
+            const container = document.getElementById('flex-flow-container');
+            container.style.flexFlow = flow;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#flex-flow .code-display').textContent = `.container {
+    display: flex;
+    flex-flow: ${flow};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.flow-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.flow-btn[onclick*="${flow.replace(' ', '%20')}"]`).classList.add('active');
+        }
+        
+        // Fonction pour changer le justify-content
+        function changeJustifyContent(justify) {
+            const container = document.getElementById('justify-content-container');
+            container.style.justifyContent = justify;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#justify-content .code-display').textContent = `.container {
+    display: flex;
+    justify-content: ${justify};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.justify-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.justify-btn[onclick*="${justify}"]`).classList.add('active');
+        }
+        
+        // Fonction pour changer le align-items
+        function changeAlignItems(align) {
+            const container = document.getElementById('align-items-container');
+            container.style.alignItems = align;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#align-items .code-display').textContent = `.container {
+    display: flex;
+    align-items: ${align};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.align-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.align-btn[onclick*="${align}"]`).classList.add('active');
+        }
+        
+        // Fonction pour changer le align-content
+        function changeAlignContent(align) {
+            const container = document.getElementById('align-content-container');
+            container.style.alignContent = align;
+            
+            // Met à jour l'affichage du code
+            document.querySelector('#align-content .code-display').textContent = `.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: ${align};
+}`;
+            
+            // Met à jour le bouton actif
+            document.querySelectorAll('.align-content-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.align-content-btn[onclick*="${align}"]`).classList.add('active');
+        }
+
         // Fonctions pour les propriétés des éléments flex
         function changeItemOrder(id, order) {
             const item = document.getElementById(id);
@@ -1220,15 +1359,25 @@
         }
         
         function updateActiveButton(property, value) {
-            const container = document.querySelector(`[class*="${property}"]`).parentNode;
-            const buttons = container.querySelectorAll('.flex-value-button');
-            
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.trim() === value) {
-                    btn.classList.add('active');
+            const containers = document.querySelectorAll('.flex-control-group');
+            let container;
+
+            for (let i = 0; i < containers.length; i++) {
+                if (containers[i].querySelector('.flex-control-label').textContent.includes(property)) {
+                    container = containers[i];
+                    break;
                 }
-            });
+            }
+
+            if (container) {
+                const buttons = container.querySelectorAll('.flex-value-button');
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent.trim() === value) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
         }
         
         function playgroundSetItemProp(property, value) {
@@ -1263,7 +1412,15 @@
                 }
             }
         }
+
+        // Initialiser les onglets et les démos au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // S'assurer que les onglets actifs sont correctement affichés
+            document.querySelectorAll('.tab-content.active').forEach(tab => {
+                tab.style.display = 'block';
+            });
+        });
     </script>
 
 </body>
-</html> 
+</html>

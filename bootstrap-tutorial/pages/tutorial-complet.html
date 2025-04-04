@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Complet de Bootstrap</title>
+    <!-- Inclusion de Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code-display {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0d6efd;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .demo-area {
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .color-box {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-5">
+            <h1 class="display-4">Guide Complet de Bootstrap</h1>
+            <p class="lead">Une ressource interactive pour apprendre Bootstrap</p>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <nav id="navbar-bootstrap" class="navbar navbar-light bg-light flex-column align-items-stretch p-3 sticky-top">
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#installation">Installation</a>
+                        <a class="nav-link" href="#grille">Système de grille</a>
+                        <a class="nav-link" href="#composants">Composants</a>
+                        <a class="nav-link" href="#utilitaires">Utilitaires</a>
+                        <a class="nav-link" href="#formulaires">Formulaires</a>
+                        <a class="nav-link" href="#responsive">Design Responsive</a>
+                        <a class="nav-link" href="#personnalisation">Personnalisation</a>
+                        <a class="nav-link" href="#exercices">Exercices Pratiques</a>
+                    </nav>
+                </nav>
+            </div>
+
+            <div class="col-md-9">
+                <section id="installation" class="section bg-white">
+                    <h2>Installation de Bootstrap</h2>
+                    <p>Il existe plusieurs façons d'intégrer Bootstrap dans votre projet :</p>
+                    
+                    <h3 class="mt-4">1. Via CDN</h3>
+                    <p>La méthode la plus rapide pour commencer avec Bootstrap est d'utiliser le CDN :</p>
+                    <div class="code-display">
+&lt;!-- CSS Bootstrap --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+
+&lt;!-- JavaScript Bootstrap Bundle avec Popper --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</div>
+                    
+                    <h3 class="mt-4">2. Via npm</h3>
+                    <div class="code-display">npm install bootstrap@5.3.2</div>
+                    
+                    <h3 class="mt-4">3. Téléchargement direct</h3>
+                    <p>Vous pouvez également <a href="https://getbootstrap.com/docs/5.3/getting-started/download/" target="_blank">télécharger Bootstrap</a> directement depuis le site officiel.</p>
+                </section>
+
+                <section id="grille" class="section bg-white">
+                    <h2>Système de grille</h2>
+                    <p>Le système de grille de Bootstrap est basé sur un layout flexbox de 12 colonnes.</p>
+                    
+                    <h3 class="mt-4">Structure de base</h3>
+                    <div class="code-display">
+&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Colonne 1&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Colonne 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+                    
+                    <h3 class="mt-4">Démonstration</h3>
+                    <div class="demo-area">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-primary text-white">col-md-4</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-success text-white">col-md-4</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-info text-white">col-md-4</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning text-dark">col-md-6</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger text-white">col-md-6</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mt-4">Points de rupture responsive</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Préfixe</th>
+                                    <th>Dimension</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>col-</code></td>
+                                    <td>&lt; 576px</td>
+                                    <td>Extra small devices</td>
+                                </tr>
+                                <tr>
+                                    <td><code>col-sm-</code></td>
+                                    <td>≥ 576px</td>
+                                    <td>Small devices</td>
+                                </tr>
+                                <tr>
+                                    <td><code>col-md-</code></td>
+                                    <td>≥ 768px</td>
+                                    <td>Medium devices</td>
+                                </tr>
+                                <tr>
+                                    <td><code>col-lg-</code></td>
+                                    <td>≥ 992px</td>
+                                    <td>Large devices</td>
+                                </tr>
+                                <tr>
+                                    <td><code>col-xl-</code></td>
+                                    <td>≥ 1200px</td>
+                                    <td>Extra large devices</td>
+                                </tr>
+                                <tr>
+                                    <td><code>col-xxl-</code></td>
+                                    <td>≥ 1400px</td>
+                                    <td>Extra extra large devices</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="composants" class="section bg-white">
+                    <h2>Composants Bootstrap</h2>
+                    <p>Bootstrap offre de nombreux composants prêts à l'emploi.</p>
+                    
+                    <div class="accordion" id="accordionComponents">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Alertes
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionComponents">
+                                <div class="accordion-body">
+                                    <div class="alert alert-primary" role="alert">
+                                        Une alerte primaire simple
+                                    </div>
+                                    <div class="alert alert-success" role="alert">
+                                        Une alerte de succès avec <a href="#" class="alert-link">un lien</a>.
+                                    </div>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Attention!</strong> Une alerte d'avertissement que vous pouvez fermer.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    <div class="code-display">
+&lt;div class="alert alert-primary" role="alert"&gt;
+  Une alerte primaire simple
+&lt;/div&gt;
+
+&lt;div class="alert alert-success" role="alert"&gt;
+  Une alerte de succès avec &lt;a href="#" class="alert-link"&gt;un lien&lt;/a&gt;.
+&lt;/div&gt;
+
+&lt;div class="alert alert-warning alert-dismissible fade show" role="alert"&gt;
+  &lt;strong&gt;Attention!&lt;/strong&gt; Une alerte d'avertissement que vous pouvez fermer.
+  &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Boutons
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionComponents">
+                                <div class="accordion-body">
+                                    <button type="button" class="btn btn-primary">Primary</button>
+                                    <button type="button" class="btn btn-secondary">Secondary</button>
+                                    <button type="button" class="btn btn-success">Success</button>
+                                    <button type="button" class="btn btn-danger">Danger</button>
+                                    <button type="button" class="btn btn-warning">Warning</button>
+                                    <button type="button" class="btn btn-info">Info</button>
+                                    <button type="button" class="btn btn-light">Light</button>
+                                    <button type="button" class="btn btn-dark">Dark</button>
+                                    <button type="button" class="btn btn-link">Link</button>
+                                    
+                                    <div class="mt-3">
+                                        <button type="button" class="btn btn-outline-primary">Primary</button>
+                                        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <button type="button" class="btn btn-primary btn-lg">Large button</button>
+                                        <button type="button" class="btn btn-primary">Standard button</button>
+                                        <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                                    </div>
+                                    
+                                    <div class="code-display">
+&lt;button type="button" class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button type="button" class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button type="button" class="btn btn-success"&gt;Success&lt;/button&gt;
+
+&lt;!-- Outline buttons --&gt;
+&lt;button type="button" class="btn btn-outline-primary"&gt;Primary&lt;/button&gt;
+
+&lt;!-- Button sizes --&gt;
+&lt;button type="button" class="btn btn-primary btn-lg"&gt;Large button&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary"&gt;Standard button&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary btn-sm"&gt;Small button&lt;/button&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Cartes
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionComponents">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Placeholder image">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Titre de la carte</h5>
+                                                    <p class="card-text">Un exemple de texte rapide pour construire sur le titre de la carte et constituer l'essentiel du contenu de la carte.</p>
+                                                    <a href="#" class="btn btn-primary">Bouton</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card text-center">
+                                                <div class="card-header">
+                                                    En-tête
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Titre spécial</h5>
+                                                    <p class="card-text">Avec un texte d'accompagnement ci-dessous comme introduction naturelle au contenu supplémentaire.</p>
+                                                    <a href="#" class="btn btn-primary">Bouton</a>
+                                                </div>
+                                                <div class="card-footer text-muted">
+                                                    Il y a 2 jours
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-display mt-3">
+&lt;div class="card"&gt;
+  &lt;img src="..." class="card-img-top" alt="..."&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Titre de la carte&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Un exemple de texte rapide.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Bouton&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="utilitaires" class="section bg-white">
+                    <h2>Classes utilitaires</h2>
+                    <p>Bootstrap fournit de nombreuses classes utilitaires pour le style et la mise en page.</p>
+                    
+                    <h3 class="mt-4">Couleurs</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="color-box bg-primary">Primary</div>
+                            <div class="color-box bg-secondary">Secondary</div>
+                            <div class="color-box bg-success">Success</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="color-box bg-danger">Danger</div>
+                            <div class="color-box bg-warning text-dark">Warning</div>
+                            <div class="color-box bg-info text-dark">Info</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="color-box bg-light text-dark">Light</div>
+                            <div class="color-box bg-dark">Dark</div>
+                            <div class="color-box bg-white text-dark border">White</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mt-4">Espacement</h3>
+                    <p>Les classes d'espacement suivent le format: <code>{propriété}{côtés}-{taille}</code></p>
+                    <ul>
+                        <li><strong>Propriété:</strong> <code>m</code> (margin) ou <code>p</code> (padding)</li>
+                        <li><strong>Côtés:</strong> <code>t</code> (top), <code>b</code> (bottom), <code>s</code> (start), <code>e</code> (end), <code>x</code> (left/right), <code>y</code> (top/bottom), or blank (all sides)</li>
+                        <li><strong>Taille:</strong> <code>0</code> à <code>5</code>, ou <code>auto</code></li>
+                    </ul>
+                    
+                    <div class="demo-area">
+                        <div class="mb-5 bg-info p-2">Margin Bottom 5</div>
+                        <div class="mt-3 bg-warning p-2">Margin Top 3</div>
+                        <div class="mx-auto bg-success p-2" style="width: 200px;">Margin X Auto</div>
+                        <div class="p-4 bg-secondary mt-3">Padding 4</div>
+                    </div>
+                    
+                    <h3 class="mt-4">Flexbox</h3>
+                    <div class="demo-area">
+                        <div class="d-flex justify-content-between bg-light p-2">
+                            <div class="p-2 bg-primary text-white">Flex item 1</div>
+                            <div class="p-2 bg-primary text-white">Flex item 2</div>
+                            <div class="p-2 bg-primary text-white">Flex item 3</div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center mt-3 bg-light p-2">
+                            <div class="p-2 bg-success text-white">Centré</div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center bg-light p-2 mt-3" style="height: 100px;">
+                            <div class="p-2 bg-danger text-white">Aligné verticalement</div>
+                        </div>
+                    </div>
+                    
+                    <div class="code-display">
+&lt;!-- Flexbox de base --&gt;
+&lt;div class="d-flex"&gt;...&lt;/div&gt;
+
+&lt;!-- Justification (axe principal) --&gt;
+&lt;div class="d-flex justify-content-start"&gt;...&lt;/div&gt;
+&lt;div class="d-flex justify-content-end"&gt;...&lt;/div&gt;
+&lt;div class="d-flex justify-content-center"&gt;...&lt;/div&gt;
+&lt;div class="d-flex justify-content-between"&gt;...&lt;/div&gt;
+&lt;div class="d-flex justify-content-around"&gt;...&lt;/div&gt;
+
+&lt;!-- Alignement (axe secondaire) --&gt;
+&lt;div class="d-flex align-items-start"&gt;...&lt;/div&gt;
+&lt;div class="d-flex align-items-end"&gt;...&lt;/div&gt;
+&lt;div class="d-flex align-items-center"&gt;...&lt;/div&gt;
+&lt;div class="d-flex align-items-baseline"&gt;...&lt;/div&gt;
+&lt;div class="d-flex align-items-stretch"&gt;...&lt;/div&gt;</div>
+                </section>
+
+                <section id="formulaires" class="section bg-white">
+                    <h2>Formulaires</h2>
+                    <p>Bootstrap offre des styles et des composants pour créer facilement des formulaires.</p>
+                    
+                    <h3 class="mt-4">Exemple de formulaire</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Adresse email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Nous ne partagerons jamais votre email avec quelqu'un d'autre.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Vérifiez-moi</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formSelect" class="form-label">Exemple de select</label>
+                            <select class="form-select" id="formSelect">
+                                <option selected>Ouvrez ce menu de sélection</option>
+                                <option value="1">Un</option>
+                                <option value="2">Deux</option>
+                                <option value="3">Trois</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Soumettre</button>
+                    </form>
+                    
+                    <div class="code-display mt-3">
+&lt;form&gt;
+  &lt;div class="mb-3"&gt;
+    &lt;label for="exampleInputEmail1" class="form-label"&gt;Adresse email&lt;/label&gt;
+    &lt;input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"&gt;
+    &lt;div id="emailHelp" class="form-text"&gt;Nous ne partagerons jamais votre email avec quelqu'un d'autre.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="mb-3"&gt;
+    &lt;label for="exampleInputPassword1" class="form-label"&gt;Mot de passe&lt;/label&gt;
+    &lt;input type="password" class="form-control" id="exampleInputPassword1"&gt;
+  &lt;/div&gt;
+  &lt;div class="mb-3 form-check"&gt;
+    &lt;input type="checkbox" class="form-check-input" id="exampleCheck1"&gt;
+    &lt;label class="form-check-label" for="exampleCheck1"&gt;Vérifiez-moi&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;button type="submit" class="btn btn-primary"&gt;Soumettre&lt;/button&gt;
+&lt;/form&gt;</div>
+                </section>
+
+                <section id="responsive" class="section bg-white">
+                    <h2>Design Responsive</h2>
+                    <p>Bootstrap est conçu pour être mobile-first et responsive par défaut.</p>
+                    
+                    <h3 class="mt-4">Classes d'affichage</h3>
+                    <p>Contrôlez quand les éléments sont affichés avec les classes <code>d-*-*</code>.</p>
+                    
+                    <div class="demo-area">
+                        <div class="d-none d-md-block alert alert-success">
+                            Ce contenu est caché sur les écrans small et extra small, mais visible sur les écrans medium et supérieurs.
+                        </div>
+                        
+                        <div class="d-md-none alert alert-warning">
+                            Ce contenu est visible uniquement sur les écrans small et extra small.
+                        </div>
+                    </div>
+                    
+                    <div class="code-display">
+&lt;div class="d-none d-md-block"&gt;Caché sur les petits écrans, affiché sur medium+&lt;/div&gt;
+&lt;div class="d-md-none"&gt;Affiché sur les petits écrans, caché sur medium+&lt;/div&gt;</div>
+                </section>
+
+                <section id="personnalisation" class="section bg-white">
+                    <h2>Personnalisation de Bootstrap</h2>
+                    <p>Vous pouvez personnaliser Bootstrap de différentes façons :</p>
+                    
+                    <h3 class="mt-4">1. Variables CSS</h3>
+                    <div class="code-display">
+:root {
+  --bs-primary: #0066cc; /* Remplace la couleur primaire */
+  --bs-border-radius: 0.5rem; /* Arrondis plus importants */
+  --bs-font-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}</div>
+                    
+                    <h3 class="mt-4">2. Utilisation de Sass</h3>
+                    <div class="code-display">
+// Personnalisation des variables
+$primary: #0066cc;
+$border-radius: 0.5rem;
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Import de Bootstrap
+@import "node_modules/bootstrap/scss/bootstrap";</div>
+                </section>
+
+                <section id="applications-dynamiques" class="section bg-white">
+                    <h2>Applications Dynamiques avec JavaScript</h2>
+                    <p>Créez des applications web dynamiques en combinant Bootstrap avec JavaScript.</p>
+                    
+                    <div class="accordion" id="accordionDynamicApps">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDynOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDynOne" aria-expanded="true" aria-controls="collapseDynOne">
+                                    Liste de tâches interactive
+                                </button>
+                            </h2>
+                            <div id="collapseDynOne" class="accordion-collapse collapse show" aria-labelledby="headingDynOne" data-bs-parent="#accordionDynamicApps">
+                                <div class="accordion-body">
+                                    <p>Exemple d'une application de liste de tâches simple utilisant Bootstrap et JavaScript.</p>
+                                    
+                                    <div class="demo-area">
+                                        <div id="todoApp" class="card">
+                                            <div class="card-header bg-primary text-white">
+                                                <h5 class="mb-0">Ma Liste de Tâches</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <form id="todoForm" class="mb-3">
+                                                    <div class="input-group">
+                                                        <input type="text" id="todoInput" class="form-control" placeholder="Ajouter une nouvelle tâche" required>
+                                                        <button class="btn btn-primary" type="submit">Ajouter</button>
+                                                    </div>
+                                                </form>
+                                                
+                                                <ul id="todoList" class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <input class="form-check-input me-2 todo-check" type="checkbox">
+                                                            <span>Apprendre Bootstrap</span>
+                                                        </div>
+                                                        <button class="btn btn-danger btn-sm delete-btn">
+                                                            <i class="bi bi-trash"></i> Supprimer
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <input class="form-check-input me-2 todo-check" type="checkbox">
+                                                            <span>Créer un site web responsive</span>
+                                                        </div>
+                                                        <button class="btn btn-danger btn-sm delete-btn">
+                                                            <i class="bi bi-trash"></i> Supprimer
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                
+                                                <div class="mt-3">
+                                                    <button id="clearCompletedBtn" class="btn btn-warning">Effacer les tâches terminées</button>
+                                                    <button id="clearAllBtn" class="btn btn-danger">Tout effacer</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-muted">
+                                                <span id="taskCount">2</span> tâches en attente
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const todoForm = document.getElementById('todoForm');
+                                            const todoInput = document.getElementById('todoInput');
+                                            const todoList = document.getElementById('todoList');
+                                            const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+                                            const clearAllBtn = document.getElementById('clearAllBtn');
+                                            const taskCount = document.getElementById('taskCount');
+                                            
+                                            // Ajouter une nouvelle tâche
+                                            todoForm.addEventListener('submit', function(e) {
+                                                e.preventDefault();
+                                                const taskText = todoInput.value.trim();
+                                                
+                                                if (taskText) {
+                                                    // Créer un nouvel élément de liste
+                                                    const li = document.createElement('li');
+                                                    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                                                    
+                                                    // Créer la structure interne
+                                                    li.innerHTML = `
+                                                        <div>
+                                                            <input class="form-check-input me-2 todo-check" type="checkbox">
+                                                            <span>${taskText}</span>
+                                                        </div>
+                                                        <button class="btn btn-danger btn-sm delete-btn">
+                                                            <i class="bi bi-trash"></i> Supprimer
+                                                        </button>
+                                                    `;
+                                                    
+                                                    // Ajouter l'élément à la liste
+                                                    todoList.appendChild(li);
+                                                    
+                                                    // Réinitialiser le champ d'entrée
+                                                    todoInput.value = '';
+                                                    
+                                                    // Mettre à jour le compteur de tâches
+                                                    updateTaskCount();
+                                                }
+                                            });
+                                            
+                                            // Gérer les clics sur la liste (délégation d'événements)
+                                            todoList.addEventListener('click', function(e) {
+                                                // Si on clique sur un bouton de suppression
+                                                if (e.target.classList.contains('delete-btn') || e.target.parentElement.classList.contains('delete-btn')) {
+                                                    const li = e.target.closest('li');
+                                                    todoList.removeChild(li);
+                                                    updateTaskCount();
+                                                }
+                                                
+                                                // Si on clique sur une case à cocher
+                                                if (e.target.classList.contains('todo-check')) {
+                                                    const span = e.target.nextElementSibling;
+                                                    if (e.target.checked) {
+                                                        span.style.textDecoration = 'line-through';
+                                                        span.style.color = '#6c757d';
+                                                    } else {
+                                                        span.style.textDecoration = 'none';
+                                                        span.style.color = '';
+                                                    }
+                                                }
+                                            });
+                                            
+                                            // Effacer les tâches terminées
+                                            clearCompletedBtn.addEventListener('click', function() {
+                                                const completedTasks = document.querySelectorAll('.todo-check:checked');
+                                                completedTasks.forEach(task => {
+                                                    const li = task.closest('li');
+                                                    todoList.removeChild(li);
+                                                });
+                                                updateTaskCount();
+                                            });
+                                            
+                                            // Tout effacer
+                                            clearAllBtn.addEventListener('click', function() {
+                                                todoList.innerHTML = '';
+                                                updateTaskCount();
+                                            });
+                                            
+                                            // Mettre à jour le compteur de tâches
+                                            function updateTaskCount() {
+                                                const count = todoList.children.length;
+                                                taskCount.textContent = count;
+                                            }
+                                            
+                                            // Initialiser les événements pour les éléments existants
+                                            const checks = document.querySelectorAll('.todo-check');
+                                            checks.forEach(check => {
+                                                check.addEventListener('change', function() {
+                                                    const span = this.nextElementSibling;
+                                                    if (this.checked) {
+                                                        span.style.textDecoration = 'line-through';
+                                                        span.style.color = '#6c757d';
+                                                    } else {
+                                                        span.style.textDecoration = 'none';
+                                                        span.style.color = '';
+                                                    }
+                                                });
+                                            });
+                                            
+                                            const deleteBtns = document.querySelectorAll('.delete-btn');
+                                            deleteBtns.forEach(btn => {
+                                                btn.addEventListener('click', function() {
+                                                    const li = this.closest('li');
+                                                    todoList.removeChild(li);
+                                                    updateTaskCount();
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                    
+                                    <div class="code-display mt-3">
+&lt;!-- HTML pour l'application Todo --&gt;
+&lt;div id="todoApp" class="card"&gt;
+  &lt;div class="card-header bg-primary text-white"&gt;
+    &lt;h5 class="mb-0"&gt;Ma Liste de Tâches&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;form id="todoForm" class="mb-3"&gt;
+      &lt;div class="input-group"&gt;
+        &lt;input type="text" id="todoInput" class="form-control" 
+               placeholder="Ajouter une nouvelle tâche" required&gt;
+        &lt;button class="btn btn-primary" type="submit"&gt;Ajouter&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+    
+    &lt;ul id="todoList" class="list-group"&gt;
+      &lt;li class="list-group-item d-flex justify-content-between align-items-center"&gt;
+        &lt;div&gt;
+          &lt;input class="form-check-input me-2 todo-check" type="checkbox"&gt;
+          &lt;span&gt;Apprendre Bootstrap&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;button class="btn btn-danger btn-sm delete-btn"&gt;
+          &lt;i class="bi bi-trash"&gt;&lt;/i&gt; Supprimer
+        &lt;/button&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    
+    &lt;div class="mt-3"&gt;
+      &lt;button id="clearCompletedBtn" class="btn btn-warning"&gt;
+        Effacer les tâches terminées
+      &lt;/button&gt;
+      &lt;button id="clearAllBtn" class="btn btn-danger"&gt;Tout effacer&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer text-muted"&gt;
+    &lt;span id="taskCount"&gt;1&lt;/span&gt; tâches en attente
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script&gt;
+  document.addEventListener('DOMContentLoaded', function() {
+    const todoForm = document.getElementById('todoForm');
+    const todoInput = document.getElementById('todoInput');
+    const todoList = document.getElementById('todoList');
+    const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const taskCount = document.getElementById('taskCount');
+    
+    // Ajouter une nouvelle tâche
+    todoForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const taskText = todoInput.value.trim();
+      
+      if (taskText) {
+        // Créer un nouvel élément de liste
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        
+        // Créer la structure interne
+        li.innerHTML = `
+          &lt;div&gt;
+            &lt;input class="form-check-input me-2 todo-check" type="checkbox"&gt;
+            &lt;span&gt;${taskText}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;button class="btn btn-danger btn-sm delete-btn"&gt;
+            &lt;i class="bi bi-trash"&gt;&lt;/i&gt; Supprimer
+          &lt;/button&gt;
+        `;
+        
+        // Ajouter l'élément à la liste
+        todoList.appendChild(li);
+        
+        // Réinitialiser le champ d'entrée
+        todoInput.value = '';
+        
+        // Mettre à jour le compteur de tâches
+        updateTaskCount();
+      }
+    });
+    
+    // Gérer les clics sur la liste (délégation d'événements)
+    todoList.addEventListener('click', function(e) {
+      // Si on clique sur un bouton de suppression
+      if (e.target.classList.contains('delete-btn')) {
+        const li = e.target.closest('li');
+        todoList.removeChild(li);
+        updateTaskCount();
+      }
+      
+      // Si on clique sur une case à cocher
+      if (e.target.classList.contains('todo-check')) {
+        const span = e.target.nextElementSibling;
+        if (e.target.checked) {
+          span.style.textDecoration = 'line-through';
+          span.style.color = '#6c757d';
+        } else {
+          span.style.textDecoration = 'none';
+          span.style.color = '';
+        }
+      }
+    });
+    
+    // Mettre à jour le compteur de tâches
+    function updateTaskCount() {
+      const count = todoList.children.length;
+      taskCount.textContent = count;
+    }
+  });
+&lt;/script&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDynTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDynTwo" aria-expanded="false" aria-controls="collapseDynTwo">
+                                    Panier d'achats simple
+                                </button>
+                            </h2>
+                            <div id="collapseDynTwo" class="accordion-collapse collapse" aria-labelledby="headingDynTwo" data-bs-parent="#accordionDynamicApps">
+                                <div class="accordion-body">
+                                    <p>Un exemple simple de panier d'achats avec Bootstrap et JavaScript.</p>
+                                    
+                                    <div class="demo-area">
+                                        <div class="row mb-4">
+                                            <div class="col-md-8">
+                                                <div class="card">
+                                                    <div class="card-header bg-primary text-white">
+                                                        Produits disponibles
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="card h-100">
+                                                                    <img src="https://via.placeholder.com/150/007bff/ffffff?text=Produit+1" class="card-img-top" alt="Produit 1">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">Produit 1</h5>
+                                                                        <p class="card-text">15,00 €</p>
+                                                                        <button class="btn btn-primary btn-sm add-to-cart" data-id="1" data-name="Produit 1" data-price="15">
+                                                                            Ajouter au panier
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="card h-100">
+                                                                    <img src="https://via.placeholder.com/150/28a745/ffffff?text=Produit+2" class="card-img-top" alt="Produit 2">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">Produit 2</h5>
+                                                                        <p class="card-text">25,00 €</p>
+                                                                        <button class="btn btn-primary btn-sm add-to-cart" data-id="2" data-name="Produit 2" data-price="25">
+                                                                            Ajouter au panier
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <div class="card h-100">
+                                                                    <img src="https://via.placeholder.com/150/dc3545/ffffff?text=Produit+3" class="card-img-top" alt="Produit 3">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">Produit 3</h5>
+                                                                        <p class="card-text">35,00 €</p>
+                                                                        <button class="btn btn-primary btn-sm add-to-cart" data-id="3" data-name="Produit 3" data-price="35">
+                                                                            Ajouter au panier
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    <div class="card-header bg-success text-white">
+                                                        Votre panier
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul id="cartItems" class="list-group mb-3">
+                                                            <li class="list-group-item text-center text-muted" id="emptyCart">
+                                                                Votre panier est vide
+                                                            </li>
+                                                        </ul>
+                                                        <div class="d-flex justify-content-between">
+                                                            <span><strong>Total:</strong></span>
+                                                            <span id="cartTotal">0,00 €</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <button id="clearCartBtn" class="btn btn-outline-danger w-100">Vider le panier</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="alert alert-success d-none" id="orderSuccess">
+                                            Commande passée avec succès!
+                                        </div>
+                                    </div>
+                                    
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                                            const cartItems = document.getElementById('cartItems');
+                                            const emptyCart = document.getElementById('emptyCart');
+                                            const cartTotal = document.getElementById('cartTotal');
+                                            const clearCartBtn = document.getElementById('clearCartBtn');
+                                            const orderSuccess = document.getElementById('orderSuccess');
+                                            
+                                            let cart = [];
+                                            
+                                            // Ajouter au panier
+                                            addToCartButtons.forEach(button => {
+                                                button.addEventListener('click', function() {
+                                                    const id = this.dataset.id;
+                                                    const name = this.dataset.name;
+                                                    const price = parseFloat(this.dataset.price);
+                                                    
+                                                    // Vérifier si le produit est déjà dans le panier
+                                                    const existingItem = cart.find(item => item.id === id);
+                                                    
+                                                    if (existingItem) {
+                                                        // Incrémenter la quantité
+                                                        existingItem.quantity++;
+                                                    } else {
+                                                        // Ajouter un nouvel élément
+                                                        cart.push({
+                                                            id,
+                                                            name,
+                                                            price,
+                                                            quantity: 1
+                                                        });
+                                                    }
+                                                    
+                                                    // Mettre à jour l'affichage du panier
+                                                    updateCart();
+                                                    
+                                                    // Animation de feedback
+                                                    this.textContent = 'Ajouté!';
+                                                    this.classList.remove('btn-primary');
+                                                    this.classList.add('btn-success');
+                                                    
+                                                    setTimeout(() => {
+                                                        this.textContent = 'Ajouter au panier';
+                                                        this.classList.remove('btn-success');
+                                                        this.classList.add('btn-primary');
+                                                    }, 1000);
+                                                });
+                                            });
+                                            
+                                            // Vider le panier
+                                            clearCartBtn.addEventListener('click', function() {
+                                                cart = [];
+                                                updateCart();
+                                            });
+                                            
+                                            // Mettre à jour l'affichage du panier
+                                            function updateCart() {
+                                                // Vider le contenu actuel du panier
+                                                cartItems.innerHTML = '';
+                                                
+                                                if (cart.length === 0) {
+                                                    // Afficher le message de panier vide
+                                                    cartItems.appendChild(emptyCart);
+                                                    cartTotal.textContent = '0,00 €';
+                                                    return;
+                                                }
+                                                
+                                                let total = 0;
+                                                
+                                                // Ajouter chaque élément du panier
+                                                cart.forEach(item => {
+                                                    const li = document.createElement('li');
+                                                    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                                                    
+                                                    const itemTotal = item.price * item.quantity;
+                                                    total += itemTotal;
+                                                    
+                                                    li.innerHTML = `
+                                                        <div>
+                                                            <span>${item.name}</span>
+                                                            <span class="badge bg-primary rounded-pill ms-2">${item.quantity}</span>
+                                                        </div>
+                                                        <span>${itemTotal.toFixed(2)} €</span>
+                                                    `;
+                                                    
+                                                    cartItems.appendChild(li);
+                                                });
+                                                
+                                                // Mettre à jour le total
+                                                cartTotal.textContent = `${total.toFixed(2)} €`;
+                                            }
+                                        });
+                                    </script>
+                                    
+                                    <div class="code-display mt-3">
+&lt;!-- Structure HTML --&gt;
+&lt;div class="row"&gt;
+  &lt;div class="col-md-8"&gt;
+    &lt;div class="card"&gt;
+      &lt;div class="card-header bg-primary text-white"&gt;
+        Produits disponibles
+      &lt;/div&gt;
+      &lt;div class="card-body"&gt;
+        &lt;div class="row"&gt;
+          &lt;div class="col-md-4 mb-3"&gt;
+            &lt;div class="card h-100"&gt;
+              &lt;img src="..." class="card-img-top" alt="Produit 1"&gt;
+              &lt;div class="card-body"&gt;
+                &lt;h5 class="card-title"&gt;Produit 1&lt;/h5&gt;
+                &lt;p class="card-text"&gt;15,00 €&lt;/p&gt;
+                &lt;button class="btn btn-primary btn-sm add-to-cart" 
+                        data-id="1" data-name="Produit 1" data-price="15"&gt;
+                  Ajouter au panier
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!-- Autres produits --&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-4"&gt;
+    &lt;div class="card"&gt;
+      &lt;div class="card-header bg-success text-white"&gt;
+        Votre panier
+      &lt;/div&gt;
+      &lt;div class="card-body"&gt;
+        &lt;ul id="cartItems" class="list-group mb-3"&gt;
+          &lt;li class="list-group-item text-center text-muted" id="emptyCart"&gt;
+            Votre panier est vide
+          &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class="d-flex justify-content-between"&gt;
+          &lt;span&gt;&lt;strong&gt;Total:&lt;/strong&gt;&lt;/span&gt;
+          &lt;span id="cartTotal"&gt;0,00 €&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="card-footer"&gt;
+        &lt;button id="clearCartBtn" class="btn btn-outline-danger w-100"&gt;
+          Vider le panier
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script&gt;
+  document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItems = document.getElementById('cartItems');
+    const emptyCart = document.getElementById('emptyCart');
+    const cartTotal = document.getElementById('cartTotal');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+    
+    let cart = [];
+    
+    // Ajouter au panier
+    addToCartButtons.forEach(button =&gt; {
+      button.addEventListener('click', function() {
+        const id = this.dataset.id;
+        const name = this.dataset.name;
+        const price = parseFloat(this.dataset.price);
+        
+        // Vérifier si le produit est déjà dans le panier
+        const existingItem = cart.find(item =&gt; item.id === id);
+        
+        if (existingItem) {
+          // Incrémenter la quantité
+          existingItem.quantity++;
+        } else {
+          // Ajouter un nouvel élément
+          cart.push({
+            id,
+            name,
+            price,
+            quantity: 1
+          });
+        }
+        
+        // Mettre à jour l'affichage du panier
+        updateCart();
+      });
+    });
+    
+    // Vider le panier
+    clearCartBtn.addEventListener('click', function() {
+      cart = [];
+      updateCart();
+    });
+    
+    // Mettre à jour l'affichage du panier
+    function updateCart() {
+      // Vider le contenu actuel du panier
+      cartItems.innerHTML = '';
+      
+      if (cart.length === 0) {
+        // Afficher le message de panier vide
+        cartItems.appendChild(emptyCart);
+        cartTotal.textContent = '0,00 €';
+        return;
+      }
+      
+      let total = 0;
+      
+      // Ajouter chaque élément du panier
+      cart.forEach(item =&gt; {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        li.innerHTML = `
+          &lt;div&gt;
+            &lt;span&gt;${item.name}&lt;/span&gt;
+            &lt;span class="badge bg-primary rounded-pill ms-2"&gt;${item.quantity}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;span&gt;${itemTotal.toFixed(2)} €&lt;/span&gt;
+        `;
+        
+        cartItems.appendChild(li);
+      });
+      
+      // Mettre à jour le total
+      cartTotal.textContent = `${total.toFixed(2)} €`;
+    }
+  });
+&lt;/script&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="exercices" class="section bg-white">
+                    <h2>Exercices Pratiques</h2>
+                    <p>Essayez ces exercices pour améliorer vos compétences avec Bootstrap :</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Exercice 1: Créer une navbar responsive
+                        </div>
+                        <div class="card-body">
+                            <p>Créez une barre de navigation qui se transforme en menu hamburger sur les petits écrans.</p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#solution1" aria-expanded="false" aria-controls="solution1">
+                                Voir la solution
+                            </button>
+                            <div class="collapse mt-3" id="solution1">
+                                <div class="code-display">
+&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;MonSite&lt;/a&gt;
+    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+      &lt;ul class="navbar-nav"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" aria-current="page" href="#"&gt;Accueil&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Fonctionnalités&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Tarifs&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            Exercice 2: Créer une galerie d'images responsive
+                        </div>
+                        <div class="card-body">
+                            <p>Créez une galerie d'images qui s'adapte à différentes tailles d'écran.</p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#solution2" aria-expanded="false" aria-controls="solution2">
+                                Voir la solution
+                            </button>
+                            <div class="collapse mt-3" id="solution2">
+                                <div class="code-display">
+&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-6 col-md-4 col-lg-3 mb-4"&gt;
+      &lt;img src="image1.jpg" alt="Image 1" class="img-fluid rounded"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-6 col-md-4 col-lg-3 mb-4"&gt;
+      &lt;img src="image2.jpg" alt="Image 2" class="img-fluid rounded"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-6 col-md-4 col-lg-3 mb-4"&gt;
+      &lt;img src="image3.jpg" alt="Image 3" class="img-fluid rounded"&gt;
+    &lt;/div&gt;
+    &lt;div class="col-6 col-md-4 col-lg-3 mb-4"&gt;
+      &lt;img src="image4.jpg" alt="Image 4" class="img-fluid rounded"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="bonnes-pratiques" class="section bg-white">
+                    <h2>Bonnes Pratiques et Projets Complets</h2>
+                    <p>Apprenez à structurer vos projets et à appliquer les meilleures pratiques avec Bootstrap.</p>
+                    
+                    <div class="accordion" id="accordionBestPractices">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingBPOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBPOne" aria-expanded="true" aria-controls="collapseBPOne">
+                                    Organisation du code
+                                </button>
+                            </h2>
+                            <div id="collapseBPOne" class="accordion-collapse collapse show" aria-labelledby="headingBPOne" data-bs-parent="#accordionBestPractices">
+                                <div class="accordion-body">
+                                    <p>Une bonne organisation du code est essentielle pour maintenir des projets Bootstrap à long terme.</p>
+                                    
+                                    <h4>Structure de dossiers recommandée</h4>
+                                    <div class="code-display">
+my-bootstrap-project/
+├── assets/
+│   ├── css/
+│   │   ├── custom.css        # Votre CSS personnalisé
+│   │   └── bootstrap.min.css # Version minifiée de Bootstrap (si pas via CDN)
+│   ├── js/
+│   │   ├── custom.js         # Votre JavaScript personnalisé
+│   │   └── bootstrap.bundle.min.js # Bootstrap JS (si pas via CDN)
+│   └── img/                  # Images du site
+├── components/               # Fragments HTML réutilisables
+│   ├── navbar.html
+│   ├── footer.html
+│   └── sidebar.html
+├── pages/                    # Pages individuelles
+│   ├── about.html
+│   ├── contact.html
+│   └── products.html
+└── index.html                # Page d'accueil</div>
+                                    
+                                    <h4>Conventions de nommage</h4>
+                                    <ul>
+                                        <li>Utilisez des noms de classes descriptifs qui expliquent leur fonction (ex: <code>product-card</code> plutôt que <code>card1</code>)</li>
+                                        <li>Préfixez vos classes personnalisées pour éviter les conflits avec Bootstrap (ex: <code>my-custom-btn</code>)</li>
+                                        <li>Restez cohérent dans votre style de nommage (kebab-case est recommandé pour HTML/CSS)</li>
+                                    </ul>
+                                    
+                                    <h4>Séparation des préoccupations</h4>
+                                    <p>Séparez clairement votre structure (HTML), votre présentation (CSS) et votre comportement (JavaScript).</p>
+                                    
+                                    <div class="code-display">
+&lt;!-- Bon exemple --&gt;
+&lt;button id="saveBtn" class="btn btn-primary"&gt;Enregistrer&lt;/button&gt;
+
+&lt;style&gt;
+  /* CSS séparé pour la présentation */
+  .btn-primary {
+    text-transform: uppercase;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  // JavaScript séparé pour le comportement
+  document.getElementById('saveBtn').addEventListener('click', function() {
+    saveData();
+  });
+&lt;/script&gt;
+
+&lt;!-- Mauvais exemple --&gt;
+&lt;button onclick="saveData()" style="text-transform: uppercase;"
+        class="btn btn-primary"&gt;Enregistrer&lt;/button&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingBPTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBPTwo" aria-expanded="false" aria-controls="collapseBPTwo">
+                                    Performance et optimisation
+                                </button>
+                            </h2>
+                            <div id="collapseBPTwo" class="accordion-collapse collapse" aria-labelledby="headingBPTwo" data-bs-parent="#accordionBestPractices">
+                                <div class="accordion-body">
+                                    <p>Optimisez vos projets Bootstrap pour de meilleures performances.</p>
+                                    
+                                    <h4>Minimiser les imports</h4>
+                                    <p>Bootstrap est modulaire. N'importez que ce dont vous avez besoin pour réduire la taille du fichier.</p>
+                                    
+                                    <div class="code-display">
+// Si vous utilisez Sass, n'importez que les composants nécessaires
+// _custom.scss
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Composants requis
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/card";
+// Uniquement les composants que vous utilisez</div>
+                                    
+                                    <h4>Optimiser les images</h4>
+                                    <ul>
+                                        <li>Utilisez des formats d'image appropriés (WebP, SVG pour les icônes)</li>
+                                        <li>Compressez les images pour le web</li>
+                                        <li>Utilisez la classe <code>img-fluid</code> pour les images responsives</li>
+                                        <li>Utilisez le lazy loading pour les images</li>
+                                    </ul>
+                                    
+                                    <div class="code-display">
+&lt;img src="image.jpg" class="img-fluid" alt="..." loading="lazy"&gt;</div>
+                                    
+                                    <h4>Éviter les manipulations DOM inutiles</h4>
+                                    <p>Minimisez les manipulations DOM avec JavaScript. Utilisez la délégation d'événements quand c'est possible.</p>
+                                    
+                                    <div class="code-display">
+// Mauvais - Attachement d'événements individuels à chaque bouton
+document.querySelectorAll('.btn').forEach(button => {
+  button.addEventListener('click', handleClick);
+});
+
+// Bon - Utilisation de la délégation d'événements
+document.querySelector('.container').addEventListener('click', function(e) {
+  if (e.target.matches('.btn')) {
+    handleClick(e);
+  }
+});</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingBPThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBPThree" aria-expanded="false" aria-controls="collapseBPThree">
+                                    Exemple de projet complet
+                                </button>
+                            </h2>
+                            <div id="collapseBPThree" class="accordion-collapse collapse" aria-labelledby="headingBPThree" data-bs-parent="#accordionBestPractices">
+                                <div class="accordion-body">
+                                    <p>Voici la structure recommandée pour un projet complet avec Bootstrap.</p>
+                                    
+                                    <h4>Structure de fichiers</h4>
+                                    <div class="code-display">
+projet-bootstrap/
+├── assets/
+│   ├── css/
+│   │   ├── custom.css
+│   │   └── vendor/         # CSS de bibliothèques tierces
+│   ├── js/
+│   │   ├── main.js
+│   │   └── vendor/         # JS de bibliothèques tierces
+│   ├── img/
+│   └── fonts/
+├── components/              # Fragments HTML réutilisables
+├── layouts/                 # Mises en page différentes
+├── pages/                   # Pages individuelles
+├── scss/                    # Sources Sass
+│   ├── custom/              # Variables et surcharges personnalisées
+│   ├── _variables.scss      # Variables Bootstrap personnalisées
+│   └── main.scss            # Point d'entrée principal
+├── .gitignore
+├── package.json             # Dépendances npm
+├── webpack.config.js        # Configuration de build (si utilisé)
+└── index.html</div>
+                                    
+                                    <h4>Exemple de page d'accueil complète</h4>
+                                    
+                                    <div class="code-display">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;MonSite - Accueil&lt;/title&gt;
+  
+  &lt;!-- Bootstrap CSS --&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+  
+  &lt;!-- Font Awesome pour les icônes --&gt;
+  &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"&gt;
+  
+  &lt;!-- CSS personnalisé --&gt;
+  &lt;link href="assets/css/custom.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Navigation --&gt;
+  &lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top"&gt;
+    &lt;div class="container"&gt;
+      &lt;a class="navbar-brand" href="#"&gt;MonSite&lt;/a&gt;
+      &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav"&gt;
+        &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+        &lt;ul class="navbar-nav ms-auto"&gt;
+          &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link active" href="#"&gt;Accueil&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link" href="#"&gt;Produits&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link" href="#"&gt;Services&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+  
+  &lt;!-- Hero Section --&gt;
+  &lt;header class="bg-light py-5"&gt;
+    &lt;div class="container px-5"&gt;
+      &lt;div class="row gx-5 align-items-center justify-content-center"&gt;
+        &lt;div class="col-lg-8 col-xl-7 col-xxl-6"&gt;
+          &lt;div class="my-5 text-center text-xl-start"&gt;
+            &lt;h1 class="display-5 fw-bold mb-4"&gt;Bienvenue sur MonSite&lt;/h1&gt;
+            &lt;p class="lead mb-4"&gt;
+              Une solution Bootstrap complète pour votre entreprise avec tous les
+              composants dont vous avez besoin pour réussir en ligne.
+            &lt;/p&gt;
+            &lt;div class="d-grid gap-3 d-sm-flex justify-content-sm-start"&gt;
+              &lt;a class="btn btn-primary btn-lg" href="#"&gt;Commencer&lt;/a&gt;
+              &lt;a class="btn btn-outline-secondary btn-lg" href="#"&gt;En savoir plus&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"&gt;
+          &lt;img class="img-fluid rounded-3" src="https://via.placeholder.com/600x400" 
+               alt="Image de présentation"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  
+  &lt;!-- Section Fonctionnalités --&gt;
+  &lt;section class="py-5"&gt;
+    &lt;div class="container px-5"&gt;
+      &lt;h2 class="text-center mb-5"&gt;Nos fonctionnalités&lt;/h2&gt;
+      &lt;div class="row g-4"&gt;
+        &lt;div class="col-lg-4 mb-5 mb-lg-0"&gt;
+          &lt;div class="card h-100 shadow border-0"&gt;
+            &lt;div class="card-body p-4"&gt;
+              &lt;div class="text-center mb-3"&gt;
+                &lt;i class="fas fa-laptop-code fa-3x text-primary"&gt;&lt;/i&gt;
+              &lt;/div&gt;
+              &lt;h5 class="card-title text-center mb-3"&gt;Design Responsive&lt;/h5&gt;
+              &lt;p class="card-text"&gt;
+                Nos designs s'adaptent parfaitement à tous les appareils, des 
+                téléphones mobiles aux grands écrans de bureau.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-lg-4 mb-5 mb-lg-0"&gt;
+          &lt;div class="card h-100 shadow border-0"&gt;
+            &lt;div class="card-body p-4"&gt;
+              &lt;div class="text-center mb-3"&gt;
+                &lt;i class="fas fa-rocket fa-3x text-primary"&gt;&lt;/i&gt;
+              &lt;/div&gt;
+              &lt;h5 class="card-title text-center mb-3"&gt;Performance Optimisée&lt;/h5&gt;
+              &lt;p class="card-text"&gt;
+                Nos solutions sont optimisées pour une vitesse maximale et une
+                expérience utilisateur fluide sur tous les appareils.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-lg-4"&gt;
+          &lt;div class="card h-100 shadow border-0"&gt;
+            &lt;div class="card-body p-4"&gt;
+              &lt;div class="text-center mb-3"&gt;
+                &lt;i class="fas fa-shield-alt fa-3x text-primary"&gt;&lt;/i&gt;
+              &lt;/div&gt;
+              &lt;h5 class="card-title text-center mb-3"&gt;Sécurité Renforcée&lt;/h5&gt;
+              &lt;p class="card-text"&gt;
+                La sécurité est notre priorité. Nous intégrons les meilleures
+                pratiques pour protéger vos données et votre vie privée.
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  
+  &lt;!-- Section Appel à l'action --&gt;
+  &lt;section class="py-5 bg-primary"&gt;
+    &lt;div class="container px-5"&gt;
+      &lt;div class="row gx-5 justify-content-center"&gt;
+        &lt;div class="col-lg-8 col-xl-6"&gt;
+          &lt;div class="text-center text-white"&gt;
+            &lt;h2 class="mb-4"&gt;Prêt à commencer? Inscrivez-vous dès maintenant!&lt;/h2&gt;
+            &lt;form class="row g-3 justify-content-center"&gt;
+              &lt;div class="col-auto"&gt;
+                &lt;input type="email" class="form-control" placeholder="Votre email"&gt;
+              &lt;/div&gt;
+              &lt;div class="col-auto"&gt;
+                &lt;button type="submit" class="btn btn-light"&gt;S'inscrire&lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  
+  &lt;!-- Footer --&gt;
+  &lt;footer class="py-5 bg-dark"&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-lg-4 mb-4 mb-lg-0"&gt;
+          &lt;h5 class="text-white"&gt;À propos&lt;/h5&gt;
+          &lt;p class="text-white-50"&gt;
+            Nous créons des solutions web innovantes qui aident les entreprises
+            à se développer et à réussir dans l'environnement numérique.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="col-lg-4 mb-4 mb-lg-0"&gt;
+          &lt;h5 class="text-white"&gt;Liens rapides&lt;/h5&gt;
+          &lt;ul class="list-unstyled"&gt;
+            &lt;li&gt;&lt;a href="#" class="text-white-50"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#" class="text-white-50"&gt;Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#" class="text-white-50"&gt;À propos&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#" class="text-white-50"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class="col-lg-4"&gt;
+          &lt;h5 class="text-white"&gt;Suivez-nous&lt;/h5&gt;
+          &lt;div class="d-flex"&gt;
+            &lt;a href="#" class="text-white me-3"&gt;&lt;i class="fab fa-facebook-f"&gt;&lt;/i&gt;&lt;/a&gt;
+            &lt;a href="#" class="text-white me-3"&gt;&lt;i class="fab fa-twitter"&gt;&lt;/i&gt;&lt;/a&gt;
+            &lt;a href="#" class="text-white me-3"&gt;&lt;i class="fab fa-instagram"&gt;&lt;/i&gt;&lt;/a&gt;
+            &lt;a href="#" class="text-white"&gt;&lt;i class="fab fa-linkedin-in"&gt;&lt;/i&gt;&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;hr class="text-white-50"&gt;
+      &lt;div class="text-white-50 text-center"&gt;
+        &lt;small&gt;&copy; 2023 MonSite. Tous droits réservés.&lt;/small&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  
+  &lt;!-- Bootstrap JS Bundle avec Popper --&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+  
+  &lt;!-- JS personnalisé --&gt;
+  &lt;script src="assets/js/main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="integrations-avancees" class="section bg-white">
+                    <h2>Intégrations Avancées</h2>
+                    <p>Découvrez comment intégrer Bootstrap avec d'autres technologies et frameworks.</p>
+                    
+                    <div class="accordion" id="accordionIntegrations">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingIntOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIntOne" aria-expanded="true" aria-controls="collapseIntOne">
+                                    Bootstrap avec React
+                                </button>
+                            </h2>
+                            <div id="collapseIntOne" class="accordion-collapse collapse show" aria-labelledby="headingIntOne" data-bs-parent="#accordionIntegrations">
+                                <div class="accordion-body">
+                                    <p>React-Bootstrap remplace la couche JavaScript de Bootstrap avec des implémentations React.</p>
+                                    
+                                    <h4>Installation</h4>
+                                    <div class="code-display">
+# Avec npm
+npm install react-bootstrap bootstrap
+
+# Avec yarn
+yarn add react-bootstrap bootstrap</div>
+                                    
+                                    <h4>Importation et utilisation</h4>
+                                    <div class="code-display">
+// Importer CSS Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Importer des composants individuels
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+// Utiliser les composants
+function App() {
+  return (
+    &lt;Container&gt;
+      &lt;Row&gt;
+        &lt;Col md={4}&gt;
+          &lt;Card&gt;
+            &lt;Card.Img variant="top" src="holder.js/100px180" /&gt;
+            &lt;Card.Body&gt;
+              &lt;Card.Title&gt;Card Title&lt;/Card.Title&gt;
+              &lt;Card.Text&gt;
+                Un exemple de texte pour la carte.
+              &lt;/Card.Text&gt;
+              &lt;Button variant="primary"&gt;En savoir plus&lt;/Button&gt;
+            &lt;/Card.Body&gt;
+          &lt;/Card&gt;
+        &lt;/Col&gt;
+      &lt;/Row&gt;
+    &lt;/Container&gt;
+  );
+}</div>
+                                    
+                                    <h4>Exemple d'application React-Bootstrap</h4>
+                                    <div class="code-display">
+import React, { useState } from 'react';
+import { Navbar, Nav, Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function App() {
+  const [show, setShow] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleClose = () => setShow(false);
+  
+  const items = [
+    { id: 1, title: 'Article 1', description: 'Description de l\'article 1', image: 'https://via.placeholder.com/300' },
+    { id: 2, title: 'Article 2', description: 'Description de l\'article 2', image: 'https://via.placeholder.com/300' },
+    { id: 3, title: 'Article 3', description: 'Description de l\'article 3', image: 'https://via.placeholder.com/300' },
+  ];
+
+  const handleShow = (item) => {
+    setSelectedItem(item);
+    setShow(true);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Navbar bg="dark" variant="dark" expand="lg"&gt;
+        &lt;Container&gt;
+          &lt;Navbar.Brand href="#home"&gt;React-Bootstrap&lt;/Navbar.Brand&gt;
+          &lt;Navbar.Toggle aria-controls="basic-navbar-nav" /&gt;
+          &lt;Navbar.Collapse id="basic-navbar-nav"&gt;
+            &lt;Nav className="me-auto"&gt;
+              &lt;Nav.Link href="#home"&gt;Accueil&lt;/Nav.Link&gt;
+              &lt;Nav.Link href="#articles"&gt;Articles&lt;/Nav.Link&gt;
+              &lt;Nav.Link href="#contact"&gt;Contact&lt;/Nav.Link&gt;
+            &lt;/Nav&gt;
+          &lt;/Navbar.Collapse&gt;
+        &lt;/Container&gt;
+      &lt;/Navbar&gt;
+
+      &lt;Container className="py-5"&gt;
+        &lt;h1 className="text-center mb-5"&gt;Nos Articles&lt;/h1&gt;
+        
+        &lt;Row&gt;
+          {items.map(item => (
+            &lt;Col md={4} key={item.id} className="mb-4"&gt;
+              &lt;Card&gt;
+                &lt;Card.Img variant="top" src={item.image} /&gt;
+                &lt;Card.Body&gt;
+                  &lt;Card.Title&gt;{item.title}&lt;/Card.Title&gt;
+                  &lt;Card.Text&gt;{item.description}&lt;/Card.Text&gt;
+                  &lt;Button variant="primary" onClick={() => handleShow(item)}&gt;
+                    Voir détails
+                  &lt;/Button&gt;
+                &lt;/Card.Body&gt;
+              &lt;/Card&gt;
+            &lt;/Col&gt;
+          ))}
+        &lt;/Row&gt;
+      &lt;/Container&gt;
+
+      &lt;Modal show={show} onHide={handleClose}&gt;
+        {selectedItem && (
+          &lt;&gt;
+            &lt;Modal.Header closeButton&gt;
+              &lt;Modal.Title&gt;{selectedItem.title}&lt;/Modal.Title&gt;
+            &lt;/Modal.Header&gt;
+            &lt;Modal.Body&gt;
+              &lt;img 
+                src={selectedItem.image} 
+                alt={selectedItem.title} 
+                className="img-fluid mb-3" 
+              /&gt;
+              &lt;p&gt;{selectedItem.description}&lt;/p&gt;
+              &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Nullam ultricies, velit eu finibus scelerisque, nisl mi 
+              congue urna, eu varius nibh felis nec odio.&lt;/p&gt;
+            &lt;/Modal.Body&gt;
+            &lt;Modal.Footer&gt;
+              &lt;Button variant="secondary" onClick={handleClose}&gt;
+                Fermer
+              &lt;/Button&gt;
+            &lt;/Modal.Footer&gt;
+          &lt;/&gt;
+        )}
+      &lt;/Modal&gt;
+    &lt;/&gt;
+  );
+}
+
+export default App;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingIntTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIntTwo" aria-expanded="false" aria-controls="collapseIntTwo">
+                                    Bootstrap avec Vue.js
+                                </button>
+                            </h2>
+                            <div id="collapseIntTwo" class="accordion-collapse collapse" aria-labelledby="headingIntTwo" data-bs-parent="#accordionIntegrations">
+                                <div class="accordion-body">
+                                    <p>BootstrapVue fournit des implémentations des composants Bootstrap pour Vue.js.</p>
+                                    
+                                    <h4>Installation</h4>
+                                    <div class="code-display">
+# Avec npm
+npm install bootstrap bootstrap-vue
+
+# Avec yarn
+yarn add bootstrap bootstrap-vue</div>
+                                    
+                                    <h4>Configuration</h4>
+                                    <div class="code-display">
+// Dans main.js
+import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Importer les CSS de Bootstrap et BootstrapVue
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Installer BootstrapVue
+Vue.use(BootstrapVue)
+// Optionnellement installer le plugin d'icônes
+Vue.use(IconsPlugin)</div>
+                                    
+                                    <h4>Exemple d'application BootstrapVue</h4>
+                                    <div class="code-display">
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;b-navbar toggleable="lg" type="dark" variant="primary"&gt;
+      &lt;b-container&gt;
+        &lt;b-navbar-brand href="#"&gt;BootstrapVue&lt;/b-navbar-brand&gt;
+        &lt;b-navbar-toggle target="nav-collapse"&gt;&lt;/b-navbar-toggle&gt;
+        &lt;b-collapse id="nav-collapse" is-nav&gt;
+          &lt;b-navbar-nav&gt;
+            &lt;b-nav-item href="#" active&gt;Accueil&lt;/b-nav-item&gt;
+            &lt;b-nav-item href="#"&gt;Produits&lt;/b-nav-item&gt;
+            &lt;b-nav-item href="#"&gt;Contact&lt;/b-nav-item&gt;
+          &lt;/b-navbar-nav&gt;
+          
+          &lt;b-navbar-nav class="ml-auto"&gt;
+            &lt;b-nav-form&gt;
+              &lt;b-form-input size="sm" class="mr-sm-2" placeholder="Recherche"&gt;&lt;/b-form-input&gt;
+              &lt;b-button size="sm" class="my-2 my-sm-0" type="submit"&gt;Rechercher&lt;/b-button&gt;
+            &lt;/b-nav-form&gt;
+          &lt;/b-navbar-nav&gt;
+        &lt;/b-collapse&gt;
+      &lt;/b-container&gt;
+    &lt;/b-navbar&gt;
+
+    &lt;b-container class="py-5"&gt;
+      &lt;h1 class="text-center mb-5"&gt;Catalogue de Produits&lt;/h1&gt;
+      
+      &lt;b-row&gt;
+        &lt;b-col md="4" v-for="product in products" :key="product.id" class="mb-4"&gt;
+          &lt;b-card
+            :title="product.name"
+            :img-src="product.image"
+            :img-alt="product.name"
+            img-top
+          &gt;
+            &lt;b-card-text&gt;
+              {{ product.description }}
+            &lt;/b-card-text&gt;
+            
+            &lt;div class="d-flex justify-content-between align-items-center"&gt;
+              &lt;b-badge variant="primary"&gt;{{ product.price }} €&lt;/b-badge&gt;
+              &lt;b-button variant="success" @click="addToCart(product)"&gt;
+                Ajouter au panier
+              &lt;/b-button&gt;
+            &lt;/div&gt;
+          &lt;/b-card&gt;
+        &lt;/b-col&gt;
+      &lt;/b-row&gt;
+      
+      &lt;b-modal id="cart-modal" title="Votre Panier" hide-footer&gt;
+        &lt;div v-if="cart.length === 0" class="text-center"&gt;
+          &lt;p&gt;Votre panier est vide.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;b-list-group v-else&gt;
+          &lt;b-list-group-item v-for="(item, index) in cart" :key="index" class="d-flex justify-content-between align-items-center"&gt;
+            {{ item.name }}
+            &lt;div&gt;
+              &lt;b-badge variant="primary" pill&gt;{{ item.quantity }}&lt;/b-badge&gt;
+              &lt;span class="ml-2"&gt;{{ item.price * item.quantity }} €&lt;/span&gt;
+              &lt;b-button variant="danger" size="sm" class="ml-2" @click="removeFromCart(index)"&gt;
+                &lt;b-icon icon="trash"&gt;&lt;/b-icon&gt;
+              &lt;/b-button&gt;
+            &lt;/div&gt;
+          &lt;/b-list-group-item&gt;
+        &lt;/b-list-group&gt;
+        
+        &lt;div v-if="cart.length &gt; 0" class="mt-3 d-flex justify-content-between"&gt;
+          &lt;b-button variant="secondary" @click="$bvModal.hide('cart-modal')"&gt;
+            Continuer les achats
+          &lt;/b-button&gt;
+          &lt;b-button variant="success"&gt;
+            Commander ({{ totalAmount }} €)
+          &lt;/b-button&gt;
+        &lt;/div&gt;
+      &lt;/b-modal&gt;
+      
+      &lt;div class="text-center mt-5"&gt;
+        &lt;b-button variant="primary" @click="$bvModal.show('cart-modal')"&gt;
+          &lt;b-icon icon="cart"&gt;&lt;/b-icon&gt; Voir le panier ({{ cartItemCount }})
+        &lt;/b-button&gt;
+      &lt;/div&gt;
+    &lt;/b-container&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      products: [
+        { id: 1, name: 'Produit 1', description: 'Description du produit 1', price: 19.99, image: 'https://via.placeholder.com/300' },
+        { id: 2, name: 'Produit 2', description: 'Description du produit 2', price: 29.99, image: 'https://via.placeholder.com/300' },
+        { id: 3, name: 'Produit 3', description: 'Description du produit 3', price: 39.99, image: 'https://via.placeholder.com/300' },
+        { id: 4, name: 'Produit 4', description: 'Description du produit 4', price: 49.99, image: 'https://via.placeholder.com/300' },
+        { id: 5, name: 'Produit 5', description: 'Description du produit 5', price: 59.99, image: 'https://via.placeholder.com/300' },
+        { id: 6, name: 'Produit 6', description: 'Description du produit 6', price: 69.99, image: 'https://via.placeholder.com/300' }
+      ],
+      cart: []
+    }
+  },
+  computed: {
+    cartItemCount() {
+      return this.cart.reduce((total, item) => total + item.quantity, 0)
+    },
+    totalAmount() {
+      return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
+    }
+  },
+  methods: {
+    addToCart(product) {
+      const existingItem = this.cart.find(item => item.id === product.id)
+      
+      if (existingItem) {
+        existingItem.quantity++
+      } else {
+        this.cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1
+        })
+      }
+      
+      this.$bvToast.toast(`${product.name} ajouté au panier`, {
+        title: 'Produit ajouté',
+        variant: 'success',
+        autoHideDelay: 3000
+      })
+    },
+    removeFromCart(index) {
+      this.cart.splice(index, 1)
+    }
+  }
+}
+&lt;/script&gt;</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingIntThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIntThree" aria-expanded="false" aria-controls="collapseIntThree">
+                                    Bootstrap avec Angular
+                                </button>
+                            </h2>
+                            <div id="collapseIntThree" class="accordion-collapse collapse" aria-labelledby="headingIntThree" data-bs-parent="#accordionIntegrations">
+                                <div class="accordion-body">
+                                    <p>Intégrez Bootstrap avec Angular en utilisant ng-bootstrap ou ngx-bootstrap.</p>
+                                    
+                                    <h4>Installation de ng-bootstrap</h4>
+                                    <div class="code-display">
+# Installer Bootstrap
+npm install bootstrap
+
+# Installer ng-bootstrap
+ng add @ng-bootstrap/ng-bootstrap</div>
+                                    
+                                    <h4>Configuration</h4>
+                                    <div class="code-display">
+// Dans angular.json, ajoutez Bootstrap CSS
+"styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.css"
+],
+
+// Dans app.module.ts
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NgbModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}</div>
+                                    
+                                    <h4>Exemple d'application ng-bootstrap</h4>
+                                    <div class="code-display">
+// app.component.html
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Angular Bootstrap&lt;/a&gt;
+    &lt;button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse"&gt;
+      &lt;ul class="navbar-nav me-auto"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Accueil&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Fonctionnalités&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Tarifs&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item" ngbDropdown&gt;
+          &lt;a class="nav-link" ngbDropdownToggle id="navbarDropdown" role="button"&gt;
+            Plus
+          &lt;/a&gt;
+          &lt;div ngbDropdownMenu aria-labelledby="navbarDropdown"&gt;
+            &lt;a ngbDropdownItem href="#"&gt;Action&lt;/a&gt;
+            &lt;a ngbDropdownItem href="#"&gt;Une autre action&lt;/a&gt;
+            &lt;div class="dropdown-divider"&gt;&lt;/div&gt;
+            &lt;a ngbDropdownItem href="#"&gt;Quelque chose d'autre&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;form class="d-flex"&gt;
+        &lt;input class="form-control me-2" type="search" placeholder="Recherche"&gt;
+        &lt;button class="btn btn-outline-success" type="submit"&gt;Rechercher&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div class="container mt-5"&gt;
+  &lt;ngb-carousel *ngIf="images"&gt;
+    &lt;ng-template ngbSlide *ngFor="let image of images"&gt;
+      &lt;div class="picsum-img-wrapper"&gt;
+        &lt;img [src]="image.src" class="d-block w-100" alt="Image"&gt;
+      &lt;/div&gt;
+      &lt;div class="carousel-caption"&gt;
+        &lt;h3&gt;{{ image.title }}&lt;/h3&gt;
+        &lt;p&gt;{{ image.description }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+  &lt;/ngb-carousel&gt;
+  
+  &lt;div class="row mt-5"&gt;
+    &lt;div class="col-md-4 mb-4" *ngFor="let card of cards"&gt;
+      &lt;div class="card h-100"&gt;
+        &lt;img [src]="card.imageSrc" class="card-img-top" [alt]="card.title"&gt;
+        &lt;div class="card-body"&gt;
+          &lt;h5 class="card-title"&gt;{{ card.title }}&lt;/h5&gt;
+          &lt;p class="card-text"&gt;{{ card.text }}&lt;/p&gt;
+          &lt;button class="btn btn-primary" (click)="open(content, card)"&gt;Voir détails&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ng-template #content let-modal&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;h4 class="modal-title" id="modal-basic-title"&gt;{{ selectedCard?.title }}&lt;/h4&gt;
+    &lt;button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body" *ngIf="selectedCard"&gt;
+    &lt;img [src]="selectedCard.imageSrc" class="img-fluid mb-3" [alt]="selectedCard.title"&gt;
+    &lt;p&gt;{{ selectedCard.text }}&lt;/p&gt;
+    &lt;p&gt;{{ selectedCard.detailedText }}&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    &lt;button type="button" class="btn btn-secondary" (click)="modal.close('Close click')"&gt;Fermer&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+
+// app.component.ts
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  isMenuCollapsed = true;
+  
+  images = [
+    { src: 'https://via.placeholder.com/1200x400?text=Slide+1', title: 'Premier slide', description: 'Description du premier slide' },
+    { src: 'https://via.placeholder.com/1200x400?text=Slide+2', title: 'Deuxième slide', description: 'Description du deuxième slide' },
+    { src: 'https://via.placeholder.com/1200x400?text=Slide+3', title: 'Troisième slide', description: 'Description du troisième slide' }
+  ];
+  
+  cards = [
+    { 
+      title: 'Titre de la carte 1', 
+      text: 'Texte de la carte 1', 
+      imageSrc: 'https://via.placeholder.com/300',
+      detailedText: 'Description détaillée de la carte 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    { 
+      title: 'Titre de la carte 2', 
+      text: 'Texte de la carte 2', 
+      imageSrc: 'https://via.placeholder.com/300',
+      detailedText: 'Description détaillée de la carte 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    { 
+      title: 'Titre de la carte 3', 
+      text: 'Texte de la carte 3', 
+      imageSrc: 'https://via.placeholder.com/300',
+      detailedText: 'Description détaillée de la carte 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    }
+  ];
+  
+  selectedCard: any;
+  
+  constructor(private modalService: NgbModal) {}
+  
+  open(content: any, card: any) {
+    this.selectedCard = card;
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+  }
+}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclusion de Bootstrap JavaScript Bundle avec Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Activer le scrollspy pour la navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
